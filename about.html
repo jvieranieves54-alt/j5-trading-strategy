@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julio Viera - The Master Trader | J5 Trading Strategy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar h1 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            border: 3px solid #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: #00d4ff;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .epic-stat {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(0, 102, 204, 0.1);
+            border: 2px solid #00d4ff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .journey-section {
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(0, 102, 204, 0.05);
+            border-left: 5px solid #00d4ff;
+            border-radius: 8px;
+        }
+        
+        .journey-section h2 {
+            color: #00d4ff;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-vertical {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-vertical::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #00d4ff, transparent);
+        }
+        
+        .timeline-point {
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-point::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: #00d4ff;
+            border: 3px solid #0f0f1e;
+            border-radius: 50%;
+        }
+        
+        .timeline-year {
+            color: #00d4ff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .timeline-event {
+            color: #e0e0e0;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-desc {
+            color: #909090;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+        
+        .values-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .value-card {
+            background: rgba(0, 102, 204, 0.05);
+            border: 1px solid #00d4ff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .value-card h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .value-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.2) 0%, rgba(0, 212, 255, 0.1) 100%);
+            border: 2px solid #00d4ff;
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .cta-section h2 {
+            color: #00d4ff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: #c0c0c0;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #00d4ff;
+            color: #0f0f1e;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid #00d4ff;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: #00d4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .quote-section {
+            background: rgba(0, 102, 204, 0.1);
+            border-left: 6px solid #00d4ff;
+            padding: 2rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            color: #00d4ff;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .achievement-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .achievement-list li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #c0c0c0;
+            font-size: 1.05rem;
+        }
+        
+        .achievement-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        footer {
+            background: rgba(10, 10, 20, 0.95);
+            border-top: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 2rem;
+            text-align: center;
+            color: #808080;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .epic-stat {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <h1>J5 Trading Strategy</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="strategy.html">Strategy</a></li>
+                <li><a href="whitepaper/">Whitepapers</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO SECTION -->
+        <div class="hero-section">
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/500x600/0a0a14/00d4ff?text=Julio+Viera" alt="Julio Henrique Viera Nieves">
+            </div>
+            
+            <div class="hero-content">
+                <h1>Julio Henrique Viera Nieves</h1>
+                <p class="subtitle">The Master Trader | Mathematics Professor | Founder of J5 Strategy</p>
+                
+                <p>
+                    From losing everything in Texas to creating a 1,954% ROI in 67 days using pure mathematics 
+                    and geometric market understanding. This is not a story of luck. It's a story of discipline, 
+                    intelligence, and mastery.
+                </p>
+                
+                <div class="epic-stat">
+                    <div class="stat-card">
+                        <div class="stat-number">$2,931.70</div>
+                        <div class="stat-label">Total Generated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1,954%</div>
+                        <div class="stat-label">ROI in 67 Days</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Win Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JOURNEY SECTION -->
+        <div class="journey-section">
+            <h2>🚀 The Journey: From Everything to Nothing to Everything</h2>
+            
+            <div class="timeline-vertical">
+                <div class="timeline-point">
+                    <div class="timeline-year">June 2023</div>
+                    <div class="timeline-event">The Breaking Point</div>
+                    <div class="timeline-desc">
+                        After 6 years building a life in Texas with stability, career, and success, 
+                        Julio returned to Puerto Rico with NOTHING.
+                    </div>
+                </div>
+                
+                <div class="timeline-point">
+                    <div class="timeline-year">September 2023</div>
+                    <div class="timeline-event">The Awakening</div>
+                    <div class="timeline-desc">
+                        After 3 months without work, his brother Omar introduced him to Forex. 
+                        The catalyst for transformation begins.
+                    </div>
+                </div>
+                
+                <div class="timeline-point">
+                    <div class="timeline-year">September 2023 - September 2025</div>
+                    <div class="timeline-event">2.5 Years of Intelligent Obsession</div>
+                    <div class="timeline-desc">
+                        Studied with Riley Coleman and John from Creemos Capital. Learned C4 strategy. 
+                        Began seeing market patterns no one else could see.
+                    </div>
+                </div>
+                
+                <div class="timeline-point">
+                    <div class="timeline-year">September 2025</div>
+                    <div class="timeline-event">First Trade</div>
+                    <div class="timeline-desc">
+                        After 2.5 years of study, made the first real trade. Not with fear, but with KNOWLEDGE.
+                    </div>
+                </div>
+                
+                <div class="timeline-point">
+                    <div class="timeline-year">October 2025</div>
+                    <div class="timeline-event">The First Gift</div>
+                    <div class="timeline-desc">
+                        With his first $222 earned from 11 trades, created EA-MarketLiquiditySignals 
+                        and gave it FOR FREE to the MQL5 community.
+                    </div>
+                </div>
+                
+                <div class="timeline-point">
+                    <div class="timeline-year">November 25, 2025 - January 30, 2026</div>
+                    <div class="timeline-event">THE EXPLOSION</div>
+                    <div class="timeline-desc">
+                        $150 initial capital → $1,481.70 balance + $1,450 withdrawn = $2,931.70 total.
+                        67 days. 1,954% ROI. 90% win rate. Pure mastery.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACHIEVEMENTS -->
+        <div style="margin: 4rem 0;">
+            <h2 style="color: #00d4ff; font-size: 2rem; margin-bottom: 2rem;">🏆 Key Achievements</h2>
+            <ul class="achievement-list">
+                <li>University Professor of Accounting with 20+ years experience</li>
+                <li>Discovered the quadratic EMA pattern (y = -x² for buys, y = x² for sells)</li>
+                <li>Evolved Creemos Capital's C4 strategy into J5 - 90% win rate system</li>
+                <li>Created EA-MarketLiquiditySignals - Identifies institutional liquidity zones</li>
+                <li>Generated $2,931.70 from $150 initial capital in 67 days</li>
+                <li>Achieved Sharpe Ratio > 1 (proving risk management, not gambling)</li>
+                <li>Mastered hedging as a multiplier, not just protection</li>
+                <li>Maintained maximum drawdown of only $25 (1.65% from peak)</li>
+                <li>Published research and strategies on MQL5 community</li>
+                <li>Mentor to Creemos Capital network traders</li>
+            </ul>
+        </div>
+
+        <!-- PHILOSOPHY -->
+        <div class="values-section">
+            <div class="value-card">
+                <h3>📚 Knowledge First</h3>
+                <p>
+                    2.5 years of study before risking real capital. Intelligence beats speed. 
+                    Mastery beats luck.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <h3>📐 Mathematics Always</h3>
+                <p>
+                    Markets follow geometric patterns. EMAs move quadratically. Volume is momentum. 
+                    Price finds institutional levels.
+                </p>
+            </div>
+            
+            <div class="value-card">
+                <h3>💪 Capital Preservation</h3>
+                <p>
+                    "Trading is not about who makes the most, it's about who preserves the most capital." 
+                    90% win rate + low drawdown = sustainable wealth.
+                </p>
+            </div>
+        </div>
+
+        <!-- PHILOSOPHY QUOTE -->
+        <div class="quote-section">
+            "I had everything in Texas. When I came to Puerto Rico, I had nothing. 
+            But that nothing taught me something: real wealth is not what you have, 
+            it's what you understand."
+        </div>
+
+        <!-- THE SYSTEM -->
+        <div style="margin: 4rem 0;">
+            <h2 style="color: #00d4ff; font-size: 2rem; margin-bottom: 2rem;">⚙️ The J5 System</h2>
+            <p style="color: #c0c0c0; font-size: 1.1rem; margin-bottom: 2rem;">
+                J5 is not a random strategy. It's an evolution of Creemos Capital's legendary C4 method, 
+                refined through mathematical precision and institutional liquidity analysis.
+            </p>
+            
+            <div class="achievement-list">
+                <li><strong>Foundation:</strong> C4 Strategy (4 steps: Floor, Tendency, Pullbacks, Volume)</li>
+                <li><strong>Enhancement:</strong> Avoid entries against daily structure + Stay out of internal liquidity zones</li>
+                <li><strong>The Genius:</strong> EMAs move quadratically (y = -x² for buys, y = x² for sells)</li>
+                <li><strong>Entry Signal:</strong> Price rejection at psychological levels + 5% drop from EMA = ENTRY</li>
+                <li><strong>Multiplier:</strong> Hedging mode: 3-4 simultaneous trades when plan confirms</li>
+                <li><strong>Result:</strong> 90% win rate + Sharpe Ratio > 1 + $2,931.70 from $150</li>
+            </div>
+        </div>
+
+        <!-- CTA SECTION -->
+        <div class="cta-section">
+            <h2>Ready to Learn the J5 Strategy?</h2>
+            <p>
+                Discover how to trade like Julio. Pure mathematics. Institutional liquidity. 90% accuracy.
+            </p>
+            <a href="strategy.html" class="cta-button">Explore the Strategy →</a>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Julio Henrique Viera Nieves</strong> | J5 Trading Strategy</p>
+        <p>"Fiat Voluntas Geometriae" - Let the Will of Geometry be Done</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem;">Puerto Rico, 2026</p>
+    </footer>
+</body>
+</html>
