@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Market Liquidity Signals — Download</title>
-    
-    
-	<style>
+    <title>Market Liquidity Signals — Download & Installation Guide</title>
+        
+    <style>
     /* ==========================================================
        CSS COMPLETO — J5 Trading Strategy
        ========================================================== */
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
         --gold: #d4af37;
         --gold-dark: #b8860b;
@@ -25,6 +22,7 @@
         --text-muted: #4a5568;
         --text-light: #718096;
         --success: #0f7b3a;
+        --danger: #d9534f;
         --white: #ffffff;
         --shadow: 0 8px 24px rgba(0,0,0,0.06);
         --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
@@ -34,7 +32,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
         font-family: var(--font);
         background: var(--gray-bg);
@@ -44,18 +41,18 @@
 
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+    code { background: var(--gray-border); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.85em; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
     /* ─── HEADER ─── */
     header {
-        background: var(--white);
+        background: rgba(255,255,255,0.92);
         border-bottom: 1px solid var(--gray-border);
         padding: 14px 0;
         position: sticky;
         top: 0;
         z-index: 100;
         backdrop-filter: blur(6px);
-        background: rgba(255,255,255,0.92);
     }
 
     .header-inner {
@@ -205,11 +202,12 @@
     }
 
     .download-content .snapshot {
-        margin: 20px 0;
+        margin: 16px 0 24px;
         border-radius: var(--radius);
         border: 1px solid var(--gray-border);
         box-shadow: var(--shadow);
         max-width: 100%;
+        overflow: hidden;
     }
     .download-content .snapshot img {
         border-radius: var(--radius);
@@ -236,294 +234,76 @@
         font-weight: 600;
     }
 
-    .footer-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--gray-border); }
-    .footer-meta a { color: var(--blue-medium); text-decoration: none; }
-    .footer-meta a:hover { color: var(--gold-dark); }
-
-    /* ─── FOOTER ─── */
-    footer {
-        background: var(--white);
-        border-top: 1px solid var(--gray-border);
-        padding: 30px 0 24px;
+    /* ─── INSTALLATION MANUAL STYLES ─── */
+    .installation-guide {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 2px dashed var(--gray-border);
     }
 
-    .footer-inner {
+    .steps-container {
         display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .footer-left .logo { font-size: 1.1rem; }
-    .footer-left p {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        margin-top: 4px;
-    }
-    .footer-copy {
-        font-size: 0.75rem;
-        color: var(--text-light);
-        margin-top: 2px !important;
-    }
-
-    .footer-right {
-        display: flex;
+        flex-direction: column;
         gap: 24px;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .footer-right a {
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        font-weight: 500;
-        transition: color var(--transition);
-    }
-    .footer-right a:hover { color: var(--gold-dark); }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-        .download-hero h1 { font-size: 1.8rem; }
-        .header-inner {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-        }
-        nav { justify-content: center; }
-        .language-switcher { align-self: center; }
-        .footer-inner { flex-direction: column; text-align: center; }
-        .footer-right { justify-content: center; }
-    }
-    @media (max-width: 480px) {
-        .download-hero h1 { font-size: 1.4rem; }
-    }
-<style>
-    /* ==========================================================
-       CSS COMPLETO — J5 Trading Strategy
-       ========================================================== */
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-        --gold: #d4af37;
-        --gold-dark: #b8860b;
-        --gold-light: #fef6e0;
-        --blue-dark: #0b1e33;
-        --blue-medium: #1a4d8b;
-        --gray-bg: #f8fafc;
-        --gray-border: #e2e8f0;
-        --text-dark: #1a1f2e;
-        --text-muted: #4a5568;
-        --text-light: #718096;
-        --success: #0f7b3a;
-        --white: #ffffff;
-        --shadow: 0 8px 24px rgba(0,0,0,0.06);
-        --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
-        --radius: 12px;
-        --transition: 0.25s ease;
-        --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        margin-top: 20px;
     }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-        font-family: var(--font);
+    .step-card {
         background: var(--gray-bg);
-        color: var(--text-dark);
-        line-height: 1.6;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-
-    /* ─── HEADER ─── */
-    header {
-        background: var(--white);
-        border-bottom: 1px solid var(--gray-border);
-        padding: 14px 0;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        backdrop-filter: blur(6px);
-        background: rgba(255,255,255,0.92);
-    }
-
-    .header-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
-    .logo-gold { color: var(--gold); }
-
-    nav { display: flex; gap: 20px; flex-wrap: wrap; }
-    nav a {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: color var(--transition);
-        position: relative;
-    }
-
-    nav a::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--gold);
-        transition: width var(--transition);
-    }
-
-    nav a:hover::after, nav a.active::after { width: 100%; }
-    nav a:hover, nav a.active { color: var(--gold-dark); }
-
-    .language-switcher {
-        display: flex;
-        gap: 4px;
-        background: var(--gray-bg);
-        border-radius: 24px;
-        padding: 3px;
         border: 1px solid var(--gray-border);
+        border-radius: var(--radius);
+        padding: 24px;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        transition: transform var(--transition);
     }
 
-    .language-switcher button {
-        background: transparent;
-        border: none;
-        border-radius: 20px;
-        padding: 4px 14px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all var(--transition);
-        color: var(--text-muted);
-        text-transform: uppercase;
+    .step-card:hover {
+        box-shadow: var(--shadow);
     }
 
-    .language-switcher button.active {
-        background: var(--gold);
-        color: var(--white);
-        box-shadow: 0 2px 8px rgba(212,175,55,0.3);
-    }
-
-    .language-switcher button:hover:not(.active) {
-        color: var(--blue-dark);
-        background: var(--gold-light);
-    }
-
-    /* ─── HERO (DOWNLOAD) ─── */
-    .download-hero {
+    .step-number {
         background: var(--blue-dark);
-        padding: 40px 0 30px;
-        color: var(--white);
-        text-align: center;
-    }
-
-    .download-hero h1 {
-        font-size: 2.2rem;
+        color: var(--gold);
         font-weight: 700;
-        margin-bottom: 4px;
+        font-size: 1.2rem;
+        min-width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--gold);
+        flex-shrink: 0;
     }
-    .download-hero h1 .gold { color: var(--gold); }
-    .download-hero p { color: var(--text-light); font-size: 1rem; }
 
-    .download-content { padding: 40px 0; background: var(--white); }
-    .download-content h2 {
-        font-size: 1.4rem;
+    .step-content {
+        flex-grow: 1;
+    }
+
+    .step-content h3 {
+        font-size: 1.1rem;
         color: var(--blue-dark);
-        margin: 24px 0 10px;
-    }
-    .download-content h2:first-of-type { margin-top: 0; }
-    .download-content p {
-        font-size: 1rem;
-        color: var(--text-dark);
-        line-height: 1.7;
-        margin-bottom: 14px;
-    }
-    .download-content ul { padding-left: 24px; margin-bottom: 16px; }
-    .download-content ul li {
         margin-bottom: 6px;
+    }
+
+    .step-content p {
         font-size: 0.95rem;
         color: var(--text-dark);
+        margin-bottom: 12px;
     }
 
-    .download-content .structure-box {
-        background: var(--gray-bg);
-        border-radius: var(--radius);
-        padding: 16px 20px;
-        border-left: 4px solid var(--gold);
-        margin: 12px 0 18px;
-    }
-    .download-content .structure-box .label { font-weight: 600; color: var(--blue-dark); }
-    .download-content .structure-box .green { color: var(--success); }
-    .download-content .structure-box .red { color: var(--danger); }
-
-    .download-content .code-block {
-        background: #1e1e1e;
-        color: #d4d4d4;
-        padding: 14px 18px;
-        border-radius: var(--radius);
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 0.8rem;
-        overflow-x: auto;
-        margin: 12px 0 18px;
-    }
-    .download-content .code-block .comment { color: #6a9955; }
-    .download-content .code-block .keyword { color: #569cd6; }
-    .download-content .code-block .string { color: #ce9178; }
-
-    .download-content .btn-download {
+    .kbd-badge {
         display: inline-block;
-        background: var(--gold);
+        background: var(--blue-dark);
         color: var(--white);
-        padding: 14px 40px;
-        border-radius: 40px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: monospace;
         font-weight: 700;
-        font-size: 1.1rem;
-        text-decoration: none;
-        transition: all var(--transition);
-        margin: 12px 0 8px;
-    }
-    .download-content .btn-download:hover {
-        background: var(--gold-dark);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(212,175,55,0.3);
-    }
-
-    .download-content .snapshot {
-        margin: 20px 0;
-        border-radius: var(--radius);
-        border: 1px solid var(--gray-border);
-        box-shadow: var(--shadow);
-        max-width: 100%;
-    }
-    .download-content .snapshot img {
-        border-radius: var(--radius);
-        width: 100%;
-        height: auto;
-    }
-
-    .download-content .badge-version {
-        display: inline-block;
-        background: var(--gold-light);
-        color: var(--gold-dark);
-        padding: 2px 14px;
-        border-radius: 40px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-    .download-content .badge-origin {
-        display: inline-block;
-        background: #e8edf5;
-        color: var(--blue-medium);
-        padding: 2px 14px;
-        border-radius: 40px;
-        font-size: 0.75rem;
-        font-weight: 600;
+        font-size: 0.85em;
+        box-shadow: 0 2px 0 var(--text-muted);
     }
 
     .footer-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--gray-border); }
@@ -580,13 +360,14 @@
         }
         nav { justify-content: center; }
         .language-switcher { align-self: center; }
+        .step-card { flex-direction: column; gap: 12px; }
         .footer-inner { flex-direction: column; text-align: center; }
         .footer-right { justify-content: center; }
     }
     @media (max-width: 480px) {
         .download-hero h1 { font-size: 1.4rem; }
     }
-</style>
+    </style>
 </head>
 <body>
 
@@ -613,7 +394,7 @@
         <div class="container">
             <h1><span class="gold">Market Liquidity Signals</span> — The Origin</h1>
             <p><span class="lang-en">The first program that taught me to see institutional liquidity — before the price moved.</span></p>
-            <p>
+            <p style="margin-top: 8px;">
                 <span class="badge-version">Version 1.0</span>
                 <span class="badge-origin">🧠 The One That Started It All</span>
             </p>
@@ -625,28 +406,27 @@
         <div class="container">
 
             <h2>📌 What It Does</h2>
-            <p>This indicator identifies <strong>external and internal liquidity zones</strong> — the levels where <strong>institutional traders</strong> place their orders and where <strong>retail traders</strong> get trapped.</p>
+            <p>This Expert Advisor identifies <strong>external and internal liquidity zones</strong> — the key levels where <strong>institutional traders</strong> place their orders and where <strong>retail traders</strong> get trapped.</p>
 
             <ul>
-                <li><strong>🔵 External Liquidity:</strong> Supply/Demand zones — institutional levels (Soportes/Resistencias reales)</li>
-                <li><strong>🔴 Internal Liquidity:</strong> Stop-loss zones — retail traps (donde se queman los traders)</li>
-                <li><strong>🌍 Session Detection:</strong> ASIA / EUROPE / NEW YORK / LOW LIQUIDITY</li>
-                <li><strong>📊 Volume Filter:</strong> Confirms institutional intent</li>
-                <li><strong>🎯 Entry Signals:</strong> BUY / SELL / NO TRADE based on liquidity + structure</li>
+                <li><strong>🔵 External Liquidity:</strong> Supply/Demand zones — true institutional support & resistance levels.</li>
+                <li><strong>🔴 Internal Liquidity:</strong> Stop-loss zones — retail liquidity traps.</li>
+                <li><strong>🌍 Session Detection:</strong> ASIA / EUROPE / NEW YORK / LOW LIQUIDITY filtering.</li>
+                <li><strong>📊 Volume Filter:</strong> Confirms institutional intent prior to execution.</li>
+                <li><strong>🎯 Entry Signals:</strong> BUY / SELL / NO TRADE execution logic based on liquidity and structure.</li>
             </ul>
 
             <div class="structure-box">
-                <span class="label">🔵 External Liquidity (Institucional)</span><br>
-                <span class="green">Máximos/Mínimos clave — Supply/Demand — órdenes de grandes jugadores</span>
+                <span class="label">🔵 External Liquidity (Institutional)</span><br>
+                <span class="green">Key Highs/Lows — Supply/Demand — Major market participant orders</span>
                 <br><br>
                 <span class="label">🔴 Internal Liquidity (Retail)</span><br>
-                <span class="red">Zonas de stops — trampas para traders retail</span>
+                <span class="red">Stop-loss clusters — Liquidity traps for retail traders</span>
             </div>
 
             <h2>📷 Live Snapshot</h2>
             <div class="snapshot">
-                <!-- COLOCA TU CAPTURA DE PANTALLA AQUÍ -->
-                <img src="../assets/images/market-liquidity-snapshot.png" alt="Market Liquidity Signals in action" />
+                <img src="../assets/images/market-liquidity-snapshot.png" alt="Market Liquidity Signals Expert Advisor in action" />
             </div>
 
             <h2>⚙️ Key Features</h2>
@@ -661,6 +441,64 @@
             <h2>📥 Download</h2>
             <a href="MarketLiquiditySignals.mq5" class="btn-download">⬇ Download MarketLiquiditySignals.mq5</a>
 
+
+            <!-- ═══ STEP-BY-STEP INSTALLATION MANUAL FOR EXPERT ADVISORS ═══ -->
+            <div class="installation-guide">
+                <h2>🛠️ Step-by-Step Installation Manual (MetaTrader 5)</h2>
+                <p>If you prefer copying and compiling the source code directly inside MetaTrader 5, follow these simple steps:</p>
+
+                <div class="steps-container">
+
+                    <!-- STEP 1 -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Step 1: Open MetaTrader 5</h3>
+                            <p>Launch your MetaTrader 5 platform on your computer.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/expert-1.png" alt="Step 1: Open MetaTrader 5 Terminal" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Step 2: Open MetaEditor Compiler</h3>
+                            <p>Press the <span class="kbd-badge">F4</span> key on your keyboard (or go to <strong>Tools → MetaQuotes Language Editor</strong>) to open the MQL5 compiler window.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/expert-2.png" alt="Step 2: Press F4 to open MetaEditor" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 -->
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Step 3: Create a New Expert Advisor</h3>
+                            <p>In MetaEditor, click on <strong>New</strong> (top-left button) or press <span class="kbd-badge">Ctrl + N</span>. Select <strong>Expert Advisor (template)</strong> and click <strong>Next</strong> all the way through to the end finish window.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/expert-3.png" alt="Step 3: Select Expert Advisor (template) and click Next" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4 -->
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Step 4: Paste Source Code & Compile</h3>
+                            <p>Select all default text in the generated file (<span class="kbd-badge">Ctrl + A</span>), delete it, and paste the complete <code>MarketLiquiditySignals.mq5</code> code. Finally, click <strong>Compile</strong> (or press <span class="kbd-badge">F7</span>). The Expert Advisor will now appear in your MT5 Navigator window under <strong>Expert Advisors</strong>!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- FOOTER META -->
             <div class="footer-meta">
                 <p><strong>Compatibility:</strong> MetaTrader 5 (MT5) · All timeframes · All symbols</p>
                 <p><strong>Best used on:</strong> GOLD, SILVER, Indices, BTC</p>

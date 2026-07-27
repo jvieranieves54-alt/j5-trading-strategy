@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Epiphany Dashboard — Download</title>
-    
+    <title>Epiphany Dashboard — Download & Installation Guide</title>
+        
     <style>
     /* ==========================================================
        CSS COMPLETO — J5 Trading Strategy
@@ -41,6 +41,7 @@
 
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+    code { background: var(--gray-border); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.85em; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
     /* ─── HEADER ─── */
@@ -141,7 +142,9 @@
     .download-content h2 {
         font-size: 1.4rem;
         color: var(--blue-dark);
-        margin: 24px 0 10px;
+        margin: 32px 0 12px;
+        border-left: 4px solid var(--gold);
+        padding-left: 10px;
     }
     .download-content h2:first-of-type { margin-top: 0; }
     .download-content p {
@@ -187,7 +190,7 @@
     }
 
     .download-content .snapshot {
-        margin: 20px 0;
+        margin: 16px 0 24px;
         border-radius: var(--radius);
         border: 1px solid var(--gray-border);
         box-shadow: var(--shadow);
@@ -219,7 +222,79 @@
         font-weight: 600;
     }
 
-    .footer-meta { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--gray-border); }
+    /* ─── INSTALLATION MANUAL STYLES ─── */
+    .installation-guide {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 2px dashed var(--gray-border);
+    }
+
+    .steps-container {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 20px;
+    }
+
+    .step-card {
+        background: var(--gray-bg);
+        border: 1px solid var(--gray-border);
+        border-radius: var(--radius);
+        padding: 24px;
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        transition: transform var(--transition);
+    }
+
+    .step-card:hover {
+        box-shadow: var(--shadow);
+    }
+
+    .step-number {
+        background: var(--blue-dark);
+        color: var(--gold);
+        font-weight: 700;
+        font-size: 1.2rem;
+        min-width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--gold);
+        flex-shrink: 0;
+    }
+
+    .step-content {
+        flex-grow: 1;
+    }
+
+    .step-content h3 {
+        font-size: 1.1rem;
+        color: var(--blue-dark);
+        margin-bottom: 6px;
+    }
+
+    .step-content p {
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        margin-bottom: 12px;
+    }
+
+    .kbd-badge {
+        display: inline-block;
+        background: var(--blue-dark);
+        color: var(--white);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        font-weight: 700;
+        font-size: 0.85em;
+        box-shadow: 0 2px 0 var(--text-muted);
+    }
+
+    .footer-meta { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--gray-border); }
     .footer-meta a { color: var(--blue-medium); text-decoration: none; }
     .footer-meta a:hover { color: var(--gold-dark); }
 
@@ -273,6 +348,7 @@
         }
         nav { justify-content: center; }
         .language-switcher { align-self: center; }
+        .step-card { flex-direction: column; gap: 12px; }
         .footer-inner { flex-direction: column; text-align: center; }
         .footer-right { justify-content: center; }
     }
@@ -306,7 +382,7 @@
         <div class="container">
             <h1><span class="gold">Epiphany Dashboard</span> — Dynamic EMA & Momentum HUD</h1>
             <p><span class="lang-en">Real-time multi-EMA slope calculation and price momentum tracked directly on your chart canvas.</span></p>
-            <p>
+            <p style="margin-top: 8px;">
                 <span class="badge-version">Version 1.6</span>
                 <span class="badge-origin">⚡ Pure On-Chart HUD</span>
             </p>
@@ -353,6 +429,64 @@
             <h2>📥 Download</h2>
             <a href="../mql5/Epiphany_Dashboard.mq5" class="btn-download">⬇ Download Epiphany_Dashboard.mq5</a>
 
+
+            <!-- ═══ MANUAL DE INSTALACIÓN PASO A PASO ═══ -->
+            <div class="installation-guide">
+                <h2>🛠️ Step-by-Step Installation Manual (MetaTrader 5)</h2>
+                <p>If you prefer copying and compiling the source code directly inside MetaTrader 5, follow these simple steps:</p>
+
+                <div class="steps-container">
+
+                    <!-- PASO 1 -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Step 1: Open MetaTrader 5</h3>
+                            <p>Launch your MetaTrader 5 platform on your computer.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/indicator-1.png" alt="Step 1: Open MetaTrader 5 Terminal" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 2 -->
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Step 2: Open MetaEditor Compiler</h3>
+                            <p>Press the <span class="kbd-badge">F4</span> key on your keyboard (or go to <strong>Tools → MetaQuotes Language Editor</strong>) to open the MQL5 compiler window.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/indicator-2.png" alt="Step 2: Press F4 to open MetaEditor" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 3 -->
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Step 3: Create a New Custom Indicator</h3>
+                            <p>In MetaEditor, click on <strong>New</strong> (top-left button) or press <span class="kbd-badge">Ctrl + N</span>. Select <strong>Custom Indicator</strong> and click <strong>Next</strong> all the way through to the end finish window.</p>
+                            <div class="snapshot">
+                                <img src="../assets/images/indicator-3.png" alt="Step 3: Select Custom Indicator and click Next" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASO 4 -->
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Step 4: Paste Source Code & Compile</h3>
+                            <p>Select all default text in the generated file (<span class="kbd-badge">Ctrl + A</span>), delete it, and paste the complete <code>Epiphany_Dashboard.mq5</code> code. Finally, click <strong>Compile</strong> (or press <span class="kbd-badge">F7</span>). The indicator will now appear in your MT5 Navigator window under <strong>Indicators → Custom</strong>!</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- FOOTER META -->
             <div class="footer-meta">
                 <p><strong>Compatibility:</strong> MetaTrader 5 (MT5) · All timeframes · All symbols</p>
                 <p><strong>Best used on:</strong> GOLD (XAUUSD), SILVER (XAGUSD), US Indices, BTCUSD</p>
