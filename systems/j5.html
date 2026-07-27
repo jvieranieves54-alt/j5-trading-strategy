@@ -1,1 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J5 Protocol — 5-Step Trading Strategy & Institutional Liquidity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy & Protocol Page
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
 
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width var(--transition);
+        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+
+        .language-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 3px;
+            border: 1px solid var(--gray-border);
+        }
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: var(--white);
+            padding: 60px 0 50px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .hero-text { flex: 1 1 55%; }
+        .hero-text h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .hero-sub {
+            font-size: 1.15rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            max-width: 620px;
+        }
+        .badge-honor {
+            display: inline-block;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            border: 1px solid var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* ─── STRATEGY STEPS ─── */
+        .strategy-steps { padding: 60px 0; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--blue-dark);
+            margin-bottom: 8px;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .step-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            padding: 32px;
+            margin-bottom: 30px;
+            transition: all var(--transition);
+        }
+        .step-card:hover {
+            box-shadow: var(--shadow-hover);
+            border-color: var(--gold);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .step-number {
+            background: var(--gold);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .step-title {
+            font-size: 1.35rem;
+            color: var(--blue-dark);
+            font-weight: 700;
+        }
+        .step-body p {
+            color: var(--text-dark);
+            font-size: 0.98rem;
+            margin-bottom: 14px;
+            line-height: 1.65;
+        }
+        .step-rule {
+            background: var(--gray-bg);
+            border-left: 4px solid var(--gold);
+            padding: 12px 18px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* ─── SNAPSHOT PLACEHOLDER ─── */
+        .snapshot-container {
+            margin-top: 20px;
+            background: #0f172a;
+            border: 2px dashed #334155;
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            text-align: center;
+            color: #94a3b8;
+            transition: all var(--transition);
+        }
+        .snapshot-container:hover {
+            border-color: var(--gold);
+            background: #1e293b;
+        }
+        .snapshot-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
+        .snapshot-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #e2e8f0;
+        }
+        .snapshot-sub {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* ─── HERITAGE ─── */
+        .heritage {
+            background: var(--white);
+            padding: 50px 0;
+            border-top: 1px solid var(--gray-border);
+            border-bottom: 1px solid var(--gray-border);
+        }
+        .heritage-box {
+            background: var(--gold-light);
+            border: 1px solid var(--gold);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .heritage-box h3 {
+            color: var(--blue-dark);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .heritage-box p {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--gray-border);
+            padding: 30px 0 24px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px !important;
+        }
+        .footer-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .footer-right a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2rem; }
+            .hero-inner { flex-direction: column; text-align: center; }
+            .step-card { padding: 20px; }
+            .header-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+            nav { justify-content: center; }
+            .language-switcher { align-self: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-right { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-gold">J5</span> Trading Strategy
+            </div>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="j5.html" class="active">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="../blog/index.html">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">EN</button>
+                <button data-lang="es">ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <div class="badge-honor">Honoring Creemos Capital's C4 Methodology</div>
+                <h1>The 5-Step J5 Execution Protocol</h1>
+                <p class="hero-sub">Market Structure + Volume + 20 EMA Quadratic Concavity</p>
+                <p class="hero-description">
+                    Without C4, J5 does not exist. The J5 Protocol takes Creemos Capital's foundation and enhances it with a geometric filter to capture institutional momentum while shielding trades against horizontal consolidation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ STRATEGY STEPS SECTION ═══ -->
+    <section class="strategy-steps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Step-by-Step Execution Protocol</h2>
+                <p>Follow all five rules sequentially. Skipping a step invalidates the setup.</p>
+            </div>
+
+            <!-- STEP 1 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Identify Key Support or Resistance (Supply & Demand Zones)</div>
+                </div>
+                <div class="step-body">
+                    <p>
+                        All high-probability entries originate strictly from institutional supply or demand zones. <strong>Bullish trades</strong> are initiated when price reacts off a validated Demand Zone (Support). <strong>Bearish trades</strong> are executed when price rejects a Supply Zone (Resistance). We never buy directly into resistance or sell directly into support.
+                    </p>
+                    <div class="step-rule">
+                        <strong>Filter:</strong> Zone validation requires clear historical rejections on structural timeframes.
+                    </div>
+                    
+                    <!-- Snapshot Placeholder 1 -->
+                   
+                    <div class="snapshot-container">
+    <img src="../assets/images/j5-1.png" alt="Step 1: Supply & Demand Mapping" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+</div>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Trendline & Pullback Execution (5m to 15m Timeframe)</div>
+                </div>
+                <div class="step-body">
+                    <p>
+                        We map trendlines strictly on the <strong>5-minute to 15-minute timeframes</strong>. Entry timing is essential: trades are executed exclusively on the <strong>1st or 2nd pullback</strong> following a trendline break, targeting a minimum 2:1 risk-to-reward ratio. Later pullbacks carry higher risks of institutional exhaustion.
+                    </p>
+                    <div class="step-rule">
+                        <strong>Rule:</strong> Do NOT enter on 3rd or 4th pullbacks due to momentum decay.
+                    </div>
+
+                    <!-- Snapshot Placeholder 2 -->
+                    <div class="snapshot-container">
+                        <div class="snapshot-icon">📷</div>
+                        <img src="../assets/images/j5-2.png" alt="Step 2: Trendline & Pullback" style="width: 100%; height: auto; border-radius: 8px; display: block;" /></div>
+                        <div class="snapshot-sub">assets/snapshots/step2-trendline-pullback.png</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Pure Price Action & Dow Theory (Zero Oscillators)</div>
+                </div>
+                <div class="step-body">
+                    <p>
+                        We eliminate all lagging indicators such as RSI, Stochastic, or MACD. We rely strictly on <strong>Dow Theory</strong>: Higher Highs and Higher Lows (HH/HL) for bullish structures, and Lower Lows and Lower Highs (LL/LH) for bearish structures. Price action alone reveals institutional order flow.
+                    </p>
+
+                    <!-- Snapshot Placeholder 3 -->
+                    <div class="snapshot-container">
+                        <img src="../assets/images/j5-3.png" alt="Step 3: Dow Theory Structure" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+</div>
+                        <div class="snapshot-sub">assets/snapshots/step3-dow-theory.png</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Volume Confirmation — The Fuel of the Entry</div>
+                </div>
+                <div class="step-body">
+                    <p>
+                        Volume represents true institutional backing. We require a <strong>high or moderate volume spike</strong> at the moment of entry. Low volume indicates retail participation and increases fakeout probability. Volume acts as the fuel that propels price toward our profit targets.
+                    </p>
+
+                    <!-- Snapshot Placeholder 4 -->
+                    <div class="snapshot-container">
+                        <img src="../assets/images/j5-4.png" alt="Step 4: Volume Confirmation" style="width: 100%; height: auto; border-radius: 8px; display: block;" /></div>
+                        <div class="snapshot-label">Snapshot Placeholder — Step 4: High/Moderate Institutional Volume Spike</div>
+                        <div class="snapshot-sub">assets/snapshots/step4-volume-fuel.png</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-title">20 EMA Quadratic Concavity & 5% Dynamic Rule</div>
+                </div>
+                <div class="step-body">
+                    <p>
+                        The core mathematical filter of J5: We evaluate the curvature of the 20 EMA. We enter when price separates approximately 5% from the 20 EMA, utilizing it as <strong>Dynamic Support</strong> in buys or <strong>Dynamic Resistance</strong> in sells. Curvature must follow quadratic parabolic concavity: $y = -x^2$ for buy momentum and $y = x^2$ for sell momentum.
+                    </p>
+
+                    <div class="step-rule" style="border-left-color: #e53e3e; background: #fff5f5; color: #c53030;">
+                        <strong>Iron Rule:</strong> NEVER trade counter-trend against the 4-Hour (H4) or Daily (D1) direction. Flat 20 EMA = NO TRADE.
+                    </div>
+
+                    <!-- Snapshot Placeholder 5 -->
+                    <div class="snapshot-container">
+                        <img src="../assets/images/j5-5.png" alt="Step 4: Volume Confirmation" style="width: 100%; height: auto; border-radius: 8px; display: block;" /></div>                        <div class="snapshot-label">Snapshot Placeholder — Step 5: Quadratic Concavity & 5% EMA Separation</div>
+                        <div class="snapshot-sub">assets/snapshots/step5-ema-concavity.png</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══ CREEMOS CAPITAL HERITAGE ═══ -->
+    <section class="heritage">
+        <div class="container">
+            <div class="heritage-box">
+                <h3>"Gratis accepistis, gratis date"</h3>
+                <p>
+                    Rooted in the 1990s Linux Red Hat open-source doctrine, the J5 Protocol and its MQL5 code are shared freely with the trading community. Developed with utmost respect upon the foundation of Creemos Capital's C4 framework.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo">
+                    <span class="logo-gold">J5</span> Trading Strategy
+                </div>
+                <p>"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="../js/language.js"></script>
+</body>
+</html>
