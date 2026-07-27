@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — J5 Trading Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           CSS COMPLETO — J5 Trading Strategy
+           ========================================================== */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+
+        .language-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 3px;
+            border: 1px solid var(--gray-border);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+        }
+
+        .language-switcher button:hover:not(.active) {
+            color: var(--blue-dark);
+            background: var(--gold-light);
+        }
+
+        /* ─── HERO (ABOUT) ─── */
+        .about-hero {
+            background: var(--blue-dark);
+            padding: 60px 0 50px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-hero h1 .gold { color: var(--gold); }
+
+        .about-hero p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ─── ABOUT CONTENT ─── */
+        .about-content {
+            padding: 50px 0;
+            background: var(--white);
+        }
+
+        .about-content h2 {
+            font-size: 1.6rem;
+            color: var(--blue-dark);
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+
+        .about-content h2:first-of-type { margin-top: 0; }
+
+        .about-content p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .about-content .highlight-gold {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        .about-content .highlight-blue {
+            color: var(--blue-medium);
+            font-weight: 600;
+        }
+
+        .about-content .quote-inline {
+            background: var(--gold-light);
+            padding: 16px 24px;
+            border-left: 4px solid var(--gold);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .about-content .quote-inline strong {
+            color: var(--blue-dark);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--gray-border);
+            padding: 30px 0 24px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px !important;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-right a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .about-hero h1 { font-size: 2rem; }
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            nav { justify-content: center; }
+            .language-switcher { align-self: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-right { justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .about-hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-gold">J5</span> Trading Strategy
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="systems/j5.html">Strategy</a>
+                <a href="downloads/index.html">Downloads</a>
+                <a href="blog/index.html">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ ABOUT HERO ═══ -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>
+                <span class="lang-en">From <span class="gold">Texas</span> to <span class="gold">Puerto Rico</span></span>
+                <span class="lang-es" style="display:none;">De <span class="gold">Texas</span> a <span class="gold">Puerto Rico</span></span>
+            </h1>
+            <p>
+                <span class="lang-en">The journey of a master trader — mathematics, discipline, and gratitude.</span>
+                <span class="lang-es" style="display:none;">El viaje de un trader maestro — matemáticas, disciplina y gratitud.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══ ABOUT CONTENT ═══ -->
+    <section class="about-content">
+        <div class="container">
+
+            <h2>
+                <span class="lang-en">📐 From Accountant to Trader</span>
+                <span class="lang-es" style="display:none;">📐 De Contable a Trader</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">I lived in <span class="highlight-gold">Seagolville, Texas</span>, where I worked as an <span class="highlight-blue">Accountant</span> and also as a <span class="highlight-blue">Mathematics teacher for GED students</span>. For many of them, equations were a nightmare. But I always encouraged them: <span class="highlight-gold">"Mathematics is a natural science. It doesn't matter how you reach the result — adding, multiplying, or a combination of both — the result will always be the same."</span></span>
+                <span class="lang-es" style="display:none;">Viví en <span class="highlight-gold">Seagolville, Texas</span>, donde trabajé como <span class="highlight-blue">Contable</span> y también como <span class="highlight-blue">maestro de matemáticas para estudiantes de GED</span>. Para muchos de ellos, las ecuaciones eran una pesadilla. Pero siempre los animaba: <span class="highlight-gold">"La matemática es una ciencia natural. No importa cómo llegues al resultado — sumando, multiplicando o una combinación de ambas — el resultado siempre será el mismo."</span></span>
+            </p>
+
+            <p>
+                <span class="lang-en">My colleagues struggled to explain quadratic equations. They knew I had a <span class="highlight-gold">visual and simple method</span> to teach it. That same method would later become the foundation of my trading system.</span>
+                <span class="lang-es" style="display:none;">Mis colegas tenían problemas para explicar la cuadrática. Sabían que yo tenía un <span class="highlight-gold">método visual y sencillo</span> para enseñarla. Ese mismo método más tarde se convertiría en la base de mi sistema de trading.</span>
+            </p>
+
+            <h2>
+                <span class="lang-en">💻 From LAMP to MQL5</span>
+                <span class="lang-es" style="display:none;">💻 De LAMP a MQL5</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">I had previous experience as a <span class="highlight-blue">server programmer</span> — LAMP stack: PHP, Apache HTTP Server, and MySQL. That gave me a <span class="highlight-gold">huge advantage</span> when I started learning MQL5. In just <span class="highlight-gold">6 months</span>, I completed two Udemy courses (basic and advanced). Many concepts were already familiar because I had studied <span class="highlight-blue">COBOL, C, C++, and Java</span> at university. MQL5 felt very similar to C++, but simpler.</span>
+                <span class="lang-es" style="display:none;">Tenía experiencia previa como <span class="highlight-blue">programador de servidores</span> — stack LAMP: PHP, Apache HTTP Server y MySQL. Eso me dio una <span class="highlight-gold">gran ventaja</span> cuando comencé a aprender MQL5. En solo <span class="highlight-gold">6 meses</span>, completé dos cursos de Udemy (básico y avanzado). Muchos conceptos ya me eran familiares porque había estudiado <span class="highlight-blue">COBOL, C, C++ y Java</span> en la universidad. MQL5 me resultó muy similar a C++, pero más sencillo.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">That's when I started creating <span class="highlight-gold">indicators and Expert Advisors</span>. Some were good, some were terrible. But with time, I realized that <span class="highlight-red">indicators run late</span> — they don't react to geopolitical tweets or sudden news. So I studied <span class="highlight-blue">Dow Theory</span> and decided to <span class="highlight-gold">say goodbye to indicators</span>, keeping only <span class="highlight-gold">EMAs</span>.</span>
+                <span class="lang-es" style="display:none;">Ahí fue cuando comencé a crear <span class="highlight-gold">indicadores y Expert Advisors</span>. Unos buenos, otros terribles. Pero con el tiempo, me di cuenta de que los <span class="highlight-red">indicadores llegan tarde</span> — no reaccionan a tweets geopolíticos ni a noticias repentinas. Así que estudié la <span class="highlight-blue">Teoría de Dow</span> y decidí <span class="highlight-gold">despedirme de los indicadores</span>, quedándome solo con las <span class="highlight-gold">EMAs</span>.</span>
+            </p>
+
+            <h2>
+                <span class="lang-en">🧠 The C4 Foundation — Standing on Giants</span>
+                <span class="lang-es" style="display:none;">🧠 La Base C4 — Sobre Hombros de Gigantes</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">In 2025, I connected with <span class="highlight-gold">John from Creemos Capital</span> and other <span class="highlight-blue">Master Traders</span> from around the world. I learned their <span class="highlight-gold">C4 strategy</span>, which had a 70% win rate. It was excellent. I <span class="highlight-gold">stood on the shoulders of these giants</span> — each with over 20 years of market experience, doing live analysis and trading.</span>
+                <span class="lang-es" style="display:none;">En 2025, me conecté con <span class="highlight-gold">John de Creemos Capital</span> y otros <span class="highlight-blue">Master Traders</span> de todo el mundo. Aprendí su <span class="highlight-gold">estrategia C4</span>, que tenía un 70% de tasa de éxito. Era excelente. Me <span class="highlight-gold">paré sobre los hombros de estos gigantes</span> — cada uno con más de 20 años de experiencia en el mercado, haciendo análisis y trading en vivo.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">That's when I started making my first <span class="highlight-gold">real dollars</span>. Not much — around $243 — but it was a start. And it was thanks to the C4 strategy and my own <span class="highlight-blue">risk management</span>.</span>
+                <span class="lang-es" style="display:none;">Ahí fue cuando comencé a hacer mis primeros <span class="highlight-gold">dólares reales</span>. No mucho — alrededor de $243 — pero era un comienzo. Y fue gracias a la estrategia C4 y mi propia <span class="highlight-blue">gestión de riesgo</span>.</span>
+            </p>
+
+            <div class="quote-inline">
+                <span class="lang-en">"I sat for hours in front of the computer, watching my bots' backtesting. I made all my programs available <strong>for free</strong> — they are for <strong>metals only</strong>. If you use them on forex or indices, they won't work. I specialized in <strong>Gold and Silver</strong>."</span>
+                <span class="lang-es" style="display:none;">"Me senté durante horas frente al ordenador, viendo el backtesting de mis bots. Puse todos mis programas disponibles <strong>de forma gratuita</strong> — son solo para <strong>metales</strong>. Si los usas en divisas o índices, no funcionarán. Me especialicé en <strong>Oro y Plata</strong>."</span>
+            </div>
+
+            <h2>
+                <span class="lang-en">⚡ EA-MarketLiquiditySignals — The First Program</span>
+                <span class="lang-es" style="display:none;">⚡ EA-MarketLiquiditySignals — El Primer Programa</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">One day, <span class="highlight-gold">Master Camilo</span> from Creemos Capital showed how to find liquidity zones. Using that video, I created my first program: <span class="highlight-blue">EA-MarketLiquiditySignals.mql5</span>. This program does several things: it tells you which market session you're in, and it marks <span class="highlight-gold">external and internal liquidity zones</span> — both institutional and retail levels.</span>
+                <span class="lang-es" style="display:none;">Un día, <span class="highlight-gold">Master Camilo</span> de Creemos Capital mostró cómo encontrar zonas de liquidez. Usando ese video, creé mi primer programa: <span class="highlight-blue">EA-MarketLiquiditySignals.mql5</span>. Este programa hace varias cosas: te dice en qué sesión de mercado estás, y marca las <span class="highlight-gold">zonas de liquidez externas e internas</span> — tanto niveles institucionales como retail.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">I realized that the <span class="highlight-gold">real trading edge</span> comes from using <span class="highlight-blue">External Liquidity Zones</span> — what others call Supply and Demand, or Maximum/Minimum Price. Every trader has their own world, but the <span class="highlight-gold">structure is the same</span>.</span>
+                <span class="lang-es" style="display:none;">Me di cuenta de que la <span class="highlight-gold">verdadera ventaja en el trading</span> viene de usar las <span class="highlight-blue">Zonas de Liquidez Externas</span> — lo que otros llaman Oferta y Demanda, o Precio Máximo/Mínimo. Cada trader es un mundo aparte, pero la <span class="highlight-gold">estructura es la misma</span>.</span>
+            </p>
+
+            <h2>
+                <span class="lang-en">📐 The Birth of Epiphany — January 6, 2026</span>
+                <span class="lang-es" style="display:none;">📐 El Nacimiento de Epiphany — 6 de Enero de 2026</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">After much <span class="highlight-gold">trial and error</span>, my P&L balance on January 1, 2026 was <span class="highlight-red">-$560.00</span>. That's when I discovered something profound: <span class="highlight-gold">all EMAs behave quadratically</span> according to supply and demand. When <span class="highlight-gold">buy orders exceed sell orders</span>, the EMA line curves <span class="highlight-gold">bullishly upward</span> (y = -x²). And when <span class="highlight-gold">sell orders exceed buy orders</span>, it curves <span class="highlight-gold">bearishly downward</span> (y = x²).</span>
+                <span class="lang-es" style="display:none;">Después de mucho <span class="highlight-gold">ensayo y error</span>, mi balance de P&L el 1 de Enero de 2026 era <span class="highlight-red">-$560.00</span>. Fue entonces cuando descubrí algo profundo: <span class="highlight-gold">todas las EMAs se comportan de forma cuadrática</span> según la oferta y la demanda. Cuando <span class="highlight-gold">las órdenes de compra superan a las de venta</span>, la línea de la EMA se curva <span class="highlight-gold">alcista hacia arriba</span> (y = -x²). Y cuando <span class="highlight-gold">las órdenes de venta superan a las de compra</span>, se curva <span class="highlight-gold">bajista hacia abajo</span> (y = x²).</span>
+            </p>
+
+            <p>
+                <span class="lang-en">I began to see price as a <span class="highlight-gold">ball between two players</span> — bouncing between Supply (resistance) and Demand (support). I observed that <span class="highlight-blue">bullish concavity (y = -x²)</span> acts as <span class="highlight-gold">dynamic support</span>, and the <span class="highlight-gold">momentum</span> happens when price moves <span class="highlight-gold">5% away from the concave EMA</span> — regardless of the asset.</span>
+                <span class="lang-es" style="display:none;">Comencé a ver el precio como una <span class="highlight-gold">bola entre dos jugadores</span> — rebotando entre la Oferta (resistencia) y la Demanda (soporte). Observé que la <span class="highlight-blue">concavidad alcista (y = -x²)</span> actúa como <span class="highlight-gold">soporte dinámico</span>, y el <span class="highlight-gold">momentum</span> ocurre cuando el precio se aleja <span class="highlight-gold">5% de la EMA cóncava</span> — sin importar el activo.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">That's how <span class="highlight-gold">Epiphany</span> was born — a strategy for <span class="highlight-blue">perfect daily bullish structure</span>. With its 12 Dogmas, it allows you to <span class="highlight-gold">triple or quadruple your profits</span> with controlled risk.</span>
+                <span class="lang-es" style="display:none;">Así nació <span class="highlight-gold">Epiphany</span> — una estrategia para <span class="highlight-blue">estructura diaria perfectamente alcista</span>. Con sus 12 Dogmas, te permite <span class="highlight-gold">triplicar o cuadruplicar tus ganancias</span> con riesgo controlado.</span>
+            </p>
+
+            <h2>
+                <span class="lang-en">🚀 J5 — The Evolution of C4</span>
+                <span class="lang-es" style="display:none;">🚀 J5 — La Evolución de C4</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">Then came <span class="highlight-gold">J5</span>, which evolved from Creemos Capital's C4 strategy. I added key rules: <span class="highlight-blue">never trade against the daily structure</span> — if the daily is bullish, I never sell, and vice versa. I incorporated the <span class="highlight-gold">momentum logic using EMA20 and EMA40</span>, combined with <span class="highlight-blue">price action, capital management, and quadratic geometry</span>.</span>
+                <span class="lang-es" style="display:none;">Luego vino <span class="highlight-gold">J5</span>, que evolucionó de la estrategia C4 de Creemos Capital. Añadí reglas clave: <span class="highlight-blue">nunca operar contra la estructura diaria</span> — si el diario es alcista, nunca vendo, y viceversa. Incorporé la <span class="highlight-gold">lógica del momentum usando EMA20 y EMA40</span>, combinada con <span class="highlight-blue">acción del precio, gestión de capital y geometría cuadrática</span>.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">I started using <span class="highlight-gold">hedging</span> not to mitigate losses, but to <span class="highlight-gold">multiply profits</span>. In just <span class="highlight-gold">67 days</span>, I turned a $198 account into <span class="highlight-gold">$2,931.70</span>. My brother, an Amgen Validation Engineer and also a trader, came to watch me trade live. He saw it happen with his own eyes.</span>
+                <span class="lang-es" style="display:none;">Comencé a usar el <span class="highlight-gold">hedging</span> no para amortiguar pérdidas, sino para <span class="highlight-gold">multiplicar ganancias</span>. En solo <span class="highlight-gold">67 días</span>, convertí una cuenta de $198 en <span class="highlight-gold">$2,931.70</span>. Mi hermano, Ingeniero de Validación en Amgen y también trader, vino a verme hacer trading en vivo. Lo vio con sus propios ojos.</span>
+            </p>
+
+            <div class="quote-inline">
+                <span class="lang-en">"I give <strong>everything for free</strong> — my programs, my indicators, my knowledge. Because I received it all for free. It's my way of paying back Creemos Capital and all the traders who helped me without charging a cent."</span>
+                <span class="lang-es" style="display:none;">"Doy <strong>todo de forma gratuita</strong> — mis programas, mis indicadores, mi conocimiento. Porque todo lo recibí gratis. Es mi forma de devolverle a Creemos Capital y a todos los traders que me ayudaron sin cobrarme un centavo."</span>
+            </div>
+
+            <h2>
+                <span class="lang-en">🙏 Gratitude and Mission</span>
+                <span class="lang-es" style="display:none;">🙏 Gratitud y Misión</span>
+            </h2>
+
+            <p>
+                <span class="lang-en">Today, anyone who asks for help receives my hand. I teach without charging a cent. <span class="highlight-gold">Because I didn't pay for any of this</span>. My programs and custom indicators are available on <span class="highlight-blue">MQL5.com</span> — for programmers and traders alike — to help them build <span class="highlight-gold">discipline and independence</span>.</span>
+                <span class="lang-es" style="display:none;">Hoy, cualquier persona que pide ayuda recibe mi mano. Doy clases sin cobrar un centavo. <span class="highlight-gold">Porque nada de esto lo pagué</span>. Mis programas e indicadores personalizados están disponibles en <span class="highlight-blue">MQL5.com</span> — tanto para programadores como para traders — para ayudarles a crear <span class="highlight-gold">disciplina e independencia</span>.</span>
+            </p>
+
+            <p>
+                <span class="lang-en">This is how I achieved <span class="highlight-gold">financial independence</span>. Not by selling, but by <span class="highlight-gold">giving</span>. Not by hoarding, but by <span class="highlight-gold">sharing</span>.</span>
+                <span class="lang-es" style="display:none;">Así es como logré la <span class="highlight-gold">independencia económica</span>. No vendiendo, sino <span class="highlight-gold">dando</span>. No acumulando, sino <span class="highlight-gold">compartiendo</span>.</span>
+            </p>
+
+            <p style="margin-top: 24px; font-size: 1.1rem; text-align: center; color: var(--gold-dark); font-weight: 600;">
+                <span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span>
+                <span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span>
+            </p>
+
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo">
+                    <span class="logo-gold">J5</span> Trading Strategy
+                </div>
+                <p>
+                    <span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span>
+                    <span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span>
+                </p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="js/language.js"></script>
+</body>
+</html>
