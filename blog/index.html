@@ -209,7 +209,7 @@
         .report-notes ul { padding-left: 20px; font-size: 0.9rem; color: var(--text-dark); }
         .report-notes li { margin-bottom: 8px; }
 
-        /* ─── COMMENT FORM ─── */
+        /* ─── FORMULARIO DE COMENTARIOS ─── */
         .comment-box {
             background: var(--white);
             border-radius: var(--radius);
@@ -521,37 +521,7 @@
                 </div>
             </article>
 
-            <!-- 💬 INTERACTION SECTION / QUESTION MODULE -->
-            <section class="comment-box">
-                <h2 class="section-title" style="margin-top: 0;">💬 Have a Question or Market Insight?</h2>
-                <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
-                    Have questions about our quantitative models, hedging execution blocks, or EA settings? Send your enquiry below. Answers are sent directly and selected insights are published in future Q&A updates.
-                </p>
-
-                <form id="blog-comment-form" class="comment-form" action="https://formspree.io/f/YOUR_FORMSPREE_KEY" method="POST">
-                    <div style="display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;">
-                        <div style="flex: 1; min-width: 240px;">
-                            <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--blue-dark); margin-bottom: 6px;">Name / Alias</label>
-                            <input type="text" name="name" required placeholder="e.g. Alex M." />
-                        </div>
-                        <div style="flex: 1; min-width: 240px;">
-                            <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--blue-dark); margin-bottom: 6px;">Email Address</label>
-                            <input type="email" name="email" required placeholder="your.email@domain.com" />
-                        </div>
                     </div>
-
-                    <div style="margin-bottom: 16px;">
-                        <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--blue-dark); margin-bottom: 6px;">Your Question or Trading Feedback</label>
-                        <textarea name="message" rows="4" required placeholder="Ask about lot sizing, EMA concavity, or backtest validation..."></textarea>
-                    </div>
-
-                    <button type="submit" style="background: var(--gold); color: var(--white); border: none; padding: 12px 32px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: background var(--transition);">
-                        📩 Send Question
-                    </button>
-                </form>
-            </section>
-
-        </div>
     </main>
 
     <!-- ═══ FOOTER ═══ -->
