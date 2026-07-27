@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog & Case Studies — J5 Trading Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy (Blog Section)
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: rgba(255,255,255,0.92);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width var(--transition);
+        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 3px;
+            border: 1px solid var(--gray-border);
+        }
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+        }
+
+        /* ─── HERO BLOG ─── */
+        .blog-hero {
+            background: var(--white);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--gray-border);
+            text-align: center;
+        }
+        .blog-hero h1 {
+            font-size: 2.2rem;
+            color: var(--blue-dark);
+            margin-bottom: 8px;
+        }
+        .blog-hero p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* ─── FEATURED POST / REPORT ─── */
+        .main-content { padding: 40px 0 60px; }
+        .post-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            padding: 36px 40px;
+            margin-bottom: 40px;
+        }
+        .post-header {
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .post-tag {
+            display: inline-block;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .post-title {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* ─── REPORT STYLES EMBEDDED ─── */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin: 20px 0 28px;
+        }
+        .metric-card {
+            background: var(--gray-bg);
+            border-radius: 10px;
+            padding: 14px 12px;
+            text-align: center;
+            border: 1px solid var(--gray-border);
+        }
+        .metric-card .number { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+        .metric-card .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+        .metric-card.gold .number { color: var(--gold-dark); }
+        .metric-card.green .number { color: var(--success); }
+        .metric-card.blue .number { color: var(--blue-medium); }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--blue-dark);
+            border-left: 4px solid var(--gold);
+            padding-left: 10px;
+            margin: 28px 0 14px;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 10px 0 20px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            background: #fff;
+        }
+        th {
+            background: var(--gray-bg);
+            font-weight: 600;
+            text-align: left;
+            padding: 8px 10px;
+            border-bottom: 2px solid var(--gold);
+            white-space: nowrap;
+        }
+        td { padding: 8px 10px; border-bottom: 1px solid var(--gray-border); }
+        .badge { font-weight: 600; padding: 2px 8px; border-radius: 20px; font-size: 0.65rem; }
+        .badge-green { background: #dcfce7; color: var(--success); }
+        .highlight-row { background: #fefcf3; border-left: 3px solid var(--gold); }
+        .highlight-gold { color: var(--gold-dark); font-weight: 600; }
+        .highlight-green { color: var(--success); font-weight: 600; }
+
+        .report-notes {
+            background: var(--gray-bg);
+            border-radius: var(--radius);
+            padding: 20px;
+            border: 1px solid var(--gray-border);
+            margin-top: 20px;
+        }
+        .report-notes ul { padding-left: 20px; font-size: 0.9rem; color: var(--text-dark); }
+        .report-notes li { margin-bottom: 8px; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--gray-border);
+            padding: 30px 0 24px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-copy { font-size: 0.75rem; color: var(--text-light); }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        @media (max-width: 768px) {
+            .post-card { padding: 20px; }
+            .header-inner { flex-direction: column; align-items: stretch; gap: 10px; }
+            nav { justify-content: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-right { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-gold">J5</span> Trading Strategy
+            </div>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../systems/j5.html">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="index.html" class="active">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ HERO BLOG ═══ -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>
+                <span class="lang-en">Case Studies & Performance Reports</span>
+                <span class="lang-es" style="display:none;">Casos de Estudio e Informes de Rendimiento</span>
+            </h1>
+            <p>
+                <span class="lang-en">Verifiable metrics, institutional liquidity analysis, and mathematical discipline in real market conditions.</span>
+                <span class="lang-es" style="display:none;">Métricas verificables, análisis de liquidez institucional y disciplina matemática en condiciones reales de mercado.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══ MAIN CONTENT ═══ -->
+    <main class="main-content">
+        <div class="container">
+            <article class="post-card">
+                <div class="post-header">
+                    <span class="post-tag">Featured Report · Q1 2026</span>
+                    <h2 class="post-title">
+                        Epiphany Capital Management — Performance Report (Nov 2025 – Jan 2026)
+                    </h2>
+                    <div class="post-meta">
+                        <span><strong>Trader:</strong> Julio Henrique Viera Nieves</span>
+                        <span><strong>Period:</strong> Nov 25, 2025 – Jan 30, 2026</span>
+                        <span><strong>Asset Class:</strong> GOLD & SILVER</span>
+                    </div>
+                </div>
+
+                <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
+                    <span class="lang-en">This report documents the performance of the J5 Trading Strategy on a live account. It demonstrates how strict risk parameters, patient structure selection, and quadratic EMA concavity produce high yield (+687%) with minimal maximum drawdown ($25.00 / 1.65%).</span>
+                    <span class="lang-es" style="display:none;">Este informe documenta el rendimiento de la Estrategia J5 en una cuenta real. Demuestra cómo parámetros estrictos de riesgo, selección paciente de estructuras y concavidad cuadrática de EMAs producen un alto rendimiento (+687%) con un drawdown máximo mínimo ($25.00 / 1.65%).</span>
+                </p>
+
+                <!-- Métricas Clave -->
+                <div class="metric-grid">
+                    <div class="metric-card gold">
+                        <div class="number">$1,481.70</div>
+                        <div class="label">Balance Final</div>
+                    </div>
+                    <div class="metric-card green">
+                        <div class="number">+687%</div>
+                        <div class="label">Rendimiento</div>
+                    </div>
+                    <div class="metric-card blue">
+                        <div class="number">$1,292.71</div>
+                        <div class="label">Profit Bruto</div>
+                    </div>
+                    <div class="metric-card green">
+                        <div class="number">~73%</div>
+                        <div class="label">Win Rate</div>
+                    </div>
+                    <div class="metric-card gold">
+                        <div class="number">$25.00</div>
+                        <div class="label">Drawdown Máx</div>
+                    </div>
+                    <div class="metric-card blue">
+                        <div class="number">$1,450.00</div>
+                        <div class="label">Retiros Totales</div>
+                    </div>
+                </div>
+
+                <!-- Evolución -->
+                <h3 class="section-title">📈 Evolución del Capital</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Fecha</th><th>Evento</th><th>Balance</th><th>Cambio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>25 Nov 2025</td><td>Inicio</td><td>$188.19</td><td>—</td></tr>
+                            <tr><td>02 Dic 2025</td><td>Depósito +$60</td><td>$241.31</td><td>+28%</td></tr>
+                            <tr><td>02 Dic 2025</td><td>Depósito +$100</td><td>$341.26</td><td>+81%</td></tr>
+                            <tr><td>03 Dic 2025</td><td>Depósito +$100</td><td>$441.26</td><td>+134%</td></tr>
+                            <tr><td>15 Dic 2025</td><td>Trade GOLD +$53.38</td><td>$478.60</td><td>+154%</td></tr>
+                            <tr><td>23 Dic 2025</td><td>Trade GOLD +$19.97</td><td>$420.85</td><td>+123%</td></tr>
+                            <tr><td>30 Dic 2025</td><td>Depósito +$95</td><td>$501.12</td><td>+166%</td></tr>
+                            <tr><td>15 Ene 2026</td><td>Trade SILVER +$30.40</td><td>$672.28</td><td>+257%</td></tr>
+                            <tr><td>21 Ene 2026</td><td>Bloque SILVER +$28.25</td><td>$783.97</td><td>+316%</td></tr>
+                            <tr><td>22 Ene 2026</td><td>Bloque SILVER +$40.10</td><td>$843.47</td><td>+348%</td></tr>
+                            <tr><td>27 Ene 2026</td><td>Bloque SILVER +$137.75</td><td>$1,008.69</td><td>+436%</td></tr>
+                            <tr><td>28 Ene 2026</td><td>Bloque SILVER +$129.65</td><td>$1,442.60</td><td>+666%</td></tr>
+                            <tr><td>30 Ene 2026</td><td>Bloque SILVER +$211.35</td><td>$1,506.70</td><td>+700%</td></tr>
+                            <tr><td>30 Ene 2026</td><td>Retiro -$25</td><td><strong>$1,481.70</strong></td><td><strong>+687%</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Trades Destacados -->
+                <h3 class="section-title">⭐ Trades Destacados</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Fecha</th><th>Instrumento</th><th>Dirección</th><th>Entrada</th><th>Salida</th><th>Profit</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row"><td>15 Dic 2025</td><td>GOLD</td><td><span class="badge badge-green">BUY</span></td><td>4311.59 / 4328.31</td><td>4346.64</td><td class="highlight-green">+$53.38</td></tr>
+                            <tr><td>23 Dic 2025</td><td>GOLD</td><td><span class="badge badge-green">BUY</span></td><td>4475.85</td><td>4495.82</td><td class="highlight-green">+$19.97</td></tr>
+                            <tr><td>15 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>88.698</td><td>89.306</td><td class="highlight-green">+$30.40</td></tr>
+                            <tr class="highlight-row"><td>21 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>94.766 / 94.765</td><td>94.869</td><td class="highlight-gold">+$33.55</td></tr>
+                            <tr><td>22 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>91.864 / 91.907</td><td>91.862</td><td class="highlight-gold">+$38.55</td></tr>
+                            <tr class="highlight-row"><td>27 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>105.242 / 104.270</td><td>105.693</td><td class="highlight-gold">+$137.75</td></tr>
+                            <tr><td>28 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>112.630 / 112.696</td><td>113.285</td><td class="highlight-gold">+$107.00</td></tr>
+                            <tr class="highlight-row"><td>28 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>113.386 / 113.519</td><td>113.639</td><td class="highlight-gold">+$129.65</td></tr>
+                            <tr><td>30 Ene 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>97.727 / 97.824</td><td>98.765</td><td class="highlight-gold">+$211.35</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Análisis Técnico / Notas -->
+                <h3 class="section-title">📌 Conclusiones & Gestión Psicológica</h3>
+                <div class="report-notes">
+                    <ul>
+                        <li><strong>Transición a SILVER:</strong> A partir del 15 de enero, la operativa migró de GOLD a SILVER debido a una menor fricción en picos de liquidez interna y mayor claridad geométrica en temporalidades bajas.</li>
+                        <li><strong>Bloques de Hedging:</strong> Las entradas agrupadas representan operaciones en masa (*bulk*) cerradas simultáneamente al tocar proyecciones cuadráticas.</li>
+                        <li><strong>Control de Riesgo Extremo:</strong> El Drawdown Máximo se mantuvo en **$25.00** (1.65% desde el pico máximo flotante), confirmando que las entradas no sufrieron exposición desmedida.</li>
+                        <li><strong>Paciencia Operativa:</strong> El periodo de inactividad entre el 30 de diciembre y el 15 de enero demuestra la máxima fundamental: *el mejor trade a veces es el que no se hace*.</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo">
+                    <span class="logo-gold">J5</span> Trading Strategy
+                </div>
+                <p>"Fiat Voluntas Geometriae" — Epiphany Capital Management</p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="../js/language.js"></script>
+</body>
+</html>
