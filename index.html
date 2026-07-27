@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>J5 Trading Strategy — Pure Mathematics. Institutional Liquidity.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width var(--transition);
+        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-bg);
+            border-radius: 24px;
+            padding: 3px;
+            border: 1px solid var(--gray-border);
+        }
+        .language-switcher button {
+            background: transparent;
+            border: none;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .language-switcher button.active {
+            background: var(--gold);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(212,175,55,0.3);
+        }
+        .language-switcher button:hover:not(.active) {
+            color: var(--blue-dark);
+            background: var(--gold-light);
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: var(--white);
+            padding: 60px 0 50px;
+            border-bottom: 1px solid var(--gray-border);
+        }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .hero-text { flex: 1 1 55%; }
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--gold-dark);
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        .hero-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            max-width: 600px;
+        }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+        }
+        .btn-secondary {
+            display: inline-block;
+            border: 2px solid var(--gold);
+            color: var(--gold-dark);
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition);
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-secondary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+        .hero-image { flex: 1 1 30%; text-align: center; }
+        .hero-image img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-height: 340px;
+            width: auto;
+            object-fit: cover;
+            border: 2px solid var(--gold-light);
+        }
+
+        /* ─── METRICS ─── */
+        .metrics { padding: 40px 0 30px; }
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .metric-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 22px 16px;
+            text-align: center;
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .metric-card .number {
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        .metric-card .label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .metric-card.gold .number { color: var(--gold-dark); }
+        .metric-card.green .number { color: var(--success); }
+        .metric-card.blue .number { color: var(--blue-medium); }
+
+        /* ─── JOURNEY ─── */
+        .journey {
+            padding: 50px 0 40px;
+            background: var(--white);
+        }
+        .journey h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 28px;
+        }
+        .timeline { display: flex; flex-direction: column; gap: 6px; }
+        .timeline-item {
+            padding: 14px 20px;
+            border-left: 4px solid var(--gray-border);
+            padding-left: 20px;
+            transition: background var(--transition);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .timeline-item:hover { background: var(--gray-bg); }
+        .timeline-item.highlight {
+            border-left-color: var(--gold);
+            background: var(--gold-light);
+        }
+        .timeline-date {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .timeline-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--blue-dark);
+        }
+        .timeline-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        /* ─── ACHIEVEMENTS ─── */
+        .achievements { padding: 50px 0 40px; }
+        .achievements h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 24px;
+        }
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+        .achievement-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            border: 1px solid var(--gray-border);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .achievement-item:hover {
+            transform: translateX(4px);
+            border-color: var(--gold);
+        }
+
+        /* ─── J5 SYSTEM ─── */
+        .j5-system {
+            padding: 50px 0 40px;
+            background: var(--white);
+        }
+        .j5-system h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 24px;
+        }
+        .system-grid {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .system-text { flex: 1 1 55%; }
+        .system-text p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+        .system-text .btn-primary { margin-top: 8px; }
+        .system-image { flex: 1 1 35%; text-align: center; }
+        .system-image img {
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            max-height: 320px;
+            object-fit: contain;
+            background: var(--gray-bg);
+        }
+
+        /* ─── PHILOSOPHY ─── */
+        .philosophy { padding: 50px 0 40px; }
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+        .philosophy-item {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            text-align: center;
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+        .philosophy-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .philosophy-item .icon { font-size: 2.4rem; margin-bottom: 6px; }
+        .philosophy-item h3 {
+            font-size: 1.1rem;
+            color: var(--blue-dark);
+            margin-bottom: 6px;
+        }
+        .philosophy-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ─── QUOTE ─── */
+        .quote-section {
+            padding: 50px 0 40px;
+            background: var(--blue-dark);
+            text-align: center;
+        }
+        .quote-section blockquote {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--white);
+            max-width: 720px;
+            margin: 0 auto 10px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        .quote-section cite {
+            color: var(--gold);
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--white);
+            border-top: 1px solid var(--gray-border);
+            padding: 30px 0 24px;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 2px !important;
+        }
+        .footer-right {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .footer-right a {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .hero-text h1 { font-size: 2.4rem; }
+            .hero-inner { gap: 30px; }
+        }
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2rem; }
+            .hero-inner { flex-direction: column; text-align: center; }
+            .hero-description { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .system-grid { flex-direction: column; }
+            .system-image { order: -1; }
+            .header-inner {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            nav { justify-content: center; }
+            .language-switcher { align-self: center; }
+            .footer-inner { flex-direction: column; text-align: center; }
+            .footer-right { justify-content: center; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 480px) {
+            .hero-text h1 { font-size: 1.6rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .achievements-grid { grid-template-columns: 1fr; }
+            .hero-image img { max-height: 220px; }
+            .timeline-item { padding: 10px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <span class="logo-gold">J5</span> Trading Strategy
+            </div>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="systems/j5.html">Strategy</a>
+                <a href="downloads/index.html">Downloads</a>
+                <a href="blog/index.html">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <h1>
+                    <span class="lang-en">J5 Trading Strategy</span>
+                    <span class="lang-es" style="display:none;">Estrategia de Trading J5</span>
+                </h1>
+                <p class="hero-sub">
+                    <span class="lang-en">Pure Mathematics. Institutional Liquidity. 90% Accuracy.</span>
+                    <span class="lang-es" style="display:none;">Matemática Pura. Liquidez Institucional. 90% de Precisión.</span>
+                </p>
+                <p class="hero-description">
+                    <span class="lang-en">From $150 to $2,931.70 in 67 days. 1,954% ROI. Zero luck. All structure.</span>
+                    <span class="lang-es" style="display:none;">De $150 a $2,931.70 en 67 días. 1,954% ROI. Cero suerte. Toda estructura.</span>
+                </p>
+                <div class="hero-buttons">
+                    <a href="systems/j5.html" class="btn-primary">
+                        <span class="lang-en">Explore the Strategy →</span>
+                        <span class="lang-es" style="display:none;">Explorar la Estrategia →</span>
+                    </a>
+                    <a href="downloads/index.html" class="btn-secondary">
+                        <span class="lang-en">Download MQL5</span>
+                        <span class="lang-es" style="display:none;">Descargar MQL5</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/juliolinkedin.jpg" alt="Julio Henrique Viera Nieves" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ METRICS ═══ -->
+    <section class="metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-card gold">
+                    <div class="number">$2,931.70</div>
+                    <div class="label">
+                        <span class="lang-en">Total Generated</span>
+                        <span class="lang-es" style="display:none;">Total Generado</span>
+                    </div>
+                </div>
+                <div class="metric-card green">
+                    <div class="number">1,954%</div>
+                    <div class="label">
+                        <span class="lang-en">ROI in 67 Days</span>
+                        <span class="lang-es" style="display:none;">ROI en 67 Días</span>
+                    </div>
+                </div>
+                <div class="metric-card blue">
+                    <div class="number">90%</div>
+                    <div class="label">
+                        <span class="lang-en">Win Rate</span>
+                        <span class="lang-es" style="display:none;">Tasa de Éxito</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ JOURNEY ═══ -->
+    <section class="journey">
+        <div class="container">
+            <h2>
+                <span class="lang-en">🚀 The Journey: From Everything to Nothing to Everything</span>
+                <span class="lang-es" style="display:none;">🚀 El Viaje: De Todo a Nada a Todo</span>
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2023</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">The Breaking Point</span>
+                        <span class="lang-es" style="display:none;">El Punto de Quiebre</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">After 6 years in Texas, Julio returned to Puerto Rico with NOTHING.</span>
+                        <span class="lang-es" style="display:none;">Después de 6 años en Texas, Julio regresó a Puerto Rico con NADA.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">September 2023</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">The Awakening</span>
+                        <span class="lang-es" style="display:none;">El Despertar</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">His brother Omar paid for his Forex course. The catalyst for transformation begins.</span>
+                        <span class="lang-es" style="display:none;">Su hermano Omar pagó su curso de Forex. Comienza el catalizador de la transformación.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2023 – Sep 2025</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">2.5 Years of Intelligent Obsession</span>
+                        <span class="lang-es" style="display:none;">2.5 Años de Obsesión Inteligente</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">Studied with Riley Coleman and John from Creemos Capital. Learned C4 strategy. Began seeing market patterns no one else could see.</span>
+                        <span class="lang-es" style="display:none;">Estudió con Riley Coleman y John de Creemos Capital. Aprendió la estrategia C4. Comenzó a ver patrones que nadie más podía ver.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">September 2025</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">First Trade</span>
+                        <span class="lang-es" style="display:none;">Primer Trade</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">After 2.5 years of study, made the first real trade. Not with fear, but with KNOWLEDGE.</span>
+                        <span class="lang-es" style="display:none;">Después de 2.5 años de estudio, hizo su primera operación real. No con miedo, sino con CONOCIMIENTO.</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">October 2025</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">The First Gift</span>
+                        <span class="lang-es" style="display:none;">El Primer Regalo</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">With his first $222 earned, created EA-MarketLiquiditySignals and gave it FOR FREE to the MQL5 community.</span>
+                        <span class="lang-es" style="display:none;">Con sus primeros $222 ganados, creó EA-MarketLiquiditySignals y lo regaló GRATIS a la comunidad MQL5.</span>
+                    </div>
+                </div>
+                <div class="timeline-item highlight">
+                    <div class="timeline-date">Nov 25, 2025 – Jan 30, 2026</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">🔥 THE EXPLOSION</span>
+                        <span class="lang-es" style="display:none;">🔥 LA EXPLOSIÓN</span>
+                    </div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">$150 initial capital → $1,481.70 balance + $1,450 withdrawn = $2,931.70 total. 67 days. 1,954% ROI. 90% win rate. Pure mastery.</span>
+                        <span class="lang-es" style="display:none;">$150 de capital inicial → $1,481.70 de balance + $1,450 retirados = $2,931.70 total. 67 días. 1,954% ROI. 90% de tasa de éxito. Pura maestría.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ ACHIEVEMENTS ═══ -->
+    <section class="achievements">
+        <div class="container">
+            <h2>
+                <span class="lang-en">🏆 Key Achievements</span>
+                <span class="lang-es" style="display:none;">🏆 Logros Clave</span>
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">📚 University Professor of Accounting (20+ years)</div>
+                <div class="achievement-item">📐 Discovered the quadratic EMA pattern (y = -x² / y = x²)</div>
+                <div class="achievement-item">⚡ Evolved Creemos Capital's C4 into J5 — 90% win rate</div>
+                <div class="achievement-item">💻 Created EA-MarketLiquiditySignals — identifies institutional liquidity zones</div>
+                <div class="achievement-item">💰 $2,931.70 from $150 in 67 days</div>
+                <div class="achievement-item">📊 Sharpe Ratio > 1 — risk management, not gambling</div>
+                <div class="achievement-item">🛡️ Maximum drawdown: only $25 (1.65%)</div>
+                <div class="achievement-item">🧠 Mentor to Creemos Capital network traders</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ J5 SYSTEM ═══ -->
+    <section class="j5-system">
+        <div class="container">
+            <h2>
+                <span class="lang-en">⚙️ The J5 System</span>
+                <span class="lang-es" style="display:none;">⚙️ El Sistema J5</span>
+            </h2>
+            <div class="system-grid">
+                <div class="system-text">
+                    <p>
+                        <span class="lang-en"><strong>Foundation:</strong> C4 Strategy (4 steps: Floor, Tendency, Pullbacks, Volume)</span>
+                        <span class="lang-es" style="display:none;"><strong>Fundamento:</strong> Estrategia C4 (4 pasos: Piso, Tendencia, Pullbacks, Volumen)</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>Enhancement:</strong> Avoid entries against daily structure + Stay out of internal liquidity zones</span>
+                        <span class="lang-es" style="display:none;"><strong>Mejora:</strong> Evitar entradas contra estructura diaria + Mantenerse fuera de zonas de liquidez interna</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>The Genius:</strong> EMAs move quadratically (y = -x² for buys, y = x² for sells)</span>
+                        <span class="lang-es" style="display:none;"><strong>La Genialidad:</strong> Las EMAs se mueven cuadráticamente (y = -x² para compras, y = x² para ventas)</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>Entry Signal:</strong> Price rejection at psychological levels + 5% drop from EMA = ENTRY</span>
+                        <span class="lang-es" style="display:none;"><strong>Señal de Entrada:</strong> Rechazo del precio en niveles psicológicos + 5% de distancia de la EMA = ENTRADA</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>Multiplier:</strong> Hedging mode: 3-4 simultaneous trades when plan confirms</span>
+                        <span class="lang-es" style="display:none;"><strong>Multiplicador:</strong> Modo hedging: 3-4 operaciones simultáneas cuando el plan confirma</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>Result:</strong> 90% win rate + Sharpe Ratio > 1 + $2,931.70 from $150</span>
+                        <span class="lang-es" style="display:none;"><strong>Resultado:</strong> 90% de tasa de éxito + Sharpe Ratio > 1 + $2,931.70 desde $150</span>
+                    </p>
+                    <a href="systems/j5.html" class="btn-primary">
+                        <span class="lang-en">Explore the Strategy →</span>
+                        <span class="lang-es" style="display:none;">Explorar la Estrategia →</span>
+                    </a>
+                </div>
+                <div class="system-image">
+                    <img src="assets/images/j5protocol.png" alt="J5 Protocol Screenshot" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PHILOSOPHY ═══ -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <div class="icon">📚</div>
+                    <h3>
+                        <span class="lang-en">Knowledge First</span>
+                        <span class="lang-es" style="display:none;">Conocimiento Primero</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">2.5 years of study before risking real capital. Intelligence beats speed. Mastery beats luck.</span>
+                        <span class="lang-es" style="display:none;">2.5 años de estudio antes de arriesgar capital real. La inteligencia vence a la velocidad. La maestría vence a la suerte.</span>
+                    </p>
+                </div>
+                <div class="philosophy-item">
+                    <div class="icon">📐</div>
+                    <h3>
+                        <span class="lang-en">Mathematics Always</span>
+                        <span class="lang-es" style="display:none;">Matemáticas Siempre</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Markets follow geometric patterns. EMAs move quadratically. Volume is momentum. Price finds institutional levels.</span>
+                        <span class="lang-es" style="display:none;">Los mercados siguen patrones geometricos. Las EMAs se mueven cuadráticamente. El volumen es momentum. El precio encuentra niveles institucionales.</span>
+                    </p>
+                </div>
+                <div class="philosophy-item">
+                    <div class="icon">💪</div>
+                    <h3>
+                        <span class="lang-en">Capital Preservation</span>
+                        <span class="lang-es" style="display:none;">Preservación de Capital</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Trading is not about who makes the most, it's about who preserves the most capital. 90% win rate + low drawdown = sustainable wealth.</span>
+                        <span class="lang-es" style="display:none;">El trading no se trata de quién gana más, sino de quién preserva más capital. 90% de tasa de éxito + bajo drawdown = riqueza sostenible.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ QUOTE ═══ -->
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>
+                <span class="lang-en">"I had everything in Texas. When I came to Puerto Rico, I had nothing. But that nothing taught me something: real wealth is not what you have, it's what you understand."</span>
+                <span class="lang-es" style="display:none;">"Lo tenía todo en Texas. Cuando llegué a Puerto Rico, no tenía nada. Pero esa nada me enseñó algo: la riqueza real no es lo que tienes, es lo que entiendes."</span>
+            </blockquote>
+            <cite>— Julio Henrique Viera Nieves</cite>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo">
+                    <span class="logo-gold">J5</span> Trading Strategy
+                </div>
+                <p>
+                    <span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span>
+                    <span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span>
+                </p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="js/language.js"></script>
+</body>
+</html>
