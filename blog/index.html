@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog & Case Studies — J5 Trading Strategy</title>
+    <title>J5 Trading Strategy — Pure Mathematics. Institutional Liquidity.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <style>
         /* ==========================================================
-           style.css — J5 Trading Strategy (Blog Section)
+           style.css — J5 Trading Strategy
            ========================================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -24,7 +24,8 @@
             --text-muted: #4a5568;
             --text-light: #718096;
             --success: #0f7b3a;
-            --danger: #c53030;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
             --white: #ffffff;
             --shadow: 0 8px 24px rgba(0,0,0,0.06);
             --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
@@ -41,221 +42,187 @@
             -webkit-font-smoothing: antialiased;
         }
         a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
         /* ─── HEADER ─── */
         header {
-            background: rgba(255,255,255,0.92);
+            background: var(--white);
             border-bottom: 1px solid var(--gray-border);
             padding: 14px 0;
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
         }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
         .logo-gold { color: var(--gold); }
         nav { display: flex; gap: 20px; flex-wrap: wrap; }
-        nav a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color var(--transition);
-            position: relative;
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            transition: width var(--transition);
-        }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
         nav a:hover::after, nav a.active::after { width: 100%; }
         nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+        .language-switcher button:hover:not(.active) { color: var(--blue-dark); background: var(--gold-light); }
 
-        /* ─── HERO BLOG ─── */
-        .blog-hero {
-            background: var(--white);
-            padding: 40px 0;
-            border-bottom: 1px solid var(--gray-border);
-            text-align: center;
-        }
-        .blog-hero h1 {
-            font-size: 2.2rem;
-            color: var(--blue-dark);
-            margin-bottom: 8px;
-        }
-        .blog-hero p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 650px;
-            margin: 0 auto;
-        }
+        /* ─── HERO ─── */
+        .hero { background: var(--white); padding: 60px 0 50px; border-bottom: 1px solid var(--gray-border); }
+        .hero-inner { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .hero-text { flex: 1 1 55%; }
+        .hero-text h1 { font-size: 2.8rem; font-weight: 700; color: var(--blue-dark); line-height: 1.1; margin-bottom: 8px; }
+        .hero-sub { font-size: 1.2rem; color: var(--gold-dark); font-weight: 500; margin-bottom: 12px; }
+        .hero-description { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: var(--gold); color: var(--white); padding: 12px 32px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); border: none; cursor: pointer; }
+        .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+        .btn-secondary { display: inline-block; border: 2px solid var(--gold); color: var(--gold-dark); padding: 10px 28px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); background: transparent; cursor: pointer; }
+        .btn-secondary:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .hero-image { flex: 1 1 30%; text-align: center; }
+        .hero-image img { border-radius: var(--radius); box-shadow: var(--shadow); max-height: 340px; width: auto; object-fit: cover; border: 2px solid var(--gold-light); }
 
-        /* ─── FEATURED POST / REPORT ─── */
-        .main-content { padding: 40px 0 60px; }
-        .post-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            border: 1px solid var(--gray-border);
-            box-shadow: var(--shadow);
-            padding: 36px 40px;
-            margin-bottom: 40px;
-        }
-        .post-header {
-            border-bottom: 3px solid var(--gold);
-            padding-bottom: 16px;
-            margin-bottom: 24px;
-        }
-        .post-tag {
-            display: inline-block;
-            background: var(--gold-light);
-            color: var(--gold-dark);
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-        .post-title {
-            font-size: 1.8rem;
-            color: var(--blue-dark);
-            font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 8px;
-        }
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* ─── METRIC CARDS ─── */
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 14px;
-            margin: 20px 0 28px;
-        }
-        .metric-card {
-            background: var(--gray-bg);
-            border-radius: 10px;
-            padding: 14px 12px;
-            text-align: center;
-            border: 1px solid var(--gray-border);
-        }
-        .metric-card .number { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
-        .metric-card .label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+        /* ─── METRICS ─── */
+        .metrics { padding: 40px 0 30px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .metric-card { background: var(--white); border-radius: var(--radius); padding: 22px 16px; text-align: center; border: 1px solid var(--gray-border); box-shadow: var(--shadow); transition: all var(--transition); }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .metric-card .number { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+        .metric-card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 4px; }
         .metric-card.gold .number { color: var(--gold-dark); }
         .metric-card.green .number { color: var(--success); }
         .metric-card.blue .number { color: var(--blue-medium); }
 
-        .section-title {
-            font-size: 1.15rem;
-            font-weight: 600;
+        /* ─── JOURNEY, ACHIEVEMENTS, J5 SYSTEM, PHILOSOPHY (Retained from original) ─── */
+        .journey, .achievements, .j5-system, .philosophy { padding: 50px 0 40px; background: var(--white); }
+        .journey h2, .achievements h2, .j5-system h2, .philosophy h2 { font-size: 1.8rem; color: var(--blue-dark); margin-bottom: 28px; }
+        .metrics, .achievements { background: var(--gray-bg); }
+        
+        /* Timeline */
+        .timeline { display: flex; flex-direction: column; gap: 6px; }
+        .timeline-item { padding: 14px 20px; border-left: 4px solid var(--gray-border); transition: background var(--transition); border-radius: 0 var(--radius) var(--radius) 0; }
+        .timeline-item:hover { background: var(--gray-bg); }
+        .timeline-item.highlight { border-left-color: var(--gold); background: var(--gold-light); }
+        .timeline-date { font-size: 0.7rem; font-weight: 600; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.05em; }
+        .timeline-title { font-size: 1.05rem; font-weight: 600; color: var(--blue-dark); }
+        .timeline-desc { font-size: 0.92rem; color: var(--text-muted); }
+
+        /* Grids */
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .achievement-item { background: var(--white); border-radius: var(--radius); padding: 14px 18px; border: 1px solid var(--gray-border); font-size: 0.9rem; box-shadow: var(--shadow); transition: all var(--transition); display: flex; align-items: center; gap: 10px; }
+        .achievement-item:hover { transform: translateX(4px); border-color: var(--gold); }
+        .system-grid { display: flex; gap: 40px; flex-wrap: wrap; }
+        .system-text { flex: 1 1 55%; }
+        .system-text p { margin-bottom: 12px; font-size: 0.95rem; }
+        .system-image { flex: 1 1 35%; text-align: center; }
+        .system-image img { border-radius: var(--radius); border: 1px solid var(--gray-border); box-shadow: var(--shadow); max-height: 320px; object-fit: contain; }
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+        .philosophy-item { background: var(--white); border-radius: var(--radius); padding: 24px 20px; text-align: center; border: 1px solid var(--gray-border); box-shadow: var(--shadow); transition: all var(--transition); }
+        .philosophy-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .philosophy-item .icon { font-size: 2.4rem; margin-bottom: 6px; }
+        .philosophy-item h3 { font-size: 1.1rem; color: var(--blue-dark); margin-bottom: 6px; }
+        .philosophy-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* ─── MARKET NEWS SECTION ─── */
+        .market-news {
+            padding: 60px 0 50px;
+            background: var(--gray-bg);
+        }
+        .market-news h2 {
+            font-size: 1.8rem;
             color: var(--blue-dark);
-            border-left: 4px solid var(--gold);
-            padding-left: 10px;
-            margin: 28px 0 14px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .table-wrap {
-            overflow-x: auto;
-            margin: 10px 0 20px;
-            border-radius: 8px;
-            border: 1px solid var(--gray-border);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.8rem;
-            background: #fff;
-        }
-        th {
-            background: var(--gray-bg);
-            font-weight: 600;
-            text-align: left;
-            padding: 8px 10px;
-            border-bottom: 2px solid var(--gold);
-            white-space: nowrap;
-        }
-        td { padding: 8px 10px; border-bottom: 1px solid var(--gray-border); }
-        .badge { font-weight: 600; padding: 2px 8px; border-radius: 20px; font-size: 0.65rem; }
-        .badge-green { background: #dcfce7; color: var(--success); }
-        .highlight-row { background: #fefcf3; border-left: 3px solid var(--gold); }
-        .highlight-gold { color: var(--gold-dark); font-weight: 600; }
-        .highlight-green { color: var(--success); font-weight: 600; }
-
-        .report-notes {
-            background: var(--gray-bg);
-            border-radius: var(--radius);
-            padding: 20px;
-            border: 1px solid var(--gray-border);
-            margin-top: 20px;
-        }
-        .report-notes ul { padding-left: 20px; font-size: 0.9rem; color: var(--text-dark); }
-        .report-notes li { margin-bottom: 8px; }
-
-        /* ─── FORMULARIO DE COMENTARIOS ─── */
-        .comment-box {
+        .news-card {
             background: var(--white);
             border-radius: var(--radius);
             border: 1px solid var(--gray-border);
             box-shadow: var(--shadow);
-            padding: 32px 40px;
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+            transition: all var(--transition);
         }
-        .comment-form input, .comment-form textarea {
+        .news-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .news-content {
+            padding: 32px;
+            flex: 1 1 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .news-badge {
+            align-self: flex-start;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .news-content h3 {
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .news-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .news-image {
+            flex: 1 1 45%;
+            background: #131722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--gray-border);
+            padding: 16px;
+        }
+        .news-image img {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--gray-border);
-            font-family: inherit;
-            font-size: 0.9rem;
-            outline: none;
-            transition: border-color var(--transition);
+            height: 100%;
+            object-fit: contain;
+            max-height: 280px;
+            border-radius: 6px;
         }
-        .comment-form input:focus, .comment-form textarea:focus {
-            border-color: var(--gold);
-        }
+
+        /* ─── QUOTE ─── */
+        .quote-section { padding: 50px 0 40px; background: var(--blue-dark); text-align: center; }
+        .quote-section blockquote { font-size: 1.4rem; font-weight: 400; color: var(--white); max-width: 720px; margin: 0 auto 10px; font-style: italic; line-height: 1.5; }
+        .quote-section cite { color: var(--gold); font-style: normal; font-weight: 500; font-size: 1rem; }
 
         /* ─── FOOTER ─── */
-        footer {
-            background: var(--white);
-            border-top: 1px solid var(--gray-border);
-            padding: 30px 0 24px;
-        }
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
         .footer-left .logo { font-size: 1.1rem; }
         .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
-        .footer-copy { font-size: 0.75rem; color: var(--text-light); }
         .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
-        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
         .footer-right a:hover { color: var(--gold-dark); }
 
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .news-card { flex-direction: column; }
+            .news-image { order: -1; border-left: none; border-bottom: 1px solid var(--gray-border); }
+        }
         @media (max-width: 768px) {
-            .post-card, .comment-box { padding: 20px; }
-            .header-inner { flex-direction: column; align-items: stretch; gap: 10px; }
-            nav { justify-content: center; }
-            .footer-inner { flex-direction: column; text-align: center; }
-            .footer-right { justify-content: center; }
+            .hero-inner { flex-direction: column; text-align: center; }
+            .header-inner { flex-direction: column; gap: 10px; }
+            .system-grid { flex-direction: column; }
         }
     </style>
 </head>
@@ -263,266 +230,223 @@
     <!-- ═══ HEADER ═══ -->
     <header>
         <div class="container header-inner">
-            <div class="logo">
-                <span class="logo-gold">J5</span> Trading Strategy
-            </div>
+            <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
             <nav>
-                <a href="../index.html">Home</a>
-                <a href="../about.html">About</a>
-                <a href="../systems/j5.html">Strategy</a>
-                <a href="../downloads/index.html">Downloads</a>
-                <a href="index.html" class="active">Blog</a>
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="systems/j5.html">Strategy</a>
+                <a href="downloads/index.html">Downloads</a>
+                <a href="blog/index.html">Blog</a>
             </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
         </div>
     </header>
 
-    <!-- ═══ HERO BLOG ═══ -->
-    <section class="blog-hero">
-        <div class="container">
-            <h1>Case Studies & Quantitative Analysis</h1>
-            <p>Verifiable metrics, statistical modeling, and mathematical discipline under live market conditions.</p>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-text">
+                <h1>
+                    <span class="lang-en">J5 Trading Strategy</span>
+                    <span class="lang-es" style="display:none;">Estrategia de Trading J5</span>
+                </h1>
+                <p class="hero-sub">
+                    <span class="lang-en">Pure Mathematics. Institutional Liquidity. 90% Accuracy.</span>
+                    <span class="lang-es" style="display:none;">Matemática Pura. Liquidez Institucional. 90% de Precisión.</span>
+                </p>
+                <p class="hero-description">
+                    <span class="lang-en">From $150 to $2,931.70 in 67 days. 1,954% ROI. Zero luck. All structure.</span>
+                    <span class="lang-es" style="display:none;">De $150 a $2,931.70 en 67 días. 1,954% ROI. Cero suerte. Toda estructura.</span>
+                </p>
+                <div class="hero-buttons">
+                    <a href="systems/j5.html" class="btn-primary">
+                        <span class="lang-en">Explore the Strategy →</span>
+                        <span class="lang-es" style="display:none;">Explorar la Estrategia →</span>
+                    </a>
+                    <a href="downloads/index.html" class="btn-secondary">
+                        <span class="lang-en">Download MQL5</span>
+                        <span class="lang-es" style="display:none;">Descargar MQL5</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/juliolinkedin.jpg" alt="Julio Henrique Viera Nieves" />
+            </div>
         </div>
     </section>
 
-    <!-- ═══ MAIN CONTENT ═══ -->
-    <main class="main-content">
+    <!-- ═══ METRICS ═══ -->
+    <section class="metrics">
         <div class="container">
-
-            <!-- 📄 ARTICLE 1: EPIPHANY STATISTICAL STUDY -->
-            <article class="post-card">
-                <div class="post-header">
-                    <span class="post-tag">Statistical Study · Q1 2026</span>
-                    <h2 class="post-title">
-                        Epiphany Trading System — Hedging Block Performance Study
-                    </h2>
-                    <div class="post-meta">
-                        <span><strong>Author:</strong> Julio Henrique Viera Nieves</span>
-                        <span><strong>Confidence Level:</strong> 99% (p &lt; 0.01)</span>
-                        <span><strong>Methodology:</strong> Time-Series Analysis</span>
+            <div class="metrics-grid">
+                <div class="metric-card gold">
+                    <div class="number">$2,931.70</div>
+                    <div class="label">
+                        <span class="lang-en">Total Generated</span>
+                        <span class="lang-es" style="display:none;">Total Generado</span>
                     </div>
                 </div>
-
-                <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
-                    This quantitative study analyzes two key operational windows: Validation (Jan 06–22, N=49) vs. Optimization (Jan 26–29, N=24). It evaluates geometric edge scalability, risk dispersion, and performance parameters across hedging execution blocks.
-                </p>
-
-                <!-- Metric Cards -->
-                <div class="metric-grid">
-                    <div class="metric-card gold">
-                        <div class="number">$34.35</div>
-                        <div class="label">Mean per Block (+801%)</div>
-                    </div>
-                    <div class="metric-card green">
-                        <div class="number">95.8%</div>
-                        <div class="label">Win Rate (+11.8%)</div>
-                    </div>
-                    <div class="metric-card blue">
-                        <div class="number">8.80</div>
-                        <div class="label">Win/Loss Ratio (+430%)</div>
-                    </div>
-                    <div class="metric-card green">
-                        <div class="number">$206.08</div>
-                        <div class="label">Avg Daily Profit (+1,335%)</div>
-                    </div>
-                    <div class="metric-card gold">
-                        <div class="number">0.53</div>
-                        <div class="label">Coeff. of Variation (-64%)</div>
+                <div class="metric-card green">
+                    <div class="number">1,954%</div>
+                    <div class="label">
+                        <span class="lang-en">ROI in 67 Days</span>
+                        <span class="lang-es" style="display:none;">ROI en 67 Días</span>
                     </div>
                 </div>
-
-                <!-- Comparative Statistical Table -->
-                <h3 class="section-title">📊 Comparative Performance Metrics</h3>
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Statistical Metric</th>
-                                <th>Validation (Jan 06–22)</th>
-                                <th>Optimization (Jan 26–29)</th>
-                                <th>Absolute Var.</th>
-                                <th>Relative Var.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="highlight-row">
-                                <td><strong>Mean per Block</strong></td>
-                                <td>$3.81</td>
-                                <td>$34.35</td>
-                                <td>+$30.54</td>
-                                <td class="highlight-green">+801%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Median</strong></td>
-                                <td>$2.90</td>
-                                <td>$17.70</td>
-                                <td>+$14.80</td>
-                                <td class="highlight-green">+510%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Standard Deviation</strong></td>
-                                <td>$5.60</td>
-                                <td>$18.20</td>
-                                <td>+$12.60</td>
-                                <td>+225%</td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td><strong>Coefficient of Variation</strong></td>
-                                <td>1.47</td>
-                                <td>0.53</td>
-                                <td>-0.94</td>
-                                <td class="highlight-gold">-64% (Higher Consistency)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Win Rate (Success Rate)</strong></td>
-                                <td>85.7% (42/49)</td>
-                                <td>95.8% (23/24)</td>
-                                <td>+10.1 pp</td>
-                                <td class="highlight-green">+11.8%</td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td><strong>Win / Loss Ratio</strong></td>
-                                <td>1.66</td>
-                                <td>8.80</td>
-                                <td>+7.14</td>
-                                <td class="highlight-green">+430%</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Frequency (Blocks/Day)</strong></td>
-                                <td>3.77</td>
-                                <td>6.00</td>
-                                <td>+2.23</td>
-                                <td>+59%</td>
-                            </tr>
-                            <tr class="highlight-row">
-                                <td><strong>Average Daily Profit</strong></td>
-                                <td>$14.36</td>
-                                <td>$206.08</td>
-                                <td>+$191.72</td>
-                                <td class="highlight-green">+1335%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Statistical Conclusions -->
-                <h3 class="section-title">📌 Key Takeaways & System Robustness</h3>
-                <div class="report-notes">
-                    <ul>
-                        <li><strong>Operational Efficiency:</strong> Performance increases exceeding 500% across core central metrics following block execution refinements.</li>
-                        <li><strong>Variability Reduction:</strong> The 64% drop in the Coefficient of Variation demonstrates enhanced predictive risk stability, even with higher net execution volumes.</li>
-                        <li><strong>Confirmed Scalability:</strong> The ability to simultaneously increase frequency (+59%), average block yield (+801%), and accuracy (+11.8%) validates the geometric edge under high market volatility.</li>
-                        <li><strong>Methodological Evolution:</strong> The Epiphany system successfully transitioned from a "precise craftsmanship" model into an "efficient industrial process" for liquidity management.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <!-- 📄 ARTICLE 2: PERFORMANCE REPORT NOV 2025 - JAN 2026 -->
-            <article class="post-card">
-                <div class="post-header">
-                    <span class="post-tag">Performance Report · Q1 2026</span>
-                    <h2 class="post-title">
-                        Epiphany Capital Management — Live Account Report (Nov 2025 – Jan 2026)
-                    </h2>
-                    <div class="post-meta">
-                        <span><strong>Trader:</strong> Julio Henrique Viera Nieves</span>
-                        <span><strong>Period:</strong> Nov 25, 2025 – Jan 30, 2026</span>
-                        <span><strong>Asset Class:</strong> GOLD & SILVER</span>
+                <div class="metric-card blue">
+                    <div class="number">90%</div>
+                    <div class="label">
+                        <span class="lang-en">Win Rate</span>
+                        <span class="lang-es" style="display:none;">Tasa de Éxito</span>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
-                    This report documents the performance of the J5 Trading Strategy on a live account. It demonstrates how strict risk parameters, patient structure selection, and quadratic EMA concavity produce high yield (+687%) with minimal maximum drawdown ($25.00 / 1.65%).
-                </p>
-
-                <!-- Key Metrics -->
-                <div class="metric-grid">
-                    <div class="metric-card gold">
-                        <div class="number">$1,481.70</div>
-                        <div class="label">Final Balance</div>
+    <!-- ═══ JOURNEY ═══ -->
+    <section class="journey">
+        <div class="container">
+            <h2>
+                <span class="lang-en">🚀 The Journey: From Everything to Nothing to Everything</span>
+                <span class="lang-es" style="display:none;">🚀 El Viaje: De Todo a Nada a Todo</span>
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2023</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">The Breaking Point</span>
+                        <span class="lang-es" style="display:none;">El Punto de Quiebre</span>
                     </div>
-                    <div class="metric-card green">
-                        <div class="number">+687%</div>
-                        <div class="label">Total Return</div>
-                    </div>
-                    <div class="metric-card blue">
-                        <div class="number">$1,292.71</div>
-                        <div class="label">Gross Profit</div>
-                    </div>
-                    <div class="metric-card green">
-                        <div class="number">~73%</div>
-                        <div class="label">Win Rate</div>
-                    </div>
-                    <div class="metric-card gold">
-                        <div class="number">$25.00</div>
-                        <div class="label">Max Drawdown</div>
-                    </div>
-                    <div class="metric-card blue">
-                        <div class="number">$1,450.00</div>
-                        <div class="label">Total Withdrawals</div>
+                    <div class="timeline-desc">
+                        <span class="lang-en">After 6 years in Texas, Julio returned to Puerto Rico with NOTHING.</span>
+                        <span class="lang-es" style="display:none;">Después de 6 años en Texas, Julio regresó a Puerto Rico con NADA.</span>
                     </div>
                 </div>
-
-                <!-- Capital Evolution -->
-                <h3 class="section-title">📈 Capital Growth</h3>
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr><th>Date</th><th>Event</th><th>Balance</th><th>Change</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Nov 25, 2025</td><td>Initial Start</td><td>$188.19</td><td>—</td></tr>
-                            <tr><td>Dec 02, 2025</td><td>Deposit +$60</td><td>$241.31</td><td>+28%</td></tr>
-                            <tr><td>Dec 02, 2025</td><td>Deposit +$100</td><td>$341.26</td><td>+81%</td></tr>
-                            <tr><td>Dec 03, 2025</td><td>Deposit +$100</td><td>$441.26</td><td>+134%</td></tr>
-                            <tr><td>Dec 15, 2025</td><td>GOLD Trade +$53.38</td><td>$478.60</td><td>+154%</td></tr>
-                            <tr><td>Dec 23, 2025</td><td>GOLD Trade +$19.97</td><td>$420.85</td><td>+123%</td></tr>
-                            <tr><td>Dec 30, 2025</td><td>Deposit +$95</td><td>$501.12</td><td>+166%</td></tr>
-                            <tr><td>Jan 15, 2026</td><td>SILVER Trade +$30.40</td><td>$672.28</td><td>+257%</td></tr>
-                            <tr><td>Jan 21, 2026</td><td>SILVER Block +$28.25</td><td>$783.97</td><td>+316%</td></tr>
-                            <tr><td>Jan 22, 2026</td><td>SILVER Block +$40.10</td><td>$843.47</td><td>+348%</td></tr>
-                            <tr><td>Jan 27, 2026</td><td>SILVER Block +$137.75</td><td>$1,008.69</td><td>+436%</td></tr>
-                            <tr><td>Jan 28, 2026</td><td>SILVER Block +$129.65</td><td>$1,442.60</td><td>+666%</td></tr>
-                            <tr><td>Jan 30, 2026</td><td>SILVER Block +$211.35</td><td>$1,506.70</td><td>+700%</td></tr>
-                            <tr><td>Jan 30, 2026</td><td>Withdrawal -$25</td><td><strong>$1,481.70</strong></td><td><strong>+687%</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Featured Trades -->
-                <h3 class="section-title">⭐ Featured Trades</h3>
-                <div class="table-wrap">
-                    <table>
-                        <thead>
-                            <tr><th>Date</th><th>Instrument</th><th>Direction</th><th>Entry</th><th>Exit</th><th>Profit</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr class="highlight-row"><td>Dec 15, 2025</td><td>GOLD</td><td><span class="badge badge-green">BUY</span></td><td>4311.59 / 4328.31</td><td>4346.64</td><td class="highlight-green">+$53.38</td></tr>
-                            <tr><td>Dec 23, 2025</td><td>GOLD</td><td><span class="badge badge-green">BUY</span></td><td>4475.85</td><td>4495.82</td><td class="highlight-green">+$19.97</td></tr>
-                            <tr><td>Jan 15, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>88.698</td><td>89.306</td><td class="highlight-green">+$30.40</td></tr>
-                            <tr class="highlight-row"><td>Jan 21, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>94.766 / 94.765</td><td>94.869</td><td class="highlight-gold">+$33.55</td></tr>
-                            <tr><td>Jan 22, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>91.864 / 91.907</td><td>91.862</td><td class="highlight-gold">+$38.55</td></tr>
-                            <tr class="highlight-row"><td>Jan 27, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>105.242 / 104.270</td><td>105.693</td><td class="highlight-gold">+$137.75</td></tr>
-                            <tr><td>Jan 28, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>112.630 / 112.696</td><td>113.285</td><td class="highlight-gold">+$107.00</td></tr>
-                            <tr class="highlight-row"><td>Jan 28, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>113.386 / 113.519</td><td>113.639</td><td class="highlight-gold">+$129.65</td></tr>
-                            <tr><td>Jan 30, 2026</td><td>SILVER</td><td><span class="badge badge-green">BUY</span></td><td>97.727 / 97.824</td><td>98.765</td><td class="highlight-gold">+$211.35</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Technical Analysis & Notes -->
-                <h3 class="section-title">📌 Conclusions & Mindset Management</h3>
-                <div class="report-notes">
-                    <ul>
-                        <li><strong>Transition to SILVER:</strong> Starting January 15, execution migrated from GOLD to SILVER due to lower friction during internal liquidity spikes and clearer geometric definition on lower timeframes.</li>
-                        <li><strong>Hedging Execution Blocks:</strong> Grouped entries represent bulk orders closed simultaneously upon reaching quadratic projections.</li>
-                        <li><strong>Strict Risk Control:</strong> Maximum Drawdown remained capped at $25.00 (1.65% from peak floating equity), confirming entries experienced minimal adverse excursion.</li>
-                        <li><strong>Operational Discipline:</strong> The period of inactivity between December 30 and January 15 highlights a foundational principle: <em>sometimes the best trade is no trade at all</em>.</li>
-                    </ul>
-                </div>
-            </article>
-
+                <div class="timeline-item highlight">
+                    <div class="timeline-date">Nov 25, 2025 – Jan 30, 2026</div>
+                    <div class="timeline-title">
+                        <span class="lang-en">🔥 THE EXPLOSION</span>
+                        <span class="lang-es" style="display:none;">🔥 LA EXPLOSIÓN</span>
                     </div>
-    </main>
+                    <div class="timeline-desc">
+                        <span class="lang-en">$150 initial capital → $1,481.70 balance + $1,450 withdrawn = $2,931.70 total. 67 days. 1,954% ROI. 90% win rate. Pure mastery.</span>
+                        <span class="lang-es" style="display:none;">$150 de capital inicial → $1,481.70 de balance + $1,450 retirados = $2,931.70 total. 67 días. 1,954% ROI. 90% de tasa de éxito. Pura maestría.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ ACHIEVEMENTS ═══ -->
+    <section class="achievements">
+        <div class="container">
+            <h2>
+                <span class="lang-en">🏆 Key Achievements</span>
+                <span class="lang-es" style="display:none;">🏆 Logros Clave</span>
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement-item">📚 University Professor of Accounting (20+ years)</div>
+                <div class="achievement-item">📐 Discovered the quadratic EMA pattern (y = -x² / y = x²)</div>
+                <div class="achievement-item">⚡ Evolved Creemos Capital's C4 into J5 — 90% win rate</div>
+                <div class="achievement-item">💻 Created EA-MarketLiquiditySignals</div>
+                <div class="achievement-item">💰 $2,931.70 from $150 in 67 days</div>
+                <div class="achievement-item">📊 Sharpe Ratio > 1 — risk management</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ J5 SYSTEM ═══ -->
+    <section class="j5-system">
+        <div class="container">
+            <h2>
+                <span class="lang-en">⚙️ The J5 System</span>
+                <span class="lang-es" style="display:none;">⚙️ El Sistema J5</span>
+            </h2>
+            <div class="system-grid">
+                <div class="system-text">
+                    <p>
+                        <span class="lang-en"><strong>The Genius:</strong> EMAs move quadratically (y = -x² for buys, y = x² for sells)</span>
+                        <span class="lang-es" style="display:none;"><strong>La Genialidad:</strong> Las EMAs se mueven cuadráticamente (y = -x² para compras, y = x² para ventas)</span>
+                    </p>
+                    <p>
+                        <span class="lang-en"><strong>Result:</strong> 90% win rate + Sharpe Ratio > 1 + $2,931.70 from $150</span>
+                        <span class="lang-es" style="display:none;"><strong>Resultado:</strong> 90% de tasa de éxito + Sharpe Ratio > 1 + $2,931.70 desde $150</span>
+                    </p>
+                    <a href="systems/j5.html" class="btn-primary">
+                        <span class="lang-en">Explore the Strategy →</span>
+                        <span class="lang-es" style="display:none;">Explorar la Estrategia →</span>
+                    </a>
+                </div>
+                <div class="system-image">
+                    <img src="assets/images/j5protocol.png" alt="J5 Protocol Screenshot" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PHILOSOPHY ═══ -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <div class="icon">📐</div>
+                    <h3>
+                        <span class="lang-en">Mathematics Always</span>
+                        <span class="lang-es" style="display:none;">Matemáticas Siempre</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Markets follow geometric patterns. EMAs move quadratically.</span>
+                        <span class="lang-es" style="display:none;">Los mercados siguen patrones geometricos. Las EMAs se mueven cuadráticamente.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ MARKET NEWS / CHINA A50 AUDIT ═══ -->
+    <section class="market-news">
+        <div class="container">
+            <h2>
+                <span class="lang-en">📊 Weekly Market Audits</span>
+                <span class="lang-es" style="display:none;">📊 Auditorías de Mercado Semanales</span>
+            </h2>
+            <div class="news-card">
+                <div class="news-content">
+                    <div class="news-badge">China A50 — Weekly Analysis</div>
+                    <h3>
+                        <span class="lang-en">China A50: A Bullish Consensus from Global Professionals</span>
+                        <span class="lang-es" style="display:none;">China A50: Un Consenso Alcista de Profesionales Globales</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">The J5 Protocol's custom indicator confirms a bullish structural shift on the China A50 weekly. With the EMA20 → EMA40 cross signalling a medium-term trend change, and global traders from Singapore, Russia, and Asia projecting targets above 17,000, the geometry is aligning. But discipline demands patience — the 5% distance rule has not yet triggered.</span>
+                        <span class="lang-es" style="display:none;">El indicador personalizado del Protocolo J5 confirma un cambio estructural alcista en el semanal del China A50. Con el cruce EMA20 → EMA40 señalando un cambio de tendencia a medio plazo, y traders globales de Singapur, Rusia y Asia proyectando objetivos por encima de 17,000, la geometría se está alineando. Pero la disciplina exige paciencia — la regla del 5% aún no se ha activado.</span>
+                    </p>
+                    <a href="blog/china50-audit.html" class="btn-secondary" style="padding: 10px 24px; font-size: 0.85rem;">
+                        <span class="lang-en">Read Full Analysis →</span>
+                        <span class="lang-es" style="display:none;">Leer Análisis Completo →</span>
+                    </a>
+                </div>
+                <div class="news-image">
+                    <img src="assets/images/china50.png" alt="China A50 Weekly Chart with J5 Protocol Analysis" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ QUOTE ═══ -->
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>
+                <span class="lang-en">"I had everything in Texas. When I came to Puerto Rico, I had nothing. But that nothing taught me something: real wealth is not what you have, it's what you understand."</span>
+                <span class="lang-es" style="display:none;">"Lo tenía todo en Texas. Cuando llegué a Puerto Rico, no tenía nada. Pero esa nada me enseñó algo: la riqueza real no es lo que tienes, es lo que entiendes."</span>
+            </blockquote>
+            <cite>— Julio Henrique Viera Nieves</cite>
+        </div>
+    </section>
 
     <!-- ═══ FOOTER ═══ -->
     <footer>
@@ -531,13 +455,15 @@
                 <div class="logo">
                     <span class="logo-gold">J5</span> Trading Strategy
                 </div>
-                <p>"Fiat Voluntas Geometriae" — Epiphany Capital Management</p>
+                <p>
+                    <span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span>
+                    <span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span>
+                </p>
                 <p class="footer-copy">Puerto Rico, 2026</p>
             </div>
             <div class="footer-right">
                 <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
                 <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
-                <a href="mailto:jvieranieves54@gmail.com">Email</a>
             </div>
         </div>
     </footer>

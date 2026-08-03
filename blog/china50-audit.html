@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/jvier/Downloads/deepseek_html_20260803_16c73c.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China A50 Weekly Analysis — J5 Trading Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./china50-audit_files/css2" rel="stylesheet">
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy (Blog Audit Module)
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+
+        /* ─── ARTICLE LAYOUT ─── */
+        .article-section { padding: 50px 0 60px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-dark); font-weight: 600; font-size: 0.9rem; margin-bottom: 24px; transition: transform var(--transition); }
+        .back-link:hover { transform: translateX(-4px); }
+        
+        .article-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray-border); box-shadow: var(--shadow); padding: 40px; margin-bottom: 30px; }
+        .article-badge { background: var(--danger-bg); color: var(--danger); font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 16px; }
+        .article-title { font-size: 2.2rem; font-weight: 700; color: var(--blue-dark); line-height: 1.25; margin-bottom: 12px; }
+        .article-meta { font-size: 0.85rem; color: var(--text-light); margin-bottom: 28px; border-bottom: 1px solid var(--gray-border); padding-bottom: 16px; }
+        
+        /* ─── CHART DISPLAY BOX ─── */
+        .chart-box {
+            background: #131722;
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 30px 0;
+            border: 1px solid var(--gray-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-box img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 8px; }
+
+        .article-body h2 { font-size: 1.4rem; color: var(--blue-dark); margin: 32px 0 14px; border-left: 4px solid var(--gold); padding-left: 12px; }
+        .article-body p { margin-bottom: 18px; font-size: 1.02rem; color: var(--text-dark); }
+        .article-body .quote { margin: 20px 0; padding: 16px 24px; background: var(--gold-light); border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; color: var(--text-dark); }
+        .article-body .quote strong { color: var(--blue-dark); }
+        .highlight-box { background: var(--gold-light); border-left: 4px solid var(--gold); padding: 20px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; font-size: 0.98rem; color: var(--blue-dark); }
+        .j5-data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .j5-data-item { background: var(--gray-bg); border-radius: 8px; padding: 12px 16px; border: 1px solid var(--gray-border); }
+        .j5-data-item .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-light); }
+        .j5-data-item .value { font-size: 1.1rem; font-weight: 600; color: var(--blue-dark); }
+        .j5-data-item .value.bullish { color: #0f7b3a; }
+        .j5-data-item .value.bearish { color: var(--danger); }
+        
+        /* ─── FOOTER ─── */
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        @media (max-width: 768px) {
+            .article-card { padding: 24px; }
+            .article-title { font-size: 1.7rem; }
+            .j5-data-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+            <nav>
+                <a href="file:///C:/Users/jvier/index.html">Home</a>
+                <a href="file:///C:/Users/jvier/about.html">About</a>
+                <a href="file:///C:/Users/jvier/systems/j5.html">Strategy</a>
+                <a href="file:///C:/Users/jvier/downloads/index.html">Downloads</a>
+                <a href="file:///C:/Users/jvier/blog/index.html" class="active">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ ARTICLE ═══ -->
+    <section class="article-section">
+        <div class="container">
+            <a href="file:///C:/Users/jvier/blog/index.html" class="back-link">
+                <span class="lang-en">← Back to Blog</span>
+                <span class="lang-es" style="display:none;">← Volver al Blog</span>
+            </a>
+
+            <article class="article-card">
+                <div class="article-badge">J5 Protocol Analysis — July 2026</div>
+                <h1 class="article-title">
+                    <span class="lang-en">China A50 Weekly: A Bullish Consensus from Global Professionals</span>
+                    <span class="lang-es" style="display:none;">China A50 Semanal: Un Consenso Alcista de Profesionales Globales</span>
+                </h1>
+                <div class="article-meta">
+                    <strong>Author:</strong> Julio Henrique Viera Nieves | 
+                    <strong>Date:</strong> August 2026 | 
+                    <strong>Asset:</strong> China A50 Index — Weekly
+                </div>
+
+                <div class="article-body">
+
+                    <!-- CHART -->
+                    <div class="chart-box">
+                        <img src="../assets/images/china50.png" alt="China A50 Weekly Chart with J5 Protocol Analysis">
+                    </div>
+
+                    <!-- INTRO -->
+                    <p class="lang-en">
+                        <strong>J5 Protocol View — Weekly Structure Analysis</strong><br>
+                        The China A50 is showing signs of a <strong>bullish structural shift</strong> on the weekly timeframe. The J5 custom indicator confirms the geometry is aligning, but discipline demands patience.
+                    </p>
+                    <p class="lang-es" style="display:none;">
+                        <strong>Visión del Protocolo J5 — Análisis Estructural Semanal</strong><br>
+                        El China A50 muestra señales de un <strong>cambio estructural alcista</strong> en el timeframe semanal. El indicador personalizado J5 confirma que la geometría se está alineando, pero la disciplina exige paciencia.
+                    </p>
+
+                    <!-- J5 DATA GRID -->
+                    <div class="j5-data-grid">
+                        <div class="j5-data-item">
+                            <div class="label">Price vs EMA20</div>
+                            <div class="value bearish">-270.10 pts (-1.78%)</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">Position</div>
+                            <div class="value bearish">BELOW EMA20</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">Structure</div>
+                            <div class="value bearish">BEARISH</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">5% Distance Rule</div>
+                            <div class="value">Waiting (1.78%)</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">EMA Cross</div>
+                            <div class="value bullish">EMA20 → EMA40 (BULLISH)</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">H4 Structure</div>
+                            <div class="value bearish">BEARISH CONFIRMED</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">Key Support Zone</div>
+                            <div class="value">14,400 – 14,700</div>
+                        </div>
+                        <div class="j5-data-item">
+                            <div class="label">Fibonacci Target (0.618)</div>
+                            <div class="value bullish">17,000</div>
+                        </div>
+                    </div>
+
+                    <!-- VERDICT -->
+                    <div class="highlight-box">
+                        <span class="lang-en"><strong>Verdict:</strong> The geometry is aligning, but the 5% distance rule has not yet triggered. Wait for the confirmation. <em>Fiat Voluntas Geometriae.</em></span>
+                        <span class="lang-es" style="display:none;"><strong>Veredicto:</strong> La geometría se está alineando, pero la regla del 5% aún no se ha activado. Espera la confirmación. <em>Fiat Voluntas Geometriae.</em></span>
+                    </div>
+
+                    <!-- SECTION: GLOBAL CONSENSUS -->
+                    <h2>
+                        <span class="lang-en">📜 The Global Consensus — "As It Is Written" by the World's Traders</span>
+                        <span class="lang-es" style="display:none;">📜 El Consenso Global — "Como Está Escrito" por los Traders del Mundo</span>
+                    </h2>
+
+                    <p class="lang-en">
+                        I am not alone in this reading. The following citations confirm the J5 Protocol's weekly bullish thesis, coming from traders in Europe, Asia, and the Middle East — not from the usual US market noise.
+                    </p>
+                    <p class="lang-es" style="display:none;">
+                        No estoy solo en esta lectura. Las siguientes citas confirman la tesis alcista semanal del Protocolo J5, provenientes de traders de Europa, Asia y Medio Oriente — no del ruido habitual del mercado estadounidense.
+                    </p>
+
+                    <!-- CITATION 1 -->
+                    <div class="quote">
+                        <span class="lang-en">
+                            <strong>1. On the Ascending Channel and Bullish Breakout</strong><br>
+                            <em>"Price actions have just staged a significant bullish breakout from a range-bound configuration since 28 October 2025. Recent price actions from the 7 April 2026 low of 14,406 have evolved into an ascending channel and traded above its 20-day moving average since 8 April 2026."</em><br>
+                            <strong>— MarketPulse (Singapore), May 5, 2026</strong>
+                        </span>
+                        <span class="lang-es" style="display:none;">
+                            <strong>1. Sobre el Canal Ascendente y la Ruptura Alcista</strong><br>
+                            <em>"Las acciones de precio acaban de protagonizar una ruptura alcista significativa desde una configuración de rango que se mantenía desde el 28 de octubre de 2025. Las acciones recientes desde el mínimo del 7 de abril de 2026 en 14,406 han evolucionado hacia un canal ascendente y han cotizado por encima de su media móvil de 20 días desde el 8 de abril de 2026."</em><br>
+                            <strong>— MarketPulse (Singapur), 5 de mayo de 2026</strong>
+                        </span>
+                    </div>
+
+                    <!-- CITATION 2 -->
+                    <div class="quote">
+                        <span class="lang-en">
+                            <strong>2. On the Bullish Bias and Fibonacci Targets</strong><br>
+                            <em>"The index shows strong bullish signals within the long-term uptrend that cannot be ignored... The price has made a correction to the 0.382 Fibonacci level (14,800) from the downtrend (Feb 21-Feb 24), but is not falling below, thereby increasing the chances of a healthy test of the 0.618 Fibonacci level (17,000)."</em><br>
+                            <strong>— TotSamiyKaa, Smart-Lab (Russia), April 21, 2026</strong>
+                        </span>
+                        <span class="lang-es" style="display:none;">
+                            <strong>2. Sobre el Sesgo Alcista y los Objetivos de Fibonacci</strong><br>
+                            <em>"El índice muestra señales alcistas fuertes dentro de la tendencia alcista a largo plazo que no pueden ser ignoradas... El precio ha corregido hasta el nivel de Fibonacci 0.382 (14,800) desde la tendencia bajista (21-24 de febrero), pero no cae por debajo, aumentando las posibilidades de una prueba saludable del nivel de Fibonacci 0.618 (17,000)."</em><br>
+                            <strong>— TotSamiyKaa, Smart-Lab (Rusia), 21 de abril de 2026</strong>
+                        </span>
+                    </div>
+
+                    <!-- CITATION 3 -->
+                    <div class="quote">
+                        <span class="lang-en">
+                            <strong>3. On the Long-Term Uptrend and Medium-Term Pivot</strong><br>
+                            <em>"The China A50 has broken above a 6-month range, with an intact ascending channel and positive momentum signals, keeping the bullish bias above 15,460 and targeting 16,100–16,340."</em><br>
+                            <strong>— MarketPulse (Singapore)</strong>
+                        </span>
+                        <span class="lang-es" style="display:none;">
+                            <strong>3. Sobre la Tendencia Alcista a Largo Plazo y el Pivote a Medio Plazo</strong><br>
+                            <em>"El China A50 ha roto por encima de un rango de 6 meses, con un canal ascendente intacto y señales de momentum positivas, manteniendo el sesgo alcista por encima de 15,460 y apuntando a 16,100–16,340."</em><br>
+                            <strong>— MarketPulse (Singapur)</strong>
+                        </span>
+                    </div>
+
+                    <!-- CITATION 4 -->
+                    <div class="quote">
+                        <span class="lang-en">
+                            <strong>4. On the External Validation of the Fibonacci Projection</strong><br>
+                            <em>"Price actions from the 7 April 2026 low of 14,406 have evolved into an ascending channel... Resistances: 16,100 and 16,340 (also a Fibonacci extension)."</em><br>
+                            <strong>— MarketPulse (Singapore)</strong>
+                        </span>
+                        <span class="lang-es" style="display:none;">
+                            <strong>4. Sobre la Validación Externa de la Proyección de Fibonacci</strong><br>
+                            <em>"Las acciones de precio desde el mínimo del 7 de abril de 2026 en 14,406 han evolucionado hacia un canal ascendente... Resistencias: 16,100 y 16,340 (también una extensión de Fibonacci)."</em><br>
+                            <strong>— MarketPulse (Singapur)</strong>
+                        </span>
+                    </div>
+
+                    <!-- CONCLUSION -->
+                    <h2>
+                        <span class="lang-en">🧠 The J5 Conclusion</span>
+                        <span class="lang-es" style="display:none;">🧠 La Conclusión J5</span>
+                    </h2>
+
+                    <p class="lang-en">
+                        The market is in a <strong>correction phase within a long-term bullish structure</strong>. The EMA cross (EMA20 → EMA40) confirms that the short-term bearish sentiment is waning. The Fibonacci retracement levels are holding, and global professionals agree:
+                    </p>
+                    <p class="lang-es" style="display:none;">
+                        El mercado está en una <strong>fase de corrección dentro de una estructura alcista a largo plazo</strong>. El cruce de EMAs (EMA20 → EMA40) confirma que el sentimiento bajista a corto plazo está disminuyendo. Los niveles de retroceso de Fibonacci se están manteniendo, y los profesionales globales coinciden:
+                    </p>
+
+                    <ul style="margin-bottom: 20px; padding-left: 24px; color: var(--text-dark);">
+                        <li class="lang-en"><strong>Singapore</strong> identifies an ascending channel.</li>
+                        <li class="lang-es" style="display:none;"><strong>Singapur</strong> identifica un canal ascendente.</li>
+                        <li class="lang-en"><strong>Russia</strong> targets 17,000–20,560.</li>
+                        <li class="lang-es" style="display:none;"><strong>Rusia</strong> apunta a 17,000–20,560.</li>
+                        <li class="lang-en"><strong>China</strong> confirms the long-term correlation between the A50 and the broader market.</li>
+                        <li class="lang-es" style="display:none;"><strong>China</strong> confirma la correlación a largo plazo entre el A50 y el mercado en general.</li>
+                    </ul>
+
+                    <p class="lang-en">
+                        The J5 protocol is patient. We await the <strong>5% separation from the EMA20</strong> and the confirmation of an H4 structure change. <strong>The geometry does not lie. The world's traders see it. So do we.</strong>
+                    </p>
+                    <p class="lang-es" style="display:none;">
+                        El protocolo J5 es paciente. Esperamos la <strong>separación del 5% de la EMA20</strong> y la confirmación de un cambio de estructura en H4. <strong>La geometría no miente. Los traders del mundo lo ven. Nosotros también.</strong>
+                    </p>
+
+                    <!-- FINAL SIGNATURE -->
+                    <div class="highlight-box" style="text-align: center; font-size: 1.1rem;">
+                        <span class="lang-en"><strong>🔥 Fiat Voluntas Geometriae — Let the Will of Geometry be Done</strong></span>
+                        <span class="lang-es" style="display:none;"><strong>🔥 Fiat Voluntas Geometriae — Hágase la Voluntad de la Geometría</strong></span>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 16px; color: var(--text-light); font-size: 0.9rem;">
+                        <span class="lang-en"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                        <span class="lang-es" style="display:none;"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                    </p>
+
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+                <p><span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span><span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span></p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="file:///C:/Users/jvier/js/language.js"></script>
+
+</body></html>
