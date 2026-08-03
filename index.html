@@ -125,7 +125,7 @@
         .philosophy-item h3 { font-size: 1.1rem; color: var(--blue-dark); margin-bottom: 6px; }
         .philosophy-item p { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* ─── NEW: MARKET NEWS SECTION ─── */
+        /* ─── MARKET NEWS SECTION ─── */
         .market-news {
             padding: 60px 0 50px;
             background: var(--gray-bg);
@@ -161,8 +161,8 @@
         }
         .news-badge {
             align-self: flex-start;
-            background: var(--danger-bg);
-            color: var(--danger);
+            background: var(--gold-light);
+            color: var(--gold-dark);
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.75rem;
@@ -185,17 +185,19 @@
         }
         .news-image {
             flex: 1 1 45%;
-            background: var(--blue-dark); /* Fallback color before image loads */
+            background: #131722;
             display: flex;
             align-items: center;
             justify-content: center;
             border-left: 1px solid var(--gray-border);
+            padding: 16px;
         }
         .news-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            min-height: 250px;
+            object-fit: contain;
+            max-height: 280px;
+            border-radius: 6px;
         }
 
         /* ─── QUOTE ─── */
@@ -324,7 +326,6 @@
                         <span class="lang-es" style="display:none;">Después de 6 años en Texas, Julio regresó a Puerto Rico con NADA.</span>
                     </div>
                 </div>
-                <!-- ... (resto de los items del timeline) ... -->
                 <div class="timeline-item highlight">
                     <div class="timeline-date">Nov 25, 2025 – Jan 30, 2026</div>
                     <div class="timeline-title">
@@ -406,7 +407,7 @@
         </div>
     </section>
 
-    <!-- ═══ MARKET NEWS / AUDIT (NUEVA SECCIÓN) ═══ -->
+    <!-- ═══ MARKET NEWS / CHINA A50 AUDIT ═══ -->
     <section class="market-news">
         <div class="container">
             <h2>
@@ -415,25 +416,23 @@
             </h2>
             <div class="news-card">
                 <div class="news-content">
-                    <div class="news-badge">NFE (NASDAQ) - Market Collapse</div>
+                    <div class="news-badge">China A50 — Weekly Analysis</div>
                     <h3>
-                        <span class="lang-en">The Fall of New Fortress Energy: When the Market Speaks</span>
-                        <span class="lang-es" style="display:none;">La Caída de New Fortress Energy: Cuando el Mercado Habla</span>
+                        <span class="lang-en">China A50: A Bullish Consensus from Global Professionals</span>
+                        <span class="lang-es" style="display:none;">China A50: Un Consenso Alcista de Profesionales Globales</span>
                     </h3>
                     <p>
-                        <span class="lang-en">Money talks, but the market never lies. Despite being listed on the NASDAQ and controlling the vertical integration of Puerto Rico's energy infrastructure, NFE's stock has collapsed to $0.33, trading like an OTC penny stock. Institutional investors are pulling out as the financial engineering behind this monopoly fails. An algorithmic audit of their structure shows what we already knew: guaranteed private revenue with 100% public drawdown is mathematically unsustainable.</span>
-                        <span class="lang-es" style="display:none;">El dinero habla, pero el mercado no miente. A pesar de cotizar en NASDAQ y controlar la integración vertical de la infraestructura energética de Puerto Rico, las acciones de NFE han colapsado a $0.33, comportándose como una "penny stock" del mercado OTC. Los inversores institucionales se retiran al ver fallar la ingeniería financiera detrás de este monopolio. Una auditoría algorítmica de su estructura revela lo evidente: ingresos privados garantizados con un drawdown 100% público es matemáticamente insostenible.</span>
+                        <span class="lang-en">The J5 Protocol's custom indicator confirms a bullish structural shift on the China A50 weekly. With the EMA20 → EMA40 cross signalling a medium-term trend change, and global traders from Singapore, Russia, and Asia projecting targets above 17,000, the geometry is aligning. But discipline demands patience — the 5% distance rule has not yet triggered.</span>
+                        <span class="lang-es" style="display:none;">El indicador personalizado del Protocolo J5 confirma un cambio estructural alcista en el semanal del China A50. Con el cruce EMA20 → EMA40 señalando un cambio de tendencia a medio plazo, y traders globales de Singapur, Rusia y Asia proyectando objetivos por encima de 17,000, la geometría se está alineando. Pero la disciplina exige paciencia — la regla del 5% aún no se ha activado.</span>
                     </p>
-                    <a href="blog/nfe-audit.html" class="btn-secondary" style="padding: 10px 24px; font-size: 0.85rem;">
-                        <span class="lang-en">Read Full Architectural Audit →</span>
-                        <span class="lang-es" style="display:none;">Leer Auditoría Estructural Completa →</span>
+                    <a href="blog/china50-audit.html" class="btn-secondary" style="padding: 10px 24px; font-size: 0.85rem;">
+                        <span class="lang-en">Read Full Analysis →</span>
+                        <span class="lang-es" style="display:none;">Leer Análisis Completo →</span>
                     </a>
                 </div>
-                <div class="news-image" style="background: #131722; padding: 12px; display: flex; align-items: center; justify-content: center;">
-    <img src="assets/images/nfe-stock-snapshot.png" 
-         alt="New Fortress Energy Stock Collapse to $0.33" 
-         style="width: 100%; max-height: 280px; object-fit: contain; border-radius: 6px;" />
-</div>
+                <div class="news-image">
+                    <img src="assets/images/china50.png" alt="China A50 Weekly Chart with J5 Protocol Analysis" />
+                </div>
             </div>
         </div>
     </section>
