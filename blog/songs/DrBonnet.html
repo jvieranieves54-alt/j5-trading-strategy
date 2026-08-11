@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/jvier/Downloads/deepseek_html_20260807_0820d2.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recetario Viera Nieves</title>
+    <style>
+        /* ==================================================
+           Estilos Profesionales — Recetario Viera Nieves
+           ================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: #f2f6fc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
+            max-width: 680px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 20, 40, 0.10);
+            padding: 40px 44px;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 24px 72px rgba(0, 20, 40, 0.14);
+        }
+
+        /* ─── Encabezado ─── */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .icon-title {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #0a1e2f;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .subhead {
+            color: #3f5a73;
+            font-size: 0.95rem;
+            font-weight: 400;
+            margin-top: 4px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e6edf4;
+        }
+
+        /* ─── Botones ─── */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin: 28px 0 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 28px;
+            border-radius: 60px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            background: #f8faff;
+            color: #0a1e2f;
+            border: 1px solid #dae3ed;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .btn .emoji {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        /* Botón Principal — Lorraine */
+        .btn-primary {
+            background: #0a2a44;
+            color: white;
+            border: 1px solid #0a2a44;
+            box-shadow: 0 6px 14px rgba(10, 42, 68, 0.20);
+        }
+
+        .btn-primary:hover {
+            background: #123a5e;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(10, 42, 68, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(10, 42, 68, 0.20);
+        }
+
+        /* Botón Secundario — Walgreens */
+        .btn-secondary {
+            background: white;
+            border: 1px solid #d0dce8;
+            color: #0a1e2f;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f9ff;
+            border-color: #a0b8cf;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        /* ─── Nota adicional ─── */
+        .footer-note {
+            margin-top: 32px;
+            padding-top: 18px;
+            border-top: 1px solid #eef3f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #5b738b;
+        }
+
+        .footer-note span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill {
+            background: #e8eff6;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #1d4460;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 520px) {
+            .card {
+                padding: 28px 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .btn {
+                font-size: 0.95rem;
+                padding: 16px 20px;
+            }
+            .btn .emoji {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+
+        <!-- Encabezado -->
+        <div class="header">
+            <span class="icon-title">📋</span>
+            <h1><color='blue'>OFICINAS DR. BLONDED</h1>
+        </div>
+        <div class="subhead">
+            Gestión rápida de tus recetas y órdenes en farmacia
+        </div>
+
+        <!-- Botones -->
+        <div class="button-group">
+
+            <!-- Botón 1: Lorraine (app.medsending.com) -->
+            <a href="https://app.medsending.com/lorraine/patient/rx/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <span class="emoji">🏥</span>
+                Enviar receta a Lorraine
+                <span style="margin-left:auto; font-size:0.85rem; opacity:0.8;">→</span>
+            </a>
+
+            <!-- Botón 2: Walgreens (login + rx status) -->
+            <a href="https://www.walgreens.com/login.jsp?ru=/rx-status/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <span class="emoji">💊</span>
+                Órdenes en Walgreens
+                <span style="margin-left:auto; font-size:0.85rem; opacity:0.6;">→</span>
+            </a>
+
+        </div>
+
+        <!-- Pie / estado -->
+        <div class="footer-note">
+            <span>📎 <span class="pill">Farmacia Lorraine</span></span>
+            <span>🔐 <span class="pill">Walgreens · RX Status</span></span>
+        </div>
+
+    </div>
+
+
+</body></html>

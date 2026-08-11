@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUMA Energy Crisis — Market Audit | J5 Trading Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy (Blog Audit Module)
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+
+        /* ─── ARTICLE LAYOUT ─── */
+        .article-section { padding: 50px 0 60px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-dark); font-weight: 600; font-size: 0.9rem; margin-bottom: 24px; transition: transform var(--transition); }
+        .back-link:hover { transform: translateX(-4px); }
+        
+        .article-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray-border); box-shadow: var(--shadow); padding: 40px; margin-bottom: 30px; }
+        .article-badge { background: var(--danger-bg); color: var(--danger); font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 16px; }
+        .article-title { font-size: 2.2rem; font-weight: 700; color: var(--blue-dark); line-height: 1.25; margin-bottom: 12px; }
+        .article-meta { font-size: 0.85rem; color: var(--text-light); margin-bottom: 28px; border-bottom: 1px solid var(--gray-border); padding-bottom: 16px; }
+        
+        .article-body h2 { font-size: 1.4rem; color: var(--blue-dark); margin: 32px 0 14px; border-left: 4px solid var(--gold); padding-left: 12px; }
+        .article-body h3 { font-size: 1.15rem; color: var(--blue-medium); margin: 24px 0 10px; }
+        .article-body p { margin-bottom: 18px; font-size: 1.02rem; color: var(--text-dark); }
+        .article-body .highlight-box { background: var(--gold-light); border-left: 4px solid var(--gold); padding: 20px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; font-size: 0.98rem; color: var(--blue-dark); }
+        .article-body .table-wrap { overflow-x: auto; margin: 20px 0; border-radius: 8px; border: 1px solid var(--gray-border); }
+        .article-body table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; }
+        .article-body th { background: var(--gray-bg); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--gold); white-space: nowrap; }
+        .article-body td { padding: 10px 14px; border-bottom: 1px solid var(--gray-border); }
+        .article-body .highlight-row td { background: #fefcf3; }
+        .article-body .badge-green { background: #dcfce7; color: #0f7b3a; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .article-body .badge-red { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+
+        /* ─── QUOTE ─── */
+        .quote-section { padding: 50px 0 40px; background: var(--blue-dark); text-align: center; }
+        .quote-section blockquote { font-size: 1.4rem; font-weight: 400; color: var(--white); max-width: 720px; margin: 0 auto 10px; font-style: italic; line-height: 1.5; }
+        .quote-section cite { color: var(--gold); font-style: normal; font-weight: 500; font-size: 1rem; }
+
+        /* ─── FOOTER ─── */
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        @media (max-width: 768px) {
+            .article-card { padding: 24px; }
+            .article-title { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../systems/j5.html">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="../blog/index.html" class="active">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ ARTICLE CONTENT ═══ -->
+    <section class="article-section">
+        <div class="container">
+
+            <article class="article-card">
+                <div class="article-badge">Market Audit · Energy Infrastructure</div>
+                <h1 class="article-title">
+                    <span class="lang-en">LUMA Energy Crisis: How Quanta Services & ATCO Are Weathering the Storm</span>
+                    <span class="lang-es" style="display:none;">Crisis de LUMA Energy: Cómo Quanta Services y ATCO Están Enfrentando la Tormenta</span>
+                </h1>
+                <div class="article-meta">
+                    <strong>Author:</strong> Julio Henrique Viera Nieves &nbsp;·&nbsp; <strong>Date:</strong> August 2026 &nbsp;·&nbsp; <strong>Assets:</strong> PWR · ACO.X
+                </div>
+
+                <div class="article-body">
+
+                    <!-- ═══ SUMMARY ═══ -->
+                    <p>
+                        <span class="lang-en">The political turmoil surrounding <strong>LUMA Energy</strong> in Puerto Rico is putting pressure on its parent companies — but the impact is far from uniform.</span>
+                        <span class="lang-es" style="display:none;">La turbulencia política en torno a <strong>LUMA Energy</strong> en Puerto Rico está ejerciendo presión sobre sus empresas matrices — pero el impacto está lejos de ser uniforme.</span>
+                    </p>
+
+                    <div class="highlight-box">
+                        <span class="lang-en"><strong>The Big Picture:</strong> While LUMA Energy itself is a private joint venture (not traded on any exchange), its two corporate parents — <strong>Quanta Services (NYSE: PWR)</strong> and <strong>ATCO Ltd. (TSX: ACO.X)</strong> — are publicly traded. The ongoing legal battle and threat of contract cancellation in Puerto Rico have created a cloud of uncertainty that the market is watching closely. But the financial reality is strong, yet investor perception tells a different story.</span>
+                        <span class="lang-es" style="display:none;"><strong>El Panorama General:</strong> Aunque LUMA Energy es una empresa privada (no cotiza en bolsa), sus dos matrices — <strong>Quanta Services (NYSE: PWR)</strong> y <strong>ATCO Ltd. (TSX: ACO.X)</strong> — sí cotizan. La batalla legal y la amenaza de cancelación del contrato en Puerto Rico han creado una nube de incertidumbre que el mercado sigue de cerca. La realidad financiera es sólida, pero la percepción del inversor cuenta una historia diferente.</span>
+                    </div>
+
+                    <!-- ═══ SECTION 1: QUANTA ═══ -->
+                    <h2>
+                        <span class="lang-en">🚀 Quanta Services (PWR): A Giant Under Pressure</span>
+                        <span class="lang-es" style="display:none;">🚀 Quanta Services (PWR): Un Gigante Bajo Presión</span>
+                    </h2>
+
+                    <h3>
+                        <span class="lang-en">📈 Stellar Financials — Record-Breaking Growth</span>
+                        <span class="lang-es" style="display:none;">📈 Finanzas Estelares — Crecimiento Récord</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Quanta has posted numbers that would make any company envious. For Q2 2026:</span>
+                        <span class="lang-es" style="display:none;">Quanta ha publicado cifras que harían que cualquier empresa se sintiera envidiosa. Para el segundo trimestre de 2026:</span>
+                    </p>
+                    <ul style="margin-bottom: 16px; padding-left: 24px;">
+                        <li><span class="lang-en">Revenue surged <strong>+41.1% YoY</strong> to <strong>$9.56 billion</strong></span><span class="lang-es" style="display:none;">Los ingresos aumentaron <strong>+41.1% interanual</strong> a <strong>$9,560 millones</strong></span></li>
+                        <li><span class="lang-en">Net profit skyrocketed <strong>+96.9% YoY</strong> to <strong>$451 million</strong></span><span class="lang-es" style="display:none;">El beneficio neto se disparó <strong>+96.9% interanual</strong> a <strong>$451 millones</strong></span></li>
+                        <li><span class="lang-en">Backlog hit a record <strong>$53.4 billion</strong>, giving multi-year revenue visibility</span><span class="lang-es" style="display:none;">La cartera de pedidos alcanzó un récord de <strong>$53,400 millones</strong>, dando visibilidad de ingresos a varios años</span></li>
+                    </ul>
+                    <p>
+                        <span class="lang-en">The demand is driven by massive infrastructure investments in the U.S. power grid, data centers, and renewable energy projects. Quanta is at the center of America's electrification boom.</span>
+                        <span class="lang-es" style="display:none;">La demanda está impulsada por inversiones masivas en la red eléctrica de EE. UU., centros de datos y proyectos de energía renovable. Quanta está en el centro del auge de la electrificación estadounidense.</span>
+                    </p>
+
+                    <h3>
+                        <span class="lang-en">📉 Stock Performance — The Valuation Trap</span>
+                        <span class="lang-es" style="display:none;">📉 Rendimiento de la Acción — La Trampa de la Valoración</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">Despite these jaw-dropping results, <strong>PWR has fallen -13.69% over the last three months</strong> and <strong>-11.7% in the past month</strong>.</span>
+                        <span class="lang-es" style="display:none;">A pesar de estos resultados asombrosos, <strong>PWR ha caído -13.69% en los últimos tres meses</strong> y <strong>-11.7% en el último mes</strong>.</span>
+                    </p>
+                    <p>
+                        <span class="lang-en">Why? <strong>Valuation.</strong> Quanta trades at a P/E ratio of 75x, far above the sector average (27.6x) and the S&P 500. At these levels, the market is brutally unforgiving. Any whiff of uncertainty — like a high-profile contract dispute in Puerto Rico — triggers selling.</span>
+                        <span class="lang-es" style="display:none;">¿Por qué? <strong>Valoración.</strong> Quanta cotiza con un PER de 75x, muy por encima del promedio del sector (27.6x) y del S&P 500. A estos niveles, el mercado es brutalmente implacable. Cualquier indicio de incertidumbre — como una disputa contractual de alto perfil en Puerto Rico — desencadena ventas.</span>
+                    </p>
+
+                    <h3>
+                        <span class="lang-en">🏗️ The Puerto Rico Play: Strategic or Defensive?</span>
+                        <span class="lang-es" style="display:none;">🏗️ La Jugada en Puerto Rico: ¿Estratégica o Defensiva?</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">In a move that caught analysts' attention, Quanta recently secured <strong>over $600 million</strong> in additional federal contracts for reconstruction work in Puerto Rico — <strong>separate from LUMA's operating contract</strong>.</span>
+                        <span class="lang-es" style="display:none;">En un movimiento que captó la atención de los analistas, Quanta aseguró recientemente <strong>más de $600 millones</strong> en contratos federales adicionales para trabajos de reconstrucción en Puerto Rico — <strong>separados del contrato de operación de LUMA</strong>.</span>
+                    </p>
+                    <div class="highlight-box">
+                        <span class="lang-en"><strong>Strategic Hedge:</strong> "If LUMA's contract gets canceled, Quanta is positioning itself to step in as the direct operator. If the contract is renewed, they've already secured a massive share of the reconstruction pie."</span>
+                        <span class="lang-es" style="display:none;"><strong>Cobertura Estratégica:</strong> "Si el contrato de LUMA se cancela, Quanta se está posicionando para intervenir como operador directo. Si se renueva, ya han asegurado una parte masiva del pastel de la reconstrucción."</span>
+                    </div>
+
+                    <!-- ═══ SECTION 2: ATCO ═══ -->
+                    <h2>
+                        <span class="lang-en">🏢 ATCO Ltd. (TSX: ACO.X): The Smaller Player with Bigger Risks</span>
+                        <span class="lang-es" style="display:none;">🏢 ATCO Ltd. (TSX: ACO.X): El Jugador Más Pequeño con Riesgos Mayores</span>
+                    </h2>
+
+                    <h3>
+                        <span class="lang-en">📊 Solid Growth, Tight Margins</span>
+                        <span class="lang-es" style="display:none;">📊 Crecimiento Sólido, Márgenes Ajustados</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">ATCO has also reported positive results:</span>
+                        <span class="lang-es" style="display:none;">ATCO también ha reportado resultados positivos:</span>
+                    </p>
+                    <ul style="margin-bottom: 16px; padding-left: 24px;">
+                        <li><span class="lang-en">Revenue <strong>+13.9% YoY</strong> in Q2 2026</span><span class="lang-es" style="display:none;">Ingresos <strong>+13.9% interanual</strong> en el segundo trimestre de 2026</span></li>
+                        <li><span class="lang-en">Adjusted profit <strong>+37.5% YoY</strong></span><span class="lang-es" style="display:none;">Beneficio ajustado <strong>+37.5% interanual</strong></span></li>
+                    </ul>
+                    <p>
+                        <span class="lang-en">However, the company faces a different challenge: <strong>margin compression</strong>. ATCO's net profit margin has dropped from 8.7% to 3.4% over the past year.</span>
+                        <span class="lang-es" style="display:none;">Sin embargo, la empresa enfrenta un desafío diferente: <strong>compresión de márgenes</strong>. El margen de beneficio neto de ATCO ha caído del 8.7% al 3.4% en el último año.</span>
+                    </p>
+
+                    <h3>
+                        <span class="lang-en">📈 Stock Resilience — For Now</span>
+                        <span class="lang-es" style="display:none;">📈 Resiliencia de la Acción — Por Ahora</span>
+                    </h3>
+                    <p>
+                        <span class="lang-en">ATCO's stock (ACO.X) has performed more steadily:</span>
+                        <span class="lang-es" style="display:none;">La acción de ATCO (ACO.X) ha tenido un desempeño más estable:</span>
+                    </p>
+                    <ul style="margin-bottom: 16px; padding-left: 24px;">
+                        <li><span class="lang-en"><strong>+24.88% year-to-date</strong></span><span class="lang-es" style="display:none;"><strong>+24.88% en lo que va de año</strong></span></li>
+                        <li><span class="lang-en">Recently broke above its 200-day moving average, a bullish technical signal</span><span class="lang-es" style="display:none;">Recientemente superó su media móvil de 200 días, una señal técnica alcista</span></li>
+                    </ul>
+                    <p>
+                        <span class="lang-en">At <strong>$8.32 billion</strong> market cap, ATCO is roughly <strong>12x smaller</strong> than Quanta. For ATCO, the Puerto Rico investment is significant, but their diversification into logistics and modular structures provides a cushion.</span>
+                        <span class="lang-es" style="display:none;">Con una capitalización de mercado de <strong>$8,320 millones</strong>, ATCO es aproximadamente <strong>12 veces más pequeña</strong> que Quanta. Para ATCO, la inversión en Puerto Rico es significativa, pero su diversificación en logística y estructuras modulares proporciona un colchón.</span>
+                    </p>
+
+                    <!-- ═══ COMPARISON TABLE ═══ -->
+                    <h2>
+                        <span class="lang-en">🔍 The Bottom Line: Two Giants, Two Different Stories</span>
+                        <span class="lang-es" style="display:none;">🔍 Conclusión: Dos Gigantes, Dos Historias Diferentes</span>
+                    </h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Quanta Services (PWR)</th>
+                                    <th>ATCO Ltd. (ACO.X)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Market Cap</strong></td><td>~$99.36 billion</td><td>~$8.32 billion</td></tr>
+                                <tr><td><strong>Revenue Growth (Q2 2026)</strong></td><td><span class="badge-green">+41.1%</span></td><td><span class="badge-green">+13.9%</span></td></tr>
+                                <tr><td><strong>Net Profit Growth</strong></td><td><span class="badge-green">+96.9%</span></td><td><span class="badge-green">+37.5%</span> (adjusted)</td></tr>
+                                <tr><td><strong>Stock Performance (1Y)</strong></td><td>Mixed (strong YoY, weak recent)</td><td><span class="badge-green">+24.88% YTD</span></td></tr>
+                                <tr><td><strong>Key Challenge</strong></td><td><span class="badge-red">High valuation</span> makes stock sensitive to news</td><td><span class="badge-red">Margin pressure</span> from 8.7% → 3.4%</td></tr>
+                                <tr><td><strong>Puerto Rico Exposure</strong></td><td>Massive (strategic hedge + $600M in separate contracts)</td><td>Significant but diversified</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ═══ FINAL WORD ═══ -->
+                    <h2>
+                        <span class="lang-en">🧠 What This Means for Investors</span>
+                        <span class="lang-es" style="display:none;">🧠 Lo Que Esto Significa para los Inversores</span>
+                    </h2>
+                    <ol style="margin-bottom: 20px; padding-left: 24px;">
+                        <li><span class="lang-en"><strong>Quanta (PWR)</strong> is a <strong>growth machine</strong> with earnings that justify a premium — but the premium is so high that any negative headline causes outsized moves. The LUMA crisis is a headline risk, not a fundamental risk (for now).</span><span class="lang-es" style="display:none;"><strong>Quanta (PWR)</strong> es una <strong>máquina de crecimiento</strong> con ganancias que justifican una prima — pero la prima es tan alta que cualquier titular negativo provoca movimientos descomunales. La crisis de LUMA es un riesgo de titular, no un riesgo fundamental (por ahora).</span></li>
+                        <li><span class="lang-en"><strong>ATCO (ACO.X)</strong> is the <strong>value play</strong> — smaller, cheaper, but with margin issues that need to be resolved. Puerto Rico is a meaningful exposure, but not existential.</span><span class="lang-es" style="display:none;"><strong>ATCO (ACO.X)</strong> es la <strong>apuesta de valor</strong> — más pequeña, más barata, pero con problemas de margen que deben resolverse. Puerto Rico es una exposición significativa, pero no existencial.</span></li>
+                        <li><span class="lang-en"><strong>Neither stock is collapsing because of LUMA.</strong> The market is reacting to macro trends (interest rates, infrastructure spending) and company-specific fundamentals — but the Puerto Rico uncertainty is an added layer of volatility.</span><span class="lang-es" style="display:none;"><strong>Ninguna de las dos acciones se está hundiendo por LUMA.</strong> El mercado está reaccionando a las tendencias macro (tasas de interés, gasto en infraestructura) y a los fundamentos específicos de la empresa — pero la incertidumbre en Puerto Rico es una capa adicional de volatilidad.</span></li>
+                    </ol>
+
+                    <div class="highlight-box" style="text-align: center; font-size: 1.1rem;">
+                        <span class="lang-en"><strong>💬 Final Word:</strong> "The LUMA crisis has not sunk either parent company. But it has exposed the fragility of investor confidence when high valuations meet political uncertainty."</span>
+                        <span class="lang-es" style="display:none;"><strong>💬 Palabra Final:</strong> "La crisis de LUMA no ha hundido a ninguna de las matrices. Pero ha expuesto la fragilidad de la confianza de los inversores cuando las altas valoraciones se encuentran con la incertidumbre política."</span>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 16px; color: var(--text-light); font-size: 0.9rem;">
+                        <span class="lang-en"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                        <span class="lang-es" style="display:none;"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                    </p>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ═══ QUOTE SECTION ═══ -->
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>
+                <span class="lang-en">"The numbers don't lie — but the market's mood swings do."</span>
+                <span class="lang-es" style="display:none;">"Los números no mienten — pero los cambios de humor del mercado sí."</span>
+            </blockquote>
+            <cite>— Julio Henrique Viera Nieves</cite>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+                <p><span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span><span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span></p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="../js/language.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medea — Intro Part I: The Voice of the First Witch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --surface-color: #fafafa;
+            --border-color: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #4b5563;
+            --accent-dark: #881337;
+            --accent-gold: #b45309;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-radius: 8px;
+            padding: 60px 50px;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-dark);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .meta-tag {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--accent-dark);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .song-section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-dark);
+            font-weight: 600;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .verse {
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            padding-left: 20px;
+            border-left: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .verse:hover {
+            border-left-color: var(--accent-gold);
+        }
+
+        .verse.chorus {
+            font-style: italic;
+            background: var(--surface-color);
+            padding: 20px 24px;
+            border-left: 3px solid var(--accent-dark);
+            border-radius: 0 6px 6px 0;
+        }
+
+        .verse.spoken {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .prose-box {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="meta-tag">Prologue — Part I</span>
+            <h1>The Voice of the First Witch</h1>
+            <p class="subtitle">Song Adaptation & Lyrics for Progressive Metal Collaboration</p>
+        </header>
+
+        <!-- LYRICS SECTION -->
+        <main class="song-section">
+            
+            <div class="section-header">Intro / Spoken Word</div>
+            <div class="verse spoken">
+                I was the first...<br>
+                The dawn of witchcraft, the primordial flame.<br>
+                A priestess born of ancient light,<br>
+                Medea was my name.
+            </div>
+
+            <div class="section-header">Verse I</div>
+            <div class="verse">
+                Beside the Argonauts I stood, a heroine of gold,<br>
+                To Jason gave my heart and soul, a love of tales retold.<br>
+                A lover, wife, and mother bound by sacred, solemn vows,<br>
+                Until the poison of man’s heart broke every vow he swore.<br>
+                How easily humanity betrays the ones they love—<br>
+                And burns the grace that descended from above.
+            </div>
+
+            <div class="section-header">Verse II</div>
+            <div class="verse">
+                They forced the mother to a monster, dark and hollow-eyed,<br>
+                My hands stained red with my own blood, where two young angels died.<br>
+                The first to wear the mark of shame, the first they sought to hunt,<br>
+                I fled across a thousand realms to bear their hatred's brunt.<br>
+                A counselor, a priestess, a lover in the shade,<br>
+                Yet every crown I ever wore was carved out of a blade.
+            </div>
+
+            <div class="section-header">Bridge</div>
+            <div class="verse">
+                The dark gods witnessed all my pain, my agony, my tears,<br>
+                They granted me their highest gift to echo through the years.<br>
+                The curse of immortality, the gift that never dies,<br>
+                Yet emptiness remained within, beneath eternal skies.
+            </div>
+
+            <div class="section-header">Pre-Chorus</div>
+            <div class="verse">
+                I sought the ancient, hidden paths, the shadows left behind,<br>
+                To feed the hunger in my soul, the dark depth of my mind.<br>
+                In sands of black I met the god, Anubis held the key,<br>
+                He whispered forbidden incantations into me!
+            </div>
+
+            <div class="section-header">Chorus / Climax</div>
+            <div class="verse chorus">
+                Now rise! The first god among gods, enthroned above the stars!<br>
+                With power like old Kronos, unbound by mortal scars!<br>
+                Unequaled force, eternal night, the realm begins to sway—<br>
+                And in this void of power, I feel it drag away...
+            </div>
+
+        </main>
+
+        <!-- LITERAL PROSE SECTION -->
+        <section class="song-section">
+            <div class="section-header">Direct Narrative Translation (Reference)</div>
+            <div class="prose-box">
+                "I was the first... The first witch known to the world... I was a priestess, my name is Medea. With the Argonauts, I was a heroine! With Jason, I became a lover, a wife, and a mother... but... Human nature... it is so easy for them to betray those they love. I became a monster, the murderer of my two children... a killer... I was the first to be hunted... I have walked through many realms... as a priestess, as an advisor, and sometimes as a lover... But there was so much pain in my life... The dark gods were my witnesses, and once again I was the first witch to whom the gods granted their blessing... They gave me the gift of eternity... But I feel empty inside... So I recall my days as a witch... I began to search for knowledge and power... Then I met the Egyptian god... Anubis taught me forbidden spells... Once again, I became the first god among gods! Matchless power like that of Kronos... Now I feel..."
+            </div>
+        </section>
+
+        <footer>
+            Collaboration Project &bull; Written for Guitar & Vocal Arrangements
+        </footer>
+    </div>
+
+</body>
+</html>
