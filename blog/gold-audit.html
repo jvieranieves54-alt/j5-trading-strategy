@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gold Market Audit — XAU/USD Weekly Analysis · J5 Trading Strategy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy (Blog Audit Module)
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+
+        /* ─── ARTICLE LAYOUT ─── */
+        .article-section { padding: 50px 0 60px; }
+        .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-dark); font-weight: 600; font-size: 0.9rem; margin-bottom: 24px; transition: transform var(--transition); }
+        .back-link:hover { transform: translateX(-4px); }
+        
+        .article-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray-border); box-shadow: var(--shadow); padding: 40px; margin-bottom: 30px; }
+        .article-badge { background: var(--danger-bg); color: var(--danger); font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 16px; }
+        .article-title { font-size: 2.2rem; font-weight: 700; color: var(--blue-dark); line-height: 1.25; margin-bottom: 12px; }
+        .article-meta { font-size: 0.85rem; color: var(--text-light); margin-bottom: 28px; border-bottom: 1px solid var(--gray-border); padding-bottom: 16px; }
+        
+        /* ─── CHART DISPLAY BOX ─── */
+        .chart-box {
+            background: #131722;
+            border-radius: var(--radius);
+            padding: 16px;
+            margin: 30px 0;
+            border: 1px solid var(--gray-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .chart-box img {
+            width: 100%;
+            max-width: 800px;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .article-body h2 { font-size: 1.4rem; color: var(--blue-dark); margin: 32px 0 14px; border-left: 4px solid var(--gold); padding-left: 12px; }
+        .article-body h3 { font-size: 1.15rem; color: var(--blue-medium); margin: 24px 0 10px; }
+        .article-body p { margin-bottom: 18px; font-size: 1.02rem; color: var(--text-dark); }
+        .article-body .highlight-box { background: var(--gold-light); border-left: 4px solid var(--gold); padding: 20px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; font-size: 0.98rem; color: var(--blue-dark); }
+        .article-body .table-wrap { overflow-x: auto; margin: 20px 0; border-radius: 8px; border: 1px solid var(--gray-border); }
+        .article-body table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #fff; }
+        .article-body th { background: var(--gray-bg); font-weight: 600; text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--gold); white-space: nowrap; }
+        .article-body td { padding: 10px 14px; border-bottom: 1px solid var(--gray-border); }
+        .article-body .highlight-row td { background: #fefcf3; }
+        .article-body .badge-green { background: #dcfce7; color: #0f7b3a; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+        .article-body .badge-red { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
+
+        /* ─── QUOTE ─── */
+        .quote-section { padding: 50px 0 40px; background: var(--blue-dark); text-align: center; }
+        .quote-section blockquote { font-size: 1.4rem; font-weight: 400; color: var(--white); max-width: 720px; margin: 0 auto 10px; font-style: italic; line-height: 1.5; }
+        .quote-section cite { color: var(--gold); font-style: normal; font-weight: 500; font-size: 1rem; }
+
+        /* ─── FOOTER ─── */
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        @media (max-width: 768px) {
+            .article-card { padding: 24px; }
+            .article-title { font-size: 1.7rem; }
+            .chart-box img { max-height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../systems/j5.html">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="../blog/index.html" class="active">Blog</a>
+            </nav>
+            <div class="language-switcher">
+                <button data-lang="en" class="active">🇺🇸 EN</button>
+                <button data-lang="es">🇪🇸 ES</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ ARTICLE CONTENT ═══ -->
+    <section class="article-section">
+        <div class="container">
+
+            <article class="article-card">
+                <div class="article-badge">Market Audit · August 2026</div>
+                <h1 class="article-title">
+                    <span class="lang-en">Gold Bulls Regain Control as Price Attacks $4,600</span>
+                    <span class="lang-es" style="display:none;">Los Toros del Oro Retoman el Control Mientras el Precio Ataca los $4,600</span>
+                </h1>
+                <div class="article-meta">
+                    <strong>Author:</strong> Julio Henrique Viera Nieves &nbsp;·&nbsp; <strong>Date:</strong> August 2026 &nbsp;·&nbsp; <strong>Asset:</strong> XAUUSD (GOLD)
+                </div>
+
+                <div class="article-body">
+
+                    <!-- ═══ CHART ═══ -->
+                    <div class="chart-box">
+                        <img src="../assets/images/goldisback.png" alt="GOLD Daily Chart — J5 Protocol Analysis" />
+                    </div>
+
+                    <h2>
+                        <span class="lang-en">📊 Executive Summary</span>
+                        <span class="lang-es" style="display:none;">📊 Resumen Ejecutivo</span>
+                    </h2>
+
+                    <p>
+                        <span class="lang-en">Gold entered a decisive bullish phase this week, climbing more than <strong>5%</strong> and attacking the psychological <strong>$4,600</strong> barrier. The move is being reinforced by a combination of a softer US dollar, changing expectations around US monetary policy, and renewed concern about US fiscal/debt sustainability.</span>
+                        <span class="lang-es" style="display:none;">El oro entró en una fase alcista decisiva esta semana, subiendo más del <strong>5%</strong> y atacando la barrera psicológica de los <strong>$4,600</strong>. El movimiento está siendo reforzado por una combinación de un dólar más débil, el cambio de expectativas sobre la política monetaria de EE.UU. y la renovada preocupación por la sostenibilidad fiscal/deuda de EE.UU.</span>
+                    </p>
+
+                    <div class="highlight-box">
+                        <span class="lang-en"><strong>J5 Protocol View:</strong> Our multi-timeframe structure (H4, H1, M15) has been <strong>BULLISH and ALIGNED</strong>, confirming the upward momentum. The 5% separation rule from the 20 EMA is being monitored. <strong>Key Support Zone:</strong> $4,500 – $4,550 (former resistance now turned support). <strong>Next Upside Targets:</strong> $4,635 – $4,670, followed by $4,720 – $4,770.</span>
+                        <span class="lang-es" style="display:none;"><strong>Visión del Protocolo J5:</strong> Nuestra estructura multi-timeframe (H4, H1, M15) ha sido <strong>ALCISTA y ALINEADA</strong>, confirmando el impulso alcista. La regla de separación del 5% de la EMA 20 está siendo monitoreada. <strong>Zona de Soporte Clave:</strong> $4,500 – $4,550 (antigua resistencia ahora convertida en soporte). <strong>Próximos Objetivos Al alza:</strong> $4,635 – $4,670, seguidos de $4,720 – $4,770.</span>
+                    </div>
+
+                    <h2>
+                        <span class="lang-en">🔥 The Catalysts Behind the Move</span>
+                        <span class="lang-es" style="display:none;">🔥 Los Catalizadores Detrás del Movimiento</span>
+                    </h2>
+
+                    <h3>
+                        <span class="lang-en">1. US Treasury Buyback & Dollar Weakness</span>
+                        <span class="lang-es" style="display:none;">1. Recompras del Tesoro de EE.UU. y Debilidad del Dólar</span>
+                    </h3>
+
+                    <p>
+                        <span class="lang-en">The US Treasury's announcement that it will at least <strong>double the size of its long-term debt buyback programme</strong> (from $2bn to $4bn per operation in the 10-to-30-year segment) triggered a sharp decline in US Treasury yields and the dollar, boosting gold's appeal. Even after bond yields recovered, investors remain doubtful that the measures will provide a lasting solution to high long-term borrowing costs.</span>
+                        <span class="lang-es" style="display:none;">El anuncio del Tesoro de EE.UU. de que al menos <strong>doblará el tamaño de su programa de recompra de deuda a largo plazo</strong> (de $2bn a $4bn por operación en el segmento de 10 a 30 años) provocó una fuerte caída de los rendimientos de los bonos del Tesoro de EE.UU. y del dólar, impulsando el atractivo del oro. Incluso después de que los rendimientos de los bonos se recuperaran, los inversores siguen dudando de que las medidas proporcionen una solución duradera a los altos costos de endeudamiento a largo plazo.</span>
+                    </p>
+
+                    <h3>
+                        <span class="lang-en">2. Central Bank Accumulation</span>
+                        <span class="lang-es" style="display:none;">2. Acumulación de los Bancos Centrales</span>
+                    </h3>
+
+                    <p>
+                        <span class="lang-en"><strong>Central banks continue to accumulate gold.</strong> Goldman Sachs estimates that central banks bought <strong>57 tonnes in June</strong>, with China as the largest identifiable buyer (40 tonnes). The bank maintains its end-2026 gold forecast of <strong>$4,900 per ounce</strong>, supported by projected central-bank purchases averaging 50 tonnes per month.</span>
+                        <span class="lang-es" style="display:none;"><strong>Los bancos centrales continúan acumulando oro.</strong> Goldman Sachs estima que los bancos centrales compraron <strong>57 toneladas en junio</strong>, siendo China el mayor comprador identificable (40 toneladas). El banco mantiene su pronóstico de oro para finales de 2026 en <strong>$4,900 por onza</strong>, respaldado por compras proyectadas de los bancos centrales que promedian 50 toneladas por mes.</span>
+                    </p>
+
+                    <h3>
+                        <span class="lang-en">3. Geopolitical Tensions & Oil Prices</span>
+                        <span class="lang-es" style="display:none;">3. Tensiones Geopolíticas y Precios del Petróleo</span>
+                    </h3>
+
+                    <p>
+                        <span class="lang-en"><strong>Rising oil prices</strong> amid US preparations for a new round of sweeping economic sanctions against Iran have heightened fears of renewed inflationary pressures.</span>
+                        <span class="lang-es" style="display:none;">El <strong>aumento de los precios del petróleo</strong> en medio de los preparativos de EE.UU. para una nueva ronda de amplias sanciones económicas contra Irán ha intensificado los temores de renovadas presiones inflacionarias.</span>
+                    </p>
+
+                    <h2>
+                        <span class="lang-en">📈 Technical Analysis</span>
+                        <span class="lang-es" style="display:none;">📈 Análisis Técnico</span>
+                    </h2>
+
+                    <p>
+                        <span class="lang-en">According to analysts, gold has broken above the $4,500 level and is now targeting higher levels. <strong>A clear and sustained daily breakout above $4,545–$4,600 would strengthen the completion of the technical pattern and open the door toward the next resistance at $4,764.</strong></span>
+                        <span class="lang-es" style="display:none;">Según los analistas, el oro ha roto por encima del nivel de $4,500 y ahora apunta a niveles más altos. <strong>Una ruptura diaria clara y sostenida por encima de $4,545–$4,600 fortalecería la finalización del patrón técnico y abriría la puerta hacia la siguiente resistencia en $4,764.</strong></span>
+                    </p>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-en">Level</span><span class="lang-es" style="display:none;">Nivel</span></th>
+                                    <th><span class="lang-en">Type</span><span class="lang-es" style="display:none;">Tipo</span></th>
+                                    <th><span class="lang-en">Significance</span><span class="lang-es" style="display:none;">Significado</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>$4,545 – $4,600</td><td><span class="badge-green">Resistance</span></td><td><span class="lang-en">First key test for buyers; a clear breakout opens the door to higher targets</span><span class="lang-es" style="display:none;">Primera prueba clave para los compradores; una ruptura clara abre la puerta a objetivos más altos</span></td></tr>
+                                <tr class="highlight-row"><td><strong>$4,764</strong></td><td><span class="badge-red">Resistance</span></td><td><span class="lang-en">Next major resistance after $4,600</span><span class="lang-es" style="display:none;">Próxima resistencia importante después de $4,600</span></td></tr>
+                                <tr><td>$5,086</td><td><span class="badge-red">Resistance</span></td><td><span class="lang-en">Bullish extension target</span><span class="lang-es" style="display:none;">Objetivo de extensión alcista</span></td></tr>
+                                <tr><td>$4,335</td><td><span class="badge-green">Support</span></td><td><span class="lang-en">First key support on any pullback</span><span class="lang-es" style="display:none;">Primer soporte clave en cualquier retroceso</span></td></tr>
+                                <tr class="highlight-row"><td><strong>$4,187</strong></td><td><span class="badge-green">Support</span></td><td><span class="lang-en">Major support; holding above this preserves the broader bullish structure</span><span class="lang-es" style="display:none;">Soporte mayor; mantenerse por encima de esto preserva la estructura alcista más amplia</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>
+                        <span class="lang-en">🎯 Price Forecasts</span>
+                        <span class="lang-es" style="display:none;">🎯 Pronósticos de Precio</span>
+                    </h2>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th><span class="lang-en">Institution / Analyst</span><span class="lang-es" style="display:none;">Institución / Analista</span></th>
+                                    <th><span class="lang-en">Forecast</span><span class="lang-es" style="display:none;">Pronóstico</span></th>
+                                    <th><span class="lang-en">Timeframe</span><span class="lang-es" style="display:none;">Plazo</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Goldman Sachs</strong></td><td><span class="badge-green">$4,900/oz</span></td><td>End-2026</td></tr>
+                                <tr><td><strong>RoboForex Analytical Dept</strong></td><td><span class="badge-green">$4,660/oz</span></td><td>Short-term</td></tr>
+                                <tr><td><strong>The Gold & Silver Club</strong></td><td><span class="badge-green">$5,000/oz</span></td><td>Next psychological milestone</td></tr>
+                                <tr><td><strong>Investing.com Analyst</strong></td><td><span class="badge-green">$5,086/oz</span></td><td>Bullish extension target</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2>
+                        <span class="lang-en">🧠 The J5 Protocol Verdict</span>
+                        <span class="lang-es" style="display:none;">🧠 El Veredicto del Protocolo J5</span>
+                    </h2>
+
+                    <p>
+                        <span class="lang-en">The multi-timeframe structure (H4, H1, M15) remains <strong>BULLISH and ALIGNED</strong>, confirming the upward momentum. The 5% separation rule from the 20 EMA is being monitored.</span>
+                        <span class="lang-es" style="display:none;">La estructura multi-timeframe (H4, H1, M15) sigue siendo <strong>ALCISTA y ALINEADA</strong>, confirmando el impulso alcista. La regla de separación del 5% de la EMA 20 está siendo monitoreada.</span>
+                    </p>
+
+                    <ul style="margin: 12px 0 16px; padding-left: 24px;">
+                        <li><span class="lang-en"><strong>Key Support Zone:</strong> $4,500 – $4,550 (former resistance now turned support)</span><span class="lang-es" style="display:none;"><strong>Zona de Soporte Clave:</strong> $4,500 – $4,550 (antigua resistencia ahora convertida en soporte)</span></li>
+                        <li><span class="lang-en"><strong>Next Upside Targets:</strong> $4,635 – $4,670, followed by $4,720 – $4,770</span><span class="lang-es" style="display:none;"><strong>Próximos Objetivos al Alza:</strong> $4,635 – $4,670, seguidos de $4,720 – $4,770</span></li>
+                        <li><span class="lang-en"><strong>Risk Factor:</strong> Jackson Hole Symposium (August 27-29) could shift the Fed's tone and impact the dollar</span><span class="lang-es" style="display:none;"><strong>Factor de Riesgo:</strong> El Simposio de Jackson Hole (27-29 de agosto) podría cambiar el tono de la Fed e impactar al dólar</span></li>
+                    </ul>
+
+                    <div class="highlight-box" style="text-align: center; font-size: 1.1rem;">
+                        <span class="lang-en"><strong>Verdict:</strong> The structure is bullish, but corrections toward $4,550 – $4,560 could offer a better risk/reward entry point.</span>
+                        <span class="lang-es" style="display:none;"><strong>Veredicto:</strong> La estructura es alcista, pero las correcciones hacia $4,550 – $4,560 podrían ofrecer un mejor punto de entrada en términos de riesgo/recompensa.</span>
+                    </div>
+
+                    <p style="text-align: center; margin-top: 16px; color: var(--text-light); font-size: 0.9rem;">
+                        <span class="lang-en"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                        <span class="lang-es" style="display:none;"><strong>Julio Viera</strong> — Laico de la Catedral de Nuestra Señora de la Guadalupe, Ponce</span>
+                    </p>
+
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ═══ QUOTE SECTION ═══ -->
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>
+                <span class="lang-en">"The numbers don't lie — but the market's mood swings do."</span>
+                <span class="lang-es" style="display:none;">"Los números no mienten — pero los cambios de humor del mercado sí."</span>
+            </blockquote>
+            <cite>— Julio Henrique Viera Nieves</cite>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+                <p><span class="lang-en">"Fiat Voluntas Geometriae" — Let the Will of Geometry be Done</span><span class="lang-es" style="display:none;">"Fiat Voluntas Geometriae" — Hágase la Voluntad de la Geometría</span></p>
+                <p class="footer-copy">Puerto Rico, 2026</p>
+            </div>
+            <div class="footer-right">
+                <a href="mailto:jvieranieves54@gmail.com">Email</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                <a href="https://github.com/jvieranieves54-alt/j5-trading-strategy" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="../js/language.js"></script>
+
+</body>
+</html>
