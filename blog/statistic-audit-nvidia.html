@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Análisis Estadístico, Econométrico y Estratégico de NVIDIA (NVDA)</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm 12mm 12mm 12mm;
+            background-color: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            line-height: 1.45;
+            font-size: 10.5pt;
+        }
+
+        /* Header Layout */
+        .header-container {
+            border-bottom: 3px solid #76b900;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            display: table;
+            width: 100%;
+        }
+
+        .header-left {
+            display: table-cell;
+            vertical-align: middle;
+            width: 70%;
+        }
+
+        .header-right {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: right;
+            width: 30%;
+        }
+
+        .doc-title {
+            font-size: 18pt;
+            font-weight: 800;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .doc-subtitle {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 4px;
+        }
+
+        .author-badge {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 8.5pt;
+            color: #334155;
+            line-height: 1.3;
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Section Layout */
+        .section-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #0f172a;
+            background-color: #f8fafc;
+            border-left: 4px solid #76b900;
+            padding: 5px 10px;
+            margin-top: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        p {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        /* Grid / Columns via Table for WeasyPrint compatibility */
+        .table-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .table-grid td {
+            vertical-align: top;
+            padding: 4px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 10px;
+            height: 100%;
+        }
+
+        .card-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 4px;
+        }
+
+        /* Metric Highlights */
+        .metric-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 6px 8px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 13pt;
+            font-weight: 800;
+            color: #0e4a24;
+        }
+
+        .metric-label {
+            font-size: 7.5pt;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Lists */
+        ul {
+            margin-left: 16px;
+            margin-bottom: 8px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+            margin-bottom: 10px;
+            font-size: 8.5pt;
+        }
+
+        .data-table th {
+            background-color: #1e293b;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 5px 8px;
+            border: 1px solid #1e293b;
+        }
+
+        .data-table td {
+            padding: 5px 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .data-table .highlight-row {
+            background-color: #f0fdf4;
+            font-weight: 600;
+        }
+
+        .positive {
+            color: #15803d;
+            font-weight: 700;
+        }
+
+        .negative {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 8px 12px;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+            font-size: 9.5pt;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: #14532d;
+            margin-bottom: 2px;
+        }
+
+        .footer {
+            margin-top: 15px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .math {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header-container">
+        <div class="header-left">
+            <div class="doc-title">NVIDIA Corporation (NVDA)</div>
+            <div class="doc-subtitle">Análisis Estadístico, Econométrico y Estratégico & Forecasting Q4 2026</div>
+        </div>
+        <div class="header-right">
+            <div class="author-badge">
+                <div class="author-name">Julio Viera Nieves</div>
+                <div>Especialista en Inversiones</div>
+                <div>www.juliovieratrader.com</div>
+                <div>Fecha: Septiembre 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Metrics -->
+    <table class="table-grid">
+        <tr>
+            <td width="25%">
+                <div class="metric-box">
+                    <div class="metric-label">Precio de Referencia</div>
+                    <div class="metric-value">$234.14</div>
+                </div>
+            </td>
+            <td width="25%">
+                <div class="metric-box">
+                    <div class="metric-label">Ingresos Q2 FY27</div>
+                    <div class="metric-value">$96.22B</div>
+                </div>
+            </td>
+            <td width="25%">
+                <div class="metric-box">
+                    <div class="metric-label">Forecast Base Dic 2026</div>
+                    <div class="metric-value">$275 - $288</div>
+                </div>
+            </td>
+            <td width="25%">
+                <div class="metric-box">
+                    <div class="metric-label">Ratio R:R Alcista</div>
+                    <div class="metric-value">1 : 1.81</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Section 1: Strategic & Market Analysis -->
+    <div class="section-title">1. Análisis Estratégico y de Mercado (Fundamentos de Negocio)</div>
+    
+    <p>NVIDIA ha trascendido el modelo de negocio tradicional de hardware semiconductor para consolidar un monopolio vertical en la infraestructura global de Inteligencia Artificial, integrando hardware, software de código abierto, capacidad de producción de memoria y financiamiento de capital.</p>
+
+    <table class="table-grid">
+        <tr>
+            <td width="50%">
+                <div class="card">
+                    <div class="card-title">Catalizadores de Crecimiento & Foso Defensivo</div>
+                    <ul>
+                        <li><strong>Adquisición de Hugging Face ($12,930M):</strong> Control de la plataforma central del código abierto global, vinculando desarrolladores directamente a la arquitectura CUDA y GPU de NVIDIA.</li>
+                        <li><strong>Aseguramiento de Cadena de Suministro ($279,000M):</strong> Compromisos de adquisición a largo plazo en memoria HBM y empaquetado avanzado para bloquear la capacidad productiva ante competidores.</li>
+                        <li><strong>Evolución de Arquitecturas:</strong> Transición exitosa de Hopper a <em>Blackwell</em> y proyección a <em>Vera Rubin</em>, elevando los ingresos proyectados por GW de $18,000M a $40,000M.</li>
+                        <li><strong>Expansión a Chips Personalizados:</strong> Inversión de $3,500M en bonos convertibles de MediaTek para integración de tecnología NVLink Fusion.</li>
+                    </ul>
+                </div>
+            </td>
+            <td width="50%">
+                <div class="card">
+                    <div class="card-title">Desempeño Financiero Clave (Q2 FY2027)</div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Métrica</th>
+                                <th>Valor Cierre</th>
+                                <th>Crecimiento YoY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ingresos Totales</strong></td>
+                                <td>$96,221 M</td>
+                                <td class="positive">+106%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Segmento Data Center</strong></td>
+                                <td>$89,020 M</td>
+                                <td class="positive">+117%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ganancia Neta (Non-GAAP)</strong></td>
+                                <td>$53,954 M</td>
+                                <td class="positive">+118%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>EPS Diluido (Non-GAAP)</strong></td>
+                                <td>$2.22</td>
+                                <td class="positive">+120%</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>Guía de Ingresos Q3 FY27</strong></td>
+                                <td>$108,000 M</td>
+                                <td>±2% est.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Section 2: Econometric & Statistical Analysis -->
+    <div class="section-title">2. Análisis Econométrico y Estadístico (Metodología Harvard Aplicada a Economía)</div>
+
+    <p>A diferencia de la estadística aplicada a ciencias naturales, la econometría financiera analiza series de tiempo considerando <strong>no estacionariedad, cambios de régimen (<span class="math">Chow Test</span>), compresión de varianza</strong> y la <strong>ley de rendimientos decrecientes por densidad de capital</strong>.</p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Fase / Periodo</th>
+                <th>Tipo de Movimiento</th>
+                <th>Variación (<span class="math">Δ%</span>)</th>
+                <th>Interpretación Econométrica de Régimen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fase 1 (2020)</td>
+                <td>Expansión</td>
+                <td class="positive">+143.00%</td>
+                <td>Ciclo temprano prepandemia / Demanda GPU tradicional.</td>
+            </tr>
+            <tr>
+                <td>Fase 2 (2020-2021)</td>
+                <td>Expansión</td>
+                <td class="positive">+243.00%</td>
+                <td>Burbuja de liquidez global y ciclo expansión cripto/gaming.</td>
+            </tr>
+            <tr>
+                <td>Fase 3 (2021-2022)</td>
+                <td>Contracción</td>
+                <td class="negative">-68.25%</td>
+                <td>Ruptura Estructural (Chow Test failure). Restablecimiento completo de ciclo.</td>
+            </tr>
+            <tr>
+                <td>Fase 4 (2022-2023)</td>
+                <td>Expansión</td>
+                <td class="positive">+216.23%</td>
+                <td>Inicio de cambio de régimen impulsado por Inteligencia Artificial generativa.</td>
+            </tr>
+            <tr>
+                <td>Fase 5 (2023-2024)</td>
+                <td>Expansión</td>
+                <td class="positive">+220.87%</td>
+                <td>Aceleración hiperbólica por demanda masiva de Data Centers.</td>
+            </tr>
+            <tr>
+                <td>Fase 6 (Mid 2024)</td>
+                <td>Contracción</td>
+                <td class="negative">-40.00%</td>
+                <td>Toma de ganancias institucional y corrección por sobreextensión técnica.</td>
+            </tr>
+            <tr>
+                <td>Fase 7 (2024-2025)</td>
+                <td>Expansión</td>
+                <td class="positive">+124.00%</td>
+                <td>Maduración del rally secular de IA.</td>
+            </tr>
+            <tr>
+                <td>Fase 8 (2025)</td>
+                <td>Contracción</td>
+                <td class="negative">-20.00%</td>
+                <td>Corrección menor de volatilidad comprimida / Soporte en abanico EMA.</td>
+            </tr>
+            <tr class="highlight-row">
+                <td>Fase 9 (2025-2026)</td>
+                <td>Expansión Actual</td>
+                <td class="positive">+40.00%</td>
+                <td>Impulso tendencial activo hacia la zona de $234.14 - $236.51.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card" style="margin-bottom: 10px;">
+        <div class="card-title">Tres Conclusiones Clave de la Dinámica Estadística</div>
+        <ul>
+            <li><strong>Compresión Asimétrica de Drawdowns:</strong> Las caídas secuenciales (<strong>-68.25% → -40% → -20%</strong>) demuestran una progresiva <em>institucionalización del activo</em>. NVIDIA pasó de ser un título especulativo de alta beta a un activo de infraestructura esencial en carteras institucionales.</li>
+            <li><strong>Modelo Logístico en Curva S (Base Effect):</strong> Los impulsos porcentuales expansivos muestran desaceleración progresiva (<strong>+243% → +220% → +124% → +40%</strong>). A medida que la capitalización supera los $3-$4 billones, se requiere una mayor masa de liquidez para generar retornos multiplicadores.</li>
+            <li><strong>Alineación del Abanico de Medias (EMA Fan):</strong> La estructura <span class="math">EMA 20 &gt; EMA 40 &gt; EMA 80 &gt; EMA 200</span> confirma que las correcciones recientes ni siquiera vulneran la EMA 200, rebotando sistemáticamente en soportes dinámicos superiores.</li>
+        </ul>
+    </div>
+
+    <!-- Section 3: Forecast December 31, 2026 -->
+    <div class="section-title">3. Forecast y Proyección de Precios (Septiembre – Diciembre 31, 2026)</div>
+
+    <p>Aplicando la matriz de regresión por volatilidad y estacionalidad del cuarto trimestre (Q4), se proyecta la siguiente trayectoria de precios dividida en tres escenarios de probabilidad:</p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Mes (2026)</th>
+                <th>Escenario Conservador (Test EMA 20/40)</th>
+                <th>Escenario Base (Continuidad Tendencial)</th>
+                <th>Escenario Alcista (Aceleración Q4)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Septiembre</strong></td>
+                <td>$210.00 – $218.00 (Test EMA 20)</td>
+                <td>$228.00 – $236.00 (Consolidación)</td>
+                <td>$245.00 – $252.00 (Ruptura)</td>
+            </tr>
+            <tr>
+                <td><strong>Octubre</strong></td>
+                <td>$196.00 – $205.00 (Test EMA 40)</td>
+                <td>$238.00 – $248.00 (Acumulación)</td>
+                <td>$260.00 – $272.00 (Expansión)</td>
+            </tr>
+            <tr>
+                <td><strong>Noviembre</strong></td>
+                <td>$220.00 – $232.00 (Rebote)</td>
+                <td>$255.00 – $268.00 (Impulso por ER)</td>
+                <td>$280.00 – $292.00 (Aceleración)</td>
+            </tr>
+            <tr class="highlight-row">
+                <td><strong>Diciembre 31</strong></td>
+                <td><strong>$240.00 – $250.00</strong> (Cierre bajo)</td>
+                <td><strong>$275.00 – $288.00</strong> (Objetivo +20%)</td>
+                <td><strong>$300.00 – $312.00</strong> (Techo de canal)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="callout">
+        <div class="callout-title">Gestión de Riesgo y Ratio Riesgo/Beneficio (R:R) al Precio Actual ($234.14)</div>
+        <table width="100%" style="margin-top: 4px; font-size: 8.5pt;">
+            <tr>
+                <td><strong>Punto de Entrada:</strong> $234.14</td>
+                <td><strong>Invalidez (Stop Loss):</strong> $195.00 (Cierre bajo EMA 40 / -16.71%)</td>
+            </tr>
+            <tr>
+                <td><strong>Objetivo Base (TP1):</strong> $278.00 (+18.73%) → Ratio R:R = <strong>1 : 1.12</strong></td>
+                <td><strong>Objetivo Alcista (TP2):</strong> $305.00 (+30.26%) → Ratio R:R = <strong>1 : 1.81</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <p style="font-size: 9pt; margin-top: 6px;"><strong>Recomendación Operativa:</strong> Para optimizar la ecuación riesgo/beneficio a un ratio superior a <strong>1 : 2.5</strong>, se sugiere esperar acumulaciones en los retrocesos dinámicos hacia la franja de la <strong>EMA 20 ($213 – $220)</strong> o <strong>EMA 40 ($196 – $205)</strong> antes de posicionar capital estratégico a largo plazo.</p>
+
+    <!-- Footer -->
+    <div class="footer">
+        Documento preparado por Julio Viera Nieves | Especialista en Inversiones | www.juliovieratrader.com<br>
+        <em>Análisis econométrico y financiero para fines educativos e informativos sobre activos de renta variable.</em>
+    </div>
+
+</body>
+</html>

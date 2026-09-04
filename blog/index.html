@@ -214,6 +214,82 @@
         .report-notes ul { padding-left: 20px; font-size: 0.9rem; color: var(--text-dark); }
         .report-notes li { margin-bottom: 8px; }
 
+        /* ─── MARKET NEWS SECTION ─── */
+        .market-news {
+            padding: 60px 0 50px;
+            background: var(--gray-bg);
+        }
+        .market-news h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+            transition: all var(--transition);
+        }
+        .news-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .news-content {
+            padding: 32px;
+            flex: 1 1 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .news-badge {
+            align-self: flex-start;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--gold);
+        }
+        .news-content h3 {
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .news-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .news-image {
+            flex: 1 1 45%;
+            background: #131722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--gray-border);
+            padding: 16px;
+        }
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-height: 280px;
+            border-radius: 6px;
+        }
+
         /* ─── FOOTER ─── */
         footer {
             background: var(--white);
@@ -251,23 +327,11 @@
                 <span class="logo-gold">J5</span> Trading Strategy
             </div>
             <nav>
-                <a href="../index.html">
-                    <span class="lang-en">Home</span>
-                    <span class="lang-es" style="display:none;">Inicio</span>
-                </a>
-                <a href="../about.html">
-                    <span class="lang-en">About</span>
-                    <span class="lang-es" style="display:none;">Acerca de</span>
-                </a>
-                <a href="../systems/j5.html">
-                    <span class="lang-en">Strategy</span>
-                    <span class="lang-es" style="display:none;">Estrategia</span>
-                </a>
-                <a href="../downloads/index.html">
-                    <span class="lang-en">Downloads</span>
-                    <span class="lang-es" style="display:none;">Descargas</span>
-                </a>
-                <a href="../blog/index.html" class="active">Blog</a>
+                <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../systems/j5.html">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="index.html" class="active">Blog</a>
             </nav>
             <div class="language-switcher">
                 <button data-lang="en" class="active">🇺🇸 EN</button>
@@ -285,7 +349,7 @@
             </h1>
             <p>
                 <span class="lang-en">Verifiable metrics, statistical modeling, and mathematical discipline under live market conditions.</span>
-                <span class="lang-es" style="display:none;">Métricas verificables, modelado estadístico y disciplina matemática bajo condiciones reales de mercado.</span>
+                <span class="lang-es" style="display:none;">Métricas verificables, modelado estadístico y disciplina matemática en condiciones de mercado real.</span>
             </p>
         </div>
     </section>
@@ -297,151 +361,112 @@
             <!-- 📄 ARTICLE 1: EPIPHANY STATISTICAL STUDY -->
             <article class="post-card">
                 <div class="post-header">
-                    <span class="post-tag">
-                        <span class="lang-en">Statistical Study · Q1 2026</span>
-                        <span class="lang-es" style="display:none;">Estudio Estadístico · Q1 2026</span>
-                    </span>
+                    <span class="post-tag">Statistical Study · Q1 2026</span>
                     <h2 class="post-title">
                         <span class="lang-en">Epiphany Trading System — Hedging Block Performance Study</span>
-                        <span class="lang-es" style="display:none;">Sistema de Trading Epiphany — Estudio de Desempeño de Bloques de Cobertura</span>
+                        <span class="lang-es" style="display:none;">Sistema de Trading Epiphany — Estudio de Rendimiento de Bloques de Cobertura</span>
                     </h2>
                     <div class="post-meta">
-                        <span><strong><span class="lang-en">Author:</span><span class="lang-es" style="display:none;">Autor:</span></strong> Julio Henrique Viera Nieves</span>
-                        <span><strong><span class="lang-en">Confidence Level:</span><span class="lang-es" style="display:none;">Nivel de Confianza:</span></strong> 99% (p &lt; 0.01)</span>
-                        <span><strong><span class="lang-en">Methodology:</span><span class="lang-es" style="display:none;">Metodología:</span></strong> <span class="lang-en">Time-Series Analysis</span><span class="lang-es" style="display:none;">Análisis de Series Temporales</span></span>
+                        <span><strong>Author:</strong> Julio Henrique Viera Nieves</span>
+                        <span><strong>Confidence Level:</strong> 99% (p &lt; 0.01)</span>
+                        <span><strong>Methodology:</strong> Time-Series Analysis</span>
                     </div>
                 </div>
 
                 <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
                     <span class="lang-en">This quantitative study analyzes two key operational windows: Validation (Jan 06–22, N=49) vs. Optimization (Jan 26–29, N=24). It evaluates geometric edge scalability, risk dispersion, and performance parameters across hedging execution blocks.</span>
-                    <span class="lang-es" style="display:none;">Este estudio cuantitativo analiza dos ventanas operativas clave: Validación (06–22 de Enero, N=49) vs. Optimización (26–29 de Enero, N=24). Evalúa la escalabilidad de la ventaja geométrica, la dispersión del riesgo y los parámetros de desempeño en bloques de ejecución de cobertura.</span>
+                    <span class="lang-es" style="display:none;">Este estudio cuantitativo analiza dos ventanas operativas clave: Validación (6-22 de enero, N=49) vs. Optimización (26-29 de enero, N=24). Evalúa la escalabilidad del borde geométrico, la dispersión del riesgo y los parámetros de rendimiento en bloques de ejecución de cobertura.</span>
                 </p>
 
                 <!-- Metric Cards -->
                 <div class="metric-grid">
                     <div class="metric-card gold">
                         <div class="number">$34.35</div>
-                        <div class="label">
-                            <span class="lang-en">Mean per Block (+801%)</span>
-                            <span class="lang-es" style="display:none;">Promedio por Bloque (+801%)</span>
-                        </div>
+                        <div class="label">Mean per Block (+801%)</div>
                     </div>
                     <div class="metric-card green">
                         <div class="number">95.8%</div>
-                        <div class="label">
-                            <span class="lang-en">Win Rate (+11.8%)</span>
-                            <span class="lang-es" style="display:none;">Tasa de Éxito (+11.8%)</span>
-                        </div>
+                        <div class="label">Win Rate (+11.8%)</div>
                     </div>
                     <div class="metric-card blue">
                         <div class="number">8.80</div>
-                        <div class="label">
-                            <span class="lang-en">Win/Loss Ratio (+430%)</span>
-                            <span class="lang-es" style="display:none;">Ratio Ganancia/Pérdida (+430%)</span>
-                        </div>
+                        <div class="label">Win/Loss Ratio (+430%)</div>
                     </div>
                     <div class="metric-card green">
                         <div class="number">$206.08</div>
-                        <div class="label">
-                            <span class="lang-en">Avg Daily Profit (+1,335%)</span>
-                            <span class="lang-es" style="display:none;">Beneficio Diario Prom. (+1,335%)</span>
-                        </div>
+                        <div class="label">Avg Daily Profit (+1,335%)</div>
                     </div>
                     <div class="metric-card gold">
                         <div class="number">0.53</div>
-                        <div class="label">
-                            <span class="lang-en">Coeff. of Variation (-64%)</span>
-                            <span class="lang-es" style="display:none;">Coef. de Variación (-64%)</span>
-                        </div>
+                        <div class="label">Coeff. of Variation (-64%)</div>
                     </div>
                 </div>
 
                 <!-- Comparative Statistical Table -->
-                <h3 class="section-title">
-                    <span class="lang-en">📊 Comparative Performance Metrics</span>
-                    <span class="lang-es" style="display:none;">📊 Métricas Comparativas de Desempeño</span>
-                </h3>
+                <h3 class="section-title">📊 Comparative Performance Metrics</h3>
                 <div class="table-wrap">
                     <table>
                         <thead>
                             <tr>
-                                <th>
-                                    <span class="lang-en">Statistical Metric</span>
-                                    <span class="lang-es" style="display:none;">Métrica Estadística</span>
-                                </th>
-                                <th>
-                                    <span class="lang-en">Validation (Jan 06–22)</span>
-                                    <span class="lang-es" style="display:none;">Validación (06–22 Ene)</span>
-                                </th>
-                                <th>
-                                    <span class="lang-en">Optimization (Jan 26–29)</span>
-                                    <span class="lang-es" style="display:none;">Optimización (26–29 Ene)</span>
-                                </th>
-                                <th>
-                                    <span class="lang-en">Absolute Var.</span>
-                                    <span class="lang-es" style="display:none;">Var. Absoluta</span>
-                                </th>
-                                <th>
-                                    <span class="lang-en">Relative Var.</span>
-                                    <span class="lang-es" style="display:none;">Var. Relativa</span>
-                                </th>
+                                <th>Statistical Metric</th>
+                                <th>Validation (Jan 06–22)</th>
+                                <th>Optimization (Jan 26–29)</th>
+                                <th>Absolute Var.</th>
+                                <th>Relative Var.</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="highlight-row">
-                                <td><strong><span class="lang-en">Mean per Block</span><span class="lang-es" style="display:none;">Promedio por Bloque</span></strong></td>
+                                <td><strong>Mean per Block</strong></td>
                                 <td>$3.81</td>
                                 <td>$34.35</td>
                                 <td>+$30.54</td>
                                 <td class="highlight-green">+801%</td>
                             </tr>
                             <tr>
-                                <td><strong><span class="lang-en">Median</span><span class="lang-es" style="display:none;">Mediana</span></strong></td>
+                                <td><strong>Median</strong></td>
                                 <td>$2.90</td>
                                 <td>$17.70</td>
                                 <td>+$14.80</td>
                                 <td class="highlight-green">+510%</td>
                             </tr>
                             <tr>
-                                <td><strong><span class="lang-en">Standard Deviation</span><span class="lang-es" style="display:none;">Desviación Estándar</span></strong></td>
+                                <td><strong>Standard Deviation</strong></td>
                                 <td>$5.60</td>
                                 <td>$18.20</td>
                                 <td>+$12.60</td>
                                 <td>+225%</td>
                             </tr>
                             <tr class="highlight-row">
-                                <td><strong><span class="lang-en">Coefficient of Variation</span><span class="lang-es" style="display:none;">Coeficiente de Variación</span></strong></td>
+                                <td><strong>Coefficient of Variation</strong></td>
                                 <td>1.47</td>
                                 <td>0.53</td>
                                 <td>-0.94</td>
-                                <td class="highlight-gold">
-                                    <span class="lang-en">-64% (Higher Consistency)</span>
-                                    <span class="lang-es" style="display:none;">-64% (Mayor Consistencia)</span>
-                                </td>
+                                <td class="highlight-gold">-64% (Higher Consistency)</td>
                             </tr>
                             <tr>
-                                <td><strong><span class="lang-en">Win Rate (Success Rate)</span><span class="lang-es" style="display:none;">Tasa de Éxito</span></strong></td>
+                                <td><strong>Win Rate (Success Rate)</strong></td>
                                 <td>85.7% (42/49)</td>
                                 <td>95.8% (23/24)</td>
                                 <td>+10.1 pp</td>
                                 <td class="highlight-green">+11.8%</td>
                             </tr>
                             <tr class="highlight-row">
-                                <td><strong><span class="lang-en">Win / Loss Ratio</span><span class="lang-es" style="display:none;">Ratio Ganancia / Pérdida</span></strong></td>
+                                <td><strong>Win / Loss Ratio</strong></td>
                                 <td>1.66</td>
                                 <td>8.80</td>
                                 <td>+7.14</td>
                                 <td class="highlight-green">+430%</td>
                             </tr>
                             <tr>
-                                <td><strong><span class="lang-en">Frequency (Blocks/Day)</span><span class="lang-es" style="display:none;">Frecuencia (Bloques/Día)</span></strong></td>
+                                <td><strong>Frequency (Blocks/Day)</strong></td>
                                 <td>3.77</td>
                                 <td>6.00</td>
                                 <td>+2.23</td>
                                 <td>+59%</td>
                             </tr>
                             <tr class="highlight-row">
-                                <td><strong><span class="lang-en">Average Daily Profit</span><span class="lang-es" style="display:none;">Beneficio Diario Promedio</span></strong></td>
+                                <td><strong>Average Daily Profit</strong></td>
                                 <td>$14.36</td>
                                 <td>$206.08</td>
                                 <td>+$191.72</td>
@@ -452,28 +477,13 @@
                 </div>
 
                 <!-- Statistical Conclusions -->
-                <h3 class="section-title">
-                    <span class="lang-en">📌 Key Takeaways & System Robustness</span>
-                    <span class="lang-es" style="display:none;">📌 Conclusiones Clave y Robustez del Sistema</span>
-                </h3>
+                <h3 class="section-title">📌 Key Takeaways & System Robustness</h3>
                 <div class="report-notes">
                     <ul>
-                        <li>
-                            <span class="lang-en"><strong>Operational Efficiency:</strong> Performance increases exceeding 500% across core central metrics following block execution refinements.</span>
-                            <span class="lang-es" style="display:none;"><strong>Eficiencia Operativa:</strong> Incrementos de desempeño superiores al 500% en métricas centrales tras el refinamiento de ejecución por bloques.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Variability Reduction:</strong> The 64% drop in the Coefficient of Variation demonstrates enhanced predictive risk stability, even with higher net execution volumes.</span>
-                            <span class="lang-es" style="display:none;"><strong>Reducción de Variabilidad:</strong> La caída del 64% en el Coeficiente de Variación demuestra una mayor estabilidad predictiva del riesgo, incluso con mayores volúmenes netos de ejecución.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Confirmed Scalability:</strong> The ability to simultaneously increase frequency (+59%), average block yield (+801%), and accuracy (+11.8%) validates the geometric edge under high market volatility.</span>
-                            <span class="lang-es" style="display:none;"><strong>Escalabilidad Confirmada:</strong> La capacidad de incrementar simultáneamente la frecuencia (+59%), el rendimiento promedio por bloque (+801%) y la precisión (+11.8%) valida la ventaja geométrica bajo alta volatilidad del mercado.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Methodological Evolution:</strong> The Epiphany system successfully transitioned from a "precise craftsmanship" model into an "efficient industrial process" for liquidity management.</span>
-                            <span class="lang-es" style="display:none;"><strong>Evolución Metodológica:</strong> El sistema Epiphany se transformó con éxito de un modelo de "artesanía de precisión" a un "proceso industrial eficiente" para la gestión de liquidez.</span>
-                        </li>
+                        <li><strong>Operational Efficiency:</strong> Performance increases exceeding 500% across core central metrics following block execution refinements.</li>
+                        <li><strong>Variability Reduction:</strong> The 64% drop in the Coefficient of Variation demonstrates enhanced predictive risk stability, even with higher net execution volumes.</li>
+                        <li><strong>Confirmed Scalability:</strong> The ability to simultaneously increase frequency (+59%), average block yield (+801%), and accuracy (+11.8%) validates the geometric edge under high market volatility.</li>
+                        <li><strong>Methodological Evolution:</strong> The Epiphany system successfully transitioned from a "precise craftsmanship" model into an "efficient industrial process" for liquidity management.</li>
                     </ul>
                 </div>
             </article>
@@ -481,122 +491,83 @@
             <!-- 📄 ARTICLE 2: PERFORMANCE REPORT NOV 2025 - JAN 2026 -->
             <article class="post-card">
                 <div class="post-header">
-                    <span class="post-tag">
-                        <span class="lang-en">Performance Report · Q1 2026</span>
-                        <span class="lang-es" style="display:none;">Informe de Desempeño · Q1 2026</span>
-                    </span>
+                    <span class="post-tag">Performance Report · Q1 2026</span>
                     <h2 class="post-title">
                         <span class="lang-en">Epiphany Capital Management — Live Account Report (Nov 2025 – Jan 2026)</span>
                         <span class="lang-es" style="display:none;">Epiphany Capital Management — Informe de Cuenta Real (Nov 2025 – Ene 2026)</span>
                     </h2>
                     <div class="post-meta">
-                        <span><strong><span class="lang-en">Trader:</span><span class="lang-es" style="display:none;">Trader:</span></strong> Julio Henrique Viera Nieves</span>
-                        <span><strong><span class="lang-en">Period:</span><span class="lang-es" style="display:none;">Período:</span></strong> <span class="lang-en">Nov 25, 2025 – Jan 30, 2026</span><span class="lang-es" style="display:none;">25 Nov 2025 – 30 Ene 2026</span></span>
-                        <span><strong><span class="lang-en">Asset Class:</span><span class="lang-es" style="display:none;">Clase de Activos:</span></strong> <span class="lang-en">GOLD & SILVER</span><span class="lang-es" style="display:none;">ORO Y PLATA</span></span>
+                        <span><strong>Trader:</strong> Julio Henrique Viera Nieves</span>
+                        <span><strong>Period:</strong> Nov 25, 2025 – Jan 30, 2026</span>
+                        <span><strong>Asset Class:</strong> GOLD & SILVER</span>
                     </div>
                 </div>
 
                 <p style="font-size:0.95rem; color:var(--text-muted); margin-bottom: 20px;">
                     <span class="lang-en">This report documents the performance of the J5 Trading Strategy on a live account. It demonstrates how strict risk parameters, patient structure selection, and quadratic EMA concavity produce high yield (+687%) with minimal maximum drawdown ($25.00 / 1.65%).</span>
-                    <span class="lang-es" style="display:none;">Este informe documenta el desempeño de la Estrategia de Trading J5 en una cuenta real. Demuestra cómo los parámetros estrictos de riesgo, la selección paciente de estructuras y la concavidad cuadrática de EMAs producen un alto rendimiento (+687%) con un drawdown máximo mínimo ($25.00 / 1.65%).</span>
+                    <span class="lang-es" style="display:none;">Este informe documenta el rendimiento de la Estrategia de Trading J5 en una cuenta real. Demuestra cómo estrictos parámetros de riesgo, selección paciente de estructura y concavidad cuadrática de la EMA producen un alto rendimiento (+687%) con un drawdown máximo mínimo ($25.00 / 1.65%).</span>
                 </p>
 
                 <!-- Key Metrics -->
                 <div class="metric-grid">
                     <div class="metric-card gold">
                         <div class="number">$1,481.70</div>
-                        <div class="label">
-                            <span class="lang-en">Final Balance</span>
-                            <span class="lang-es" style="display:none;">Balance Final</span>
-                        </div>
+                        <div class="label">Final Balance</div>
                     </div>
                     <div class="metric-card green">
                         <div class="number">+687%</div>
-                        <div class="label">
-                            <span class="lang-en">Total Return</span>
-                            <span class="lang-es" style="display:none;">Retorno Total</span>
-                        </div>
+                        <div class="label">Total Return</div>
                     </div>
                     <div class="metric-card blue">
                         <div class="number">$1,292.71</div>
-                        <div class="label">
-                            <span class="lang-en">Gross Profit</span>
-                            <span class="lang-es" style="display:none;">Ganancia Bruta</span>
-                        </div>
+                        <div class="label">Gross Profit</div>
                     </div>
                     <div class="metric-card green">
                         <div class="number">~73%</div>
-                        <div class="label">
-                            <span class="lang-en">Win Rate</span>
-                            <span class="lang-es" style="display:none;">Tasa de Éxito</span>
-                        </div>
+                        <div class="label">Win Rate</div>
                     </div>
                     <div class="metric-card gold">
                         <div class="number">$25.00</div>
-                        <div class="label">
-                            <span class="lang-en">Max Drawdown</span>
-                            <span class="lang-es" style="display:none;">Drawdown Máximo</span>
-                        </div>
+                        <div class="label">Max Drawdown</div>
                     </div>
                     <div class="metric-card blue">
                         <div class="number">$1,450.00</div>
-                        <div class="label">
-                            <span class="lang-en">Total Withdrawals</span>
-                            <span class="lang-es" style="display:none;">Retiros Totales</span>
-                        </div>
+                        <div class="label">Total Withdrawals</div>
                     </div>
                 </div>
 
                 <!-- Capital Evolution -->
-                <h3 class="section-title">
-                    <span class="lang-en">📈 Capital Growth</span>
-                    <span class="lang-es" style="display:none;">📈 Crecimiento de Capital</span>
-                </h3>
+                <h3 class="section-title">📈 Capital Growth</h3>
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr>
-                                <th><span class="lang-en">Date</span><span class="lang-es" style="display:none;">Fecha</span></th>
-                                <th><span class="lang-en">Event</span><span class="lang-es" style="display:none;">Evento</span></th>
-                                <th>Balance</th>
-                                <th><span class="lang-en">Change</span><span class="lang-es" style="display:none;">Cambio</span></th>
-                            </tr>
+                            <tr><th>Date</th><th>Event</th><th>Balance</th><th>Change</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Nov 25, 2025</td><td><span class="lang-en">Initial Start</span><span class="lang-es" style="display:none;">Inicio Inicial</span></td><td>$188.19</td><td>—</td></tr>
-                            <tr><td>Dec 02, 2025</td><td><span class="lang-en">Deposit +$60</span><span class="lang-es" style="display:none;">Depósito +$60</span></td><td>$241.31</td><td>+28%</td></tr>
-                            <tr><td>Dec 02, 2025</td><td><span class="lang-en">Deposit +$100</span><span class="lang-es" style="display:none;">Depósito +$100</span></td><td>$341.26</td><td>+81%</td></tr>
-                            <tr><td>Dec 03, 2025</td><td><span class="lang-en">Deposit +$100</span><span class="lang-es" style="display:none;">Depósito +$100</span></td><td>$441.26</td><td>+134%</td></tr>
-                            <tr><td>Dec 15, 2025</td><td><span class="lang-en">GOLD Trade +$53.38</span><span class="lang-es" style="display:none;">Operación ORO +$53.38</span></td><td>$478.60</td><td>+154%</td></tr>
-                            <tr><td>Dec 23, 2025</td><td><span class="lang-en">GOLD Trade +$19.97</span><span class="lang-es" style="display:none;">Operación ORO +$19.97</span></td><td>$420.85</td><td>+123%</td></tr>
-                            <tr><td>Dec 30, 2025</td><td><span class="lang-en">Deposit +$95</span><span class="lang-es" style="display:none;">Depósito +$95</span></td><td>$501.12</td><td>+166%</td></tr>
-                            <tr><td>Jan 15, 2026</td><td><span class="lang-en">SILVER Trade +$30.40</span><span class="lang-es" style="display:none;">Operación PLATA +$30.40</span></td><td>$672.28</td><td>+257%</td></tr>
-                            <tr><td>Jan 21, 2026</td><td><span class="lang-en">SILVER Block +$28.25</span><span class="lang-es" style="display:none;">Bloque PLATA +$28.25</span></td><td>$783.97</td><td>+316%</td></tr>
-                            <tr><td>Jan 22, 2026</td><td><span class="lang-en">SILVER Block +$40.10</span><span class="lang-es" style="display:none;">Bloque PLATA +$40.10</span></td><td>$843.47</td><td>+348%</td></tr>
-                            <tr><td>Jan 27, 2026</td><td><span class="lang-en">SILVER Block +$137.75</span><span class="lang-es" style="display:none;">Bloque PLATA +$137.75</span></td><td>$1,008.69</td><td>+436%</td></tr>
-                            <tr><td>Jan 28, 2026</td><td><span class="lang-en">SILVER Block +$129.65</span><span class="lang-es" style="display:none;">Bloque PLATA +$129.65</span></td><td>$1,442.60</td><td>+666%</td></tr>
-                            <tr><td>Jan 30, 2026</td><td><span class="lang-en">SILVER Block +$211.35</span><span class="lang-es" style="display:none;">Bloque PLATA +$211.35</span></td><td>$1,506.70</td><td>+700%</td></tr>
-                            <tr><td>Jan 30, 2026</td><td><span class="lang-en">Withdrawal -$25</span><span class="lang-es" style="display:none;">Retiro -$25</span></td><td><strong>$1,481.70</strong></td><td><strong>+687%</strong></td></tr>
+                            <tr><td>Nov 25, 2025</td><td>Initial Start</td><td>$188.19</td><td>—</td></tr>
+                            <tr><td>Dec 02, 2025</td><td>Deposit +$60</td><td>$241.31</td><td>+28%</td></tr>
+                            <tr><td>Dec 02, 2025</td><td>Deposit +$100</td><td>$341.26</td><td>+81%</td></tr>
+                            <tr><td>Dec 03, 2025</td><td>Deposit +$100</td><td>$441.26</td><td>+134%</td></tr>
+                            <tr><td>Dec 15, 2025</td><td>GOLD Trade +$53.38</td><td>$478.60</td><td>+154%</td></tr>
+                            <tr><td>Dec 23, 2025</td><td>GOLD Trade +$19.97</td><td>$420.85</td><td>+123%</td></tr>
+                            <tr><td>Dec 30, 2025</td><td>Deposit +$95</td><td>$501.12</td><td>+166%</td></tr>
+                            <tr><td>Jan 15, 2026</td><td>SILVER Trade +$30.40</td><td>$672.28</td><td>+257%</td></tr>
+                            <tr><td>Jan 21, 2026</td><td>SILVER Block +$28.25</td><td>$783.97</td><td>+316%</td></tr>
+                            <tr><td>Jan 22, 2026</td><td>SILVER Block +$40.10</td><td>$843.47</td><td>+348%</td></tr>
+                            <tr><td>Jan 27, 2026</td><td>SILVER Block +$137.75</td><td>$1,008.69</td><td>+436%</td></tr>
+                            <tr><td>Jan 28, 2026</td><td>SILVER Block +$129.65</td><td>$1,442.60</td><td>+666%</td></tr>
+                            <tr><td>Jan 30, 2026</td><td>SILVER Block +$211.35</td><td>$1,506.70</td><td>+700%</td></tr>
+                            <tr><td>Jan 30, 2026</td><td>Withdrawal -$25</td><td><strong>$1,481.70</strong></td><td><strong>+687%</strong></td></tr>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Featured Trades -->
-                <h3 class="section-title">
-                    <span class="lang-en">⭐ Featured Trades</span>
-                    <span class="lang-es" style="display:none;">⭐ Operaciones Destacadas</span>
-                </h3>
+                <h3 class="section-title">⭐ Featured Trades</h3>
                 <div class="table-wrap">
                     <table>
                         <thead>
-                            <tr>
-                                <th><span class="lang-en">Date</span><span class="lang-es" style="display:none;">Fecha</span></th>
-                                <th><span class="lang-en">Instrument</span><span class="lang-es" style="display:none;">Instrumento</span></th>
-                                <th><span class="lang-en">Direction</span><span class="lang-es" style="display:none;">Dirección</span></th>
-                                <th><span class="lang-en">Entry</span><span class="lang-es" style="display:none;">Entrada</span></th>
-                                <th><span class="lang-en">Exit</span><span class="lang-es" style="display:none;">Salida</span></th>
-                                <th><span class="lang-en">Profit</span><span class="lang-es" style="display:none;">Ganancia</span></th>
-                            </tr>
+                            <tr><th>Date</th><th>Instrument</th><th>Direction</th><th>Entry</th><th>Exit</th><th>Profit</th></tr>
                         </thead>
                         <tbody>
                             <tr class="highlight-row"><td>Dec 15, 2025</td><td>GOLD</td><td><span class="badge badge-green">BUY</span></td><td>4311.59 / 4328.31</td><td>4346.64</td><td class="highlight-green">+$53.38</td></tr>
@@ -613,35 +584,18 @@
                 </div>
 
                 <!-- Technical Analysis & Notes -->
-                <h3 class="section-title">
-                    <span class="lang-en">📌 Conclusions & Mindset Management</span>
-                    <span class="lang-es" style="display:none;">📌 Conclusiones y Gestión de Mentalidad</span>
-                </h3>
+                <h3 class="section-title">📌 Conclusions & Mindset Management</h3>
                 <div class="report-notes">
                     <ul>
-                        <li>
-                            <span class="lang-en"><strong>Transition to SILVER:</strong> Starting January 15, execution migrated from GOLD to SILVER due to lower friction during internal liquidity spikes and clearer geometric definition on lower timeframes.</span>
-                            <span class="lang-es" style="display:none;"><strong>Transición a PLATA:</strong> A partir del 15 de enero, la ejecución migró de ORO a PLATA debido a una menor fricción durante los picos internos de liquidez y una definición geométrica más clara en temporalidades menores.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Hedging Execution Blocks:</strong> Grouped entries represent bulk orders closed simultaneously upon reaching quadratic projections.</span>
-                            <span class="lang-es" style="display:none;"><strong>Bloques de Ejecución de Cobertura:</strong> Las entradas agrupadas representan órdenes masivas cerradas simultáneamente al alcanzar proyecciones cuadráticas.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Strict Risk Control:</strong> Maximum Drawdown remained capped at $25.00 (1.65% from peak floating equity), confirming entries experienced minimal adverse excursion.</span>
-                            <span class="lang-es" style="display:none;"><strong>Control Estricto del Riesgo:</strong> El Drawdown Máximo se mantuvo limitado a $25.00 (1.65% desde el pico flotante), confirmando que las entradas experimentaron una excursión adversa mínima.</span>
-                        </li>
-                        <li>
-                            <span class="lang-en"><strong>Operational Discipline:</strong> The period of inactivity between December 30 and January 15 highlights a foundational principle: <em>sometimes the best trade is no trade at all</em>.</span>
-                            <span class="lang-es" style="display:none;"><strong>Disciplina Operativa:</strong> El período de inactividad entre el 30 de diciembre y el 15 de enero destaca un principio fundamental: <em>a veces la mejor operación es no operar</em>.</span>
-                        </li>
+                        <li><strong>Transition to SILVER:</strong> Starting January 15, execution migrated from GOLD to SILVER due to lower friction during internal liquidity spikes and clearer geometric definition on lower timeframes.</li>
+                        <li><strong>Hedging Execution Blocks:</strong> Grouped entries represent bulk orders closed simultaneously upon reaching quadratic projections.</li>
+                        <li><strong>Strict Risk Control:</strong> Maximum Drawdown remained capped at $25.00 (1.65% from peak floating equity), confirming entries experienced minimal adverse excursion.</li>
+                        <li><strong>Operational Discipline:</strong> The period of inactivity between December 30 and January 15 highlights a foundational principle: <em>sometimes the best trade is no trade at all</em>.</li>
                     </ul>
                 </div>
             </article>
 
-        </div>
-    </main>
-
+            
     <!-- ═══ FOOTER ═══ -->
     <footer>
         <div class="container footer-inner">
@@ -656,11 +610,15 @@
                 <p class="footer-copy">Puerto Rico, 2026</p>
             </div>
             <div class="footer-right">
-                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
                 <a href="mailto:jvieranieves54@gmail.com">Email</a>
+                <a href="https://www.mql5.com/en/users/kimalasi/news" target="_blank">MQL5</a>
+                
             </div>
         </div>
     </footer>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <script src="../js/language.js"></script>
 
 </body>
 </html>

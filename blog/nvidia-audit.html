@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NVIDIA Audit · J5 Trading Strategy</title>
+
+    <!-- ===== CSS ===== -->
+    <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+        .language-switcher button:hover:not(.active) { color: var(--blue-dark); background: var(--gold-light); }
+
+        /* ─── HERO ─── */
+        .hero { background: var(--white); padding: 60px 0 50px; border-bottom: 1px solid var(--gray-border); }
+        .hero-inner { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .hero-text { flex: 1 1 55%; }
+        .hero-text h1 { font-size: 2.8rem; font-weight: 700; color: var(--blue-dark); line-height: 1.1; margin-bottom: 8px; }
+        .hero-sub { font-size: 1.2rem; color: var(--gold-dark); font-weight: 500; margin-bottom: 12px; }
+        .hero-description { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: var(--gold); color: var(--white); padding: 12px 32px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); border: none; cursor: pointer; }
+        .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+        .btn-secondary { display: inline-block; border: 2px solid var(--gold); color: var(--gold-dark); padding: 10px 28px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); background: transparent; cursor: pointer; }
+        .btn-secondary:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .hero-image { flex: 1 1 30%; text-align: center; }
+        .hero-image img { border-radius: var(--radius); box-shadow: var(--shadow); max-height: 340px; width: auto; object-fit: cover; border: 2px solid var(--gold-light); }
+
+        /* ─── METRICS ─── */
+        .metrics { padding: 40px 0 30px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .metric-card { background: var(--white); border-radius: var(--radius); padding: 22px 16px; text-align: center; border: 1px solid var(--gray-border); box-shadow: var(--shadow); transition: all var(--transition); }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .metric-card .number { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+        .metric-card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 4px; }
+        .metric-card.gold .number { color: var(--gold-dark); }
+        .metric-card.green .number { color: var(--success); }
+        .metric-card.blue .number { color: var(--blue-medium); }
+
+        /* ─── MARKET NEWS ─── */
+        .market-news {
+            padding: 60px 0 50px;
+            background: var(--gray-bg);
+        }
+        .market-news h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+            transition: all var(--transition);
+        }
+        .news-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .news-content {
+            padding: 32px;
+            flex: 1 1 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .news-badge {
+            align-self: flex-start;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--gold);
+        }
+        .news-content h3 {
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .news-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .news-image {
+            flex: 1 1 45%;
+            background: #131722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--gray-border);
+            padding: 16px;
+        }
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-height: 280px;
+            border-radius: 6px;
+        }
+
+        /* ─── QUOTE ─── */
+        .quote-section { padding: 50px 0 40px; background: var(--blue-dark); text-align: center; }
+        .quote-section blockquote { font-size: 1.4rem; font-weight: 400; color: var(--white); max-width: 720px; margin: 0 auto 10px; font-style: italic; line-height: 1.5; }
+        .quote-section cite { color: var(--gold); font-style: normal; font-weight: 500; font-size: 1rem; }
+
+        /* ─── FOOTER ─── */
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .news-card { flex-direction: column; }
+            .news-image { order: -1; border-left: none; border-bottom: 1px solid var(--gray-border); }
+        }
+        @media (max-width: 768px) {
+            .hero-inner { flex-direction: column; text-align: center; }
+            .header-inner { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="container header-inner">
+        <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#" class="active">Audit</a>
+            <a href="#">Strategy</a>
+            <a href="#">Blog</a>
+        </nav>
+        <div class="language-switcher">
+            <button class="active">EN</button>
+            <button>ES</button>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="hero-text">
+            <h1>NVIDIA Audit 2026</h1>
+            <div class="hero-sub">Statistical &amp; Market Reconciliation</div>
+            <p class="hero-description">
+                A dual‑lens review: one part econometric time‑series, one part real‑time analyst consensus.
+                No one owns the truth – but the structure does not lie.
+            </p>
+            <div class="hero-buttons">
+                <a href="#full-report" class="btn-primary">Read full summary ↓</a>
+                <a href="statistic-audit-nvidia.html" class="btn-secondary">Full statistical audit →</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://placehold.co/400x340/0b1e33/d4af37?text=NVDA" alt="NVIDIA chart placeholder" />
+        </div>
+    </div>
+</section>
+
+<!-- ===== KEY METRICS ===== -->
+<section class="metrics">
+    <div class="container metrics-grid">
+        <div class="metric-card gold">
+            <div class="number">$234.14</div>
+            <div class="label">Reference Price (Sep 4)</div>
+        </div>
+        <div class="metric-card green">
+            <div class="number">+118%</div>
+            <div class="label">Non‑GAAP EPS growth (YoY)</div>
+        </div>
+        <div class="metric-card blue">
+            <div class="number">$96.2B</div>
+            <div class="label">Q2 FY27 revenue</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAIN NEWS / AUDIT SUMMARY ===== -->
+<section class="market-news" id="full-report">
+    <div class="container">
+        <h2>📊 Two Lenses, One Horizon</h2>
+
+        <div class="news-card">
+            <div class="news-content">
+                <span class="news-badge">Stat &amp; Market</span>
+                <h3>The Statistical History of NVIDIA (2020–2026)</h3>
+
+                <p><strong>Phase 1 (2020):</strong> +143% – Early pre‑pandemic cycle, traditional GPU demand.</p>
+                <p><strong>Phase 2 (2020–2021):</strong> +243% – Global liquidity bubble &amp; crypto/gaming expansion.</p>
+                <p><strong>Phase 3 (2021–2022):</strong> −68.25% – Structural rupture (Chow Test failure). Complete cycle reset.</p>
+                <p><strong>Phase 4 (2022–2023):</strong> +216.23% – Regime shift driven by generative AI.</p>
+                <p><strong>Phase 5 (2023–2024):</strong> +220.87% – Hyperbolic acceleration from Data Center demand.</p>
+                <p><strong>Phase 6 (Mid 2024):</strong> −40% – Institutional profit‑taking, technical over‑extension correction.</p>
+                <p><strong>Phase 7 (2024–2025):</strong> +124% – Maturation of the secular AI rally.</p>
+                <p><strong>Phase 8 (2025):</strong> −20% – Minor volatility compression / EMA fan support.</p>
+                <p><strong>Phase 9 (2025–2026):</strong> +40% – Active trend impulse toward $234.14 – $236.51.</p>
+
+                <p><strong>Three key statistical conclusions:</strong></p>
+                <ul style="margin-left:20px; margin-bottom:16px;">
+                    <li><strong>Asymmetric drawdown compression:</strong> Sequential drawdowns (−68% → −40% → −20%) show NVIDIA transitioning from a high‑beta speculative stock to essential infrastructure in institutional portfolios.</li>
+                    <li><strong>Logistic S‑curve (Base Effect):</strong> Expansive impulses are decelerating (+243% → +220% → +124% → +40%). As market cap exceeds $3–$4 trillion, larger liquidity mass is required to generate multiplicative returns.</li>
+                    <li><strong>EMA Fan alignment:</strong> The structure EMA<sub>20</sub> &gt; EMA<sub>40</sub> &gt; EMA<sub>80</sub> &gt; EMA<sub>200</sub> confirms that recent corrections do not even breach the EMA 200, systematically bouncing off higher dynamic supports.</li>
+                </ul>
+
+                <p><strong>Market Catalysts &amp; Defensive Moat:</strong></p>
+                <ul style="margin-left:20px; margin-bottom:16px;">
+                    <li><strong>Hugging Face acquisition ($12,930M):</strong> Controls the global open‑source platform, locking developers into NVIDIA’s CUDA/GPU architecture.</li>
+                    <li><strong>Supply chain securing ($279,000M):</strong> Long‑term HBM memory and advanced packaging commitments to block production capacity from competitors.</li>
+                    <li><strong>Architecture evolution:</strong> Successful transition from Hopper → Blackwell → Vera Rubin, lifting projected revenue per GPU generation.</li>
+                    <li><strong>Custom chips expansion:</strong> $3,500M convertible bond investment in MediaTek for NVLink Fusion integration.</li>
+                </ul>
+
+                <p><strong>Risks identified by Wall Street:</strong></p>
+                <ul style="margin-left:20px; margin-bottom:16px;">
+                    <li><strong>Circular financing:</strong> NVIDIA has invested in OpenAI, CoreWeave, and SpaceX, and these companies use the money to buy NVIDIA chips.</li>
+                    <li><strong>Depreciation of chips:</strong> Hyperscalers depreciate chips in 4–6 years, but some experts estimate a useful life of only 2–3 years.</li>
+                    <li><strong>China risk:</strong> NVIDIA has excluded Data Center revenue from China from its guidance.</li>
+                </ul>
+
+                <p><strong>Reconciled price projection (September – December 2026):</strong></p>
+                <ul style="margin-left:20px; margin-bottom:16px;">
+                    <li><strong>Sep:</strong> $210–218 / $228–236 / $245–252</li>
+                    <li><strong>Oct:</strong> $196–205 / $238–248 / $260–272</li>
+                    <li><strong>Nov:</strong> $220–232 / $255–268 / $280–292</li>
+                    <li><strong>Dec 31:</strong> $240–250 / <strong>$275–288</strong> / $300–312</li>
+                </ul>
+
+                <p><strong>Risk/Reward Management (at $234.14):</strong></p>
+                <ul style="margin-left:20px; margin-bottom:16px;">
+                    <li><strong>Base target (TP1):</strong> $278.00 (+18.7%) → R:R = 1:1.12</li>
+                    <li><strong>Bull target (TP2):</strong> $305.00 (+30.3%) → R:R = 1:1.81</li>
+                    <li><strong>Invalidation (Stop Loss):</strong> $195.00 (−16.7%) – close below EMA 40</li>
+                </ul>
+
+                <p><strong>Final reconciled conclusion:</strong></p>
+                <p style="font-style:italic; color:var(--text-muted);">
+                    “The market owes nothing to anyone. The statistic gives me a framework of probabilities;
+                    the analyst consensus gives me a context of risk. Both are needed to trade with a cold head.
+                    NVIDIA remains an essential infrastructure asset in the AI era, with attractive valuation
+                    and sustainable growth – but entry timing is key. Waiting for a pullback toward the EMA20
+                    ($213–$220) or EMA40 ($196–$205) optimizes the risk/reward equation.”
+                </p>
+
+                <a href="/main/blog/statistic-audit-nvidia.html" class="btn-primary" style="background:var(--blue-dark);color:white;">
+                    View full statistical audit →
+                </a>
+            </div>
+            <div class="news-image">
+                <img src="https://placehold.co/500x280/131722/d4af37?text=NVDA+Q4+2026+Forecast" alt="NVIDIA forecast chart" />
+            </div>
+        </div>
+
+        <!-- Summary box -->
+        <div style="margin-top: 32px; background: var(--white); border-radius: var(--radius); padding: 28px 32px; border: 1px solid var(--gray-border);">
+            <h3 style="color: var(--blue-dark); margin-bottom: 12px;">🗓️ Reconciled Price Projection (Sep – Dec 2026)</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px;">
+                <div><strong style="color:var(--text-muted);">Sep</strong><br> $210–218 / $228–236 / $245–252</div>
+                <div><strong style="color:var(--text-muted);">Oct</strong><br> $196–205 / $238–248 / $260–272</div>
+                <div><strong style="color:var(--text-muted);">Nov</strong><br> $220–232 / $255–268 / $280–292</div>
+                <div><strong style="color:var(--text-muted);">Dec 31</strong><br> $240–250 / <strong>$275–288</strong> / $300–312</div>
+            </div>
+            <div style="margin-top: 16px; padding: 12px 16px; background: var(--gold-light); border-radius: 8px; border-left: 4px solid var(--gold);">
+                <strong style="color:var(--gold-dark);">Base case target:</strong> +20% from current levels.
+                <span style="color:var(--text-muted); display:inline-block; margin-left:12px;">Risk/Reward (base): 1:1.12 · (bull): 1:1.81</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<section class="quote-section">
+    <div class="container">
+        <blockquote>
+            “The market owes nothing to anyone. The statistic gives me a framework of probabilities;
+            the analyst consensus gives me a context of risk. Both are needed to trade with a cold head.”
+        </blockquote>
+        <cite>— Julio Viera · J5 Trading Strategy</cite>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container footer-inner">
+        <div class="footer-left">
+            <div class="logo"><span class="logo-gold">J5</span> Trading Strategy</div>
+            <p>Fiat Voluntas Geometriae · Puerto Rico 2026</p>
+        </div>
+        <div class="footer-right">
+            <a href="#">Home</a>
+            <a href="/main/blog/statistic-audit-nvidia.html">Statistical Audit</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

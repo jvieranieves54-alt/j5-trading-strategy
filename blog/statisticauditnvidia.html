@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA · Análisis Q4 2026 | J5 Trading Strategy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ==========================================================
+    TU STYLE — PON TU style.txt COMPLETO AQUÍ
+    ========================================================== -->
+       <style>
+        /* ==========================================================
+           style.css — J5 Trading Strategy
+           ========================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #d4af37;
+            --gold-dark: #b8860b;
+            --gold-light: #fef6e0;
+            --blue-dark: #0b1e33;
+            --blue-medium: #1a4d8b;
+            --gray-bg: #f8fafc;
+            --gray-border: #e2e8f0;
+            --text-dark: #1a1f2e;
+            --text-muted: #4a5568;
+            --text-light: #718096;
+            --success: #0f7b3a;
+            --danger: #c62828;
+            --danger-bg: #ffebee;
+            --white: #ffffff;
+            --shadow: 0 8px 24px rgba(0,0,0,0.06);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.10);
+            --radius: 12px;
+            --transition: 0.25s ease;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-border);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--blue-dark); }
+        .logo-gold { color: var(--gold); }
+        nav { display: flex; gap: 20px; flex-wrap: wrap; }
+        nav a { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color var(--transition); position: relative; }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--gold-dark); }
+        .language-switcher { display: flex; gap: 4px; background: var(--gray-bg); border-radius: 24px; padding: 3px; border: 1px solid var(--gray-border); }
+        .language-switcher button { background: transparent; border: none; border-radius: 20px; padding: 4px 14px; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all var(--transition); color: var(--text-muted); text-transform: uppercase; }
+        .language-switcher button.active { background: var(--gold); color: var(--white); box-shadow: 0 2px 8px rgba(212,175,55,0.3); }
+        .language-switcher button:hover:not(.active) { color: var(--blue-dark); background: var(--gold-light); }
+
+        /* ─── HERO ─── */
+        .hero { background: var(--white); padding: 60px 0 50px; border-bottom: 1px solid var(--gray-border); }
+        .hero-inner { display: flex; align-items: center; gap: 50px; flex-wrap: wrap; }
+        .hero-text { flex: 1 1 55%; }
+        .hero-text h1 { font-size: 2.8rem; font-weight: 700; color: var(--blue-dark); line-height: 1.1; margin-bottom: 8px; }
+        .hero-sub { font-size: 1.2rem; color: var(--gold-dark); font-weight: 500; margin-bottom: 12px; }
+        .hero-description { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 24px; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary { display: inline-block; background: var(--gold); color: var(--white); padding: 12px 32px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); border: none; cursor: pointer; }
+        .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.3); }
+        .btn-secondary { display: inline-block; border: 2px solid var(--gold); color: var(--gold-dark); padding: 10px 28px; border-radius: 40px; font-weight: 600; font-size: 0.9rem; transition: all var(--transition); background: transparent; cursor: pointer; }
+        .btn-secondary:hover { background: var(--gold-light); transform: translateY(-2px); }
+        .hero-image { flex: 1 1 30%; text-align: center; }
+        .hero-image img { border-radius: var(--radius); box-shadow: var(--shadow); max-height: 340px; width: auto; object-fit: cover; border: 2px solid var(--gold-light); }
+
+        /* ─── METRICS ─── */
+        .metrics { padding: 40px 0 30px; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .metric-card { background: var(--white); border-radius: var(--radius); padding: 22px 16px; text-align: center; border: 1px solid var(--gray-border); box-shadow: var(--shadow); transition: all var(--transition); }
+        .metric-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .metric-card .number { font-size: 2.4rem; font-weight: 700; line-height: 1.1; }
+        .metric-card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 4px; }
+        .metric-card.gold .number { color: var(--gold-dark); }
+        .metric-card.green .number { color: var(--success); }
+        .metric-card.blue .number { color: var(--blue-medium); }
+
+        /* ─── JOURNEY, ACHIEVEMENTS, J5 SYSTEM, PHILOSOPHY ─── */
+        .journey, .achievements, .j5-system, .philosophy { padding: 50px 0 40px; background: var(--white); }
+        .journey h2, .achievements h2, .j5-system h2, .philosophy h2 { font-size: 1.8rem; color: var(--blue-dark); margin-bottom: 28px; }
+        .metrics, .achievements { background: var(--gray-bg); }
+        
+        /* Timeline */
+        .timeline { display: flex; flex-direction: column; gap: 6px; }
+        .timeline-item { padding: 14px 20px; border-left: 4px solid var(--gray-border); transition: background var(--transition); border-radius: 0 var(--radius) var(--radius) 0; }
+        .timeline-item:hover { background: var(--gray-bg); }
+        .timeline-item.highlight { border-left-color: var(--gold); background: var(--gold-light); }
+        .timeline-date { font-size: 0.7rem; font-weight: 600; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.05em; }
+        .timeline-title { font-size: 1.05rem; font-weight: 600; color: var(--blue-dark); }
+        .timeline-desc { font-size: 0.92rem; color: var(--text-muted); }
+
+        /* Grids */
+        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .achievement-item { background: var(--white); border-radius: var(--radius); padding: 14px 18px; border: 1px solid var(--gray-border); font-size: 0.9rem; box-shadow: var(--shadow); transition: all var(--transition); display: flex; align-items: center; gap: 10px; }
+        .achievement-item:hover { transform: translateX(4px); border-color: var(--gold); }
+        .system-grid { display: flex; gap: 40px; flex-wrap: wrap; }
+        .system-text { flex: 1 1 55%; }
+        .system-text p { margin-bottom: 12px; font-size: 0.95rem; }
+        .system-image { flex: 1 1 35%; text-align: center; }
+        .system-image img { border-radius: var(--radius); border: 1px solid var(--gray-border); box-shadow: var(--shadow); max-height: 320px; object-fit: contain; }
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+        .philosophy-item { background: var(--white); border-radius: var(--radius); padding: 24px 20px; text-align: center; border: 1px solid var(--gray-border); box-shadow: var(--shadow); transition: all var(--transition); }
+        .philosophy-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+        .philosophy-item .icon { font-size: 2.4rem; margin-bottom: 6px; }
+        .philosophy-item h3 { font-size: 1.1rem; color: var(--blue-dark); margin-bottom: 6px; }
+        .philosophy-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* ─── MARKET NEWS SECTION ─── */
+        .market-news {
+            padding: 60px 0 50px;
+            background: var(--gray-bg);
+        }
+        .market-news h2 {
+            font-size: 1.8rem;
+            color: var(--blue-dark);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .news-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-border);
+            box-shadow: var(--shadow);
+            display: flex;
+            overflow: hidden;
+            flex-wrap: wrap;
+            transition: all var(--transition);
+        }
+        .news-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-4px);
+        }
+        .news-content {
+            padding: 32px;
+            flex: 1 1 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .news-badge {
+            align-self: flex-start;
+            background: var(--gold-light);
+            color: var(--gold-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--gold);
+        }
+        .news-content h3 {
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .news-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        .news-image {
+            flex: 1 1 45%;
+            background: #131722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid var(--gray-border);
+            padding: 16px;
+        }
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-height: 280px;
+            border-radius: 6px;
+        }
+
+        /* ─── QUOTE ─── */
+        .quote-section { padding: 50px 0 40px; background: var(--blue-dark); text-align: center; }
+        .quote-section blockquote { font-size: 1.4rem; font-weight: 400; color: var(--white); max-width: 720px; margin: 0 auto 10px; font-style: italic; line-height: 1.5; }
+        .quote-section cite { color: var(--gold); font-style: normal; font-weight: 500; font-size: 1rem; }
+
+        /* ─── FOOTER ─── */
+        footer { background: var(--white); border-top: 1px solid var(--gray-border); padding: 30px 0 24px; }
+        .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        .footer-left .logo { font-size: 1.1rem; }
+        .footer-left p { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .footer-right { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+        .footer-right a { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color var(--transition); }
+        .footer-right a:hover { color: var(--gold-dark); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 992px) {
+            .news-card { flex-direction: column; }
+            .news-image { order: -1; border-left: none; border-bottom: 1px solid var(--gray-border); }
+        }
+        @media (max-width: 768px) {
+            .hero-inner { flex-direction: column; text-align: center; }
+            .header-inner { flex-direction: column; gap: 10px; }
+            .system-grid { flex-direction: column; }
+        }
+    </style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container header-inner">
+        <div class="logo">J5 <span class="logo-gold">Trading</span></div>
+        <nav>
+             <a href="../index.html">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../systems/j5.html">Strategy</a>
+                <a href="../downloads/index.html">Downloads</a>
+                <a href="index.html">Blog</a>
+
+        </nav>
+        <div class="language-switcher">
+            <button data-lang="en">EN</button>
+            <button data-lang="es" class="active">ES</button>
+        </div>
+    </div>
+</header>
+
+<!-- ==========================================================
+   CONTENIDO PRINCIPAL
+   ========================================================== -->
+<main>
+
+    <!-- ==========================================================
+    PARTE 1: ANÁLISIS NVIDIA
+    ========================================================== -->
+    <div class="container" style="padding-top: 32px;">
+
+        <!-- HEADER NVIDIA -->
+        <div style="display:flex; align-items:center; gap:24px; background:var(--white); border-radius:var(--radius); padding:24px 30px; margin-bottom:32px; border:1px solid var(--gray-border); box-shadow:var(--shadow); flex-wrap:wrap;">
+            <img src="main/assets/image/NVIDIA.jpg" alt="NVIDIA" style="width:90px; height:auto; border-radius:10px; background:var(--gray-bg); padding:4px; border:1px solid var(--gray-border);" onerror="this.style.display='none'">
+            <div>
+                <h1 style="font-size:1.8rem; font-weight:700; color:var(--blue-dark);">NVIDIA <span style="color:var(--gold-dark);">Corporation</span> (NVDA)</h1>
+                <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
+                    <span class="badge lang-en">Statistical, Econometric & Strategic Analysis</span>
+                    <span class="badge lang-es" style="display:none;">Análisis Estadístico, Econométrico y Estratégico</span>
+                    <span class="badge lang-en">Forecasting Q4 2026</span>
+                    <span class="badge lang-es" style="display:none;">Forecasting Q4 2026</span>
+                    <span class="badge lang-en">Julio Viera Nieves</span>
+                    <span class="badge lang-es" style="display:none;">Julio Viera Nieves</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK STATS -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:32px;">
+            <div class="metric-card gold">
+                <div class="number">$234.14</div>
+                <div class="label lang-en">Reference Price</div>
+                <div class="label lang-es" style="display:none;">Precio Referencia</div>
+            </div>
+            <div class="metric-card green">
+                <div class="number">$96.22B</div>
+                <div class="label lang-en">Revenue Q2 FY27</div>
+                <div class="label lang-es" style="display:none;">Ingresos Q2 FY27</div>
+            </div>
+            <div class="metric-card gold">
+                <div class="number">$275–$288</div>
+                <div class="label lang-en">Base Forecast Dec 2026</div>
+                <div class="label lang-es" style="display:none;">Forecast Base Dic 2026</div>
+            </div>
+            <div class="metric-card green">
+                <div class="number">1 : 1.81</div>
+                <div class="label lang-en">Bullish R:R Ratio</div>
+                <div class="label lang-es" style="display:none;">Ratio R:R Alcista</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1 -->
+        <div class="nvidia-analysis">
+            <h2 class="lang-en">1. Strategic & Market Analysis</h2>
+            <h2 class="lang-es" style="display:none;">1. Análisis Estratégico y de Mercado</h2>
+            
+            <p class="lang-en"><strong>NVIDIA</strong> has transcended the traditional semiconductor hardware business model to consolidate a vertical monopoly in the global Artificial Intelligence infrastructure, integrating hardware, open-source software, memory production capacity, and equity financing.</p>
+            <p class="lang-es" style="display:none;"><strong>NVIDIA</strong> ha trascendido el modelo de negocio tradicional de hardware semiconductor para consolidar un monopolio vertical en la infraestructura global de Inteligencia Artificial, integrando hardware, software de código abierto, capacidad de producción de memoria y financiamiento de capital.</p>
+            
+            <h3 class="lang-en">Growth Catalysts & Defensive Moat</h3>
+            <h3 class="lang-es" style="display:none;">Catalizadores de Crecimiento &amp; Foso Defensivo</h3>
+            
+            <ul>
+                <li class="lang-en"><strong>Hugging Face Acquisition ($12,930M):</strong> Control of the global open-source platform, connecting developers directly to NVIDIA's CUDA and GPU architecture.</li>
+                <li class="lang-es" style="display:none;"><strong>Adquisición de Hugging Face ($12,930M):</strong> Control de la plataforma central del código abierto global, vinculando desarrolladores directamente a la arquitectura CUDA y GPU de NVIDIA.</li>
+                <li class="lang-en"><strong>Supply Chain Security ($279,000M):</strong> Long-term purchase commitments in HBM memory and advanced packaging to lock productive capacity ahead of competitors.</li>
+                <li class="lang-es" style="display:none;"><strong>Aseguramiento de Cadena de Suministro ($279,000M):</strong> Compromisos de adquisición a largo plazo en memoria HBM y empaquetado avanzado para bloquear la capacidad productiva ante competidores.</li>
+                <li class="lang-en"><strong>Architecture Evolution:</strong> Successful transition from Hopper to Blackwell and projection to Vera Rubin, raising projected revenue per GW from $18,000M to $40,000M.</li>
+                <li class="lang-es" style="display:none;"><strong>Evolución de Arquitecturas:</strong> Transición exitosa de Hopper a Blackwell y proyección a Vera Rubin, elevando los ingresos proyectados por GW de $18,000M a $40,000M.</li>
+                <li class="lang-en"><strong>Custom Chips Expansion:</strong> $3,500M investment in MediaTek convertible bonds for NVLink Fusion technology integration.</li>
+                <li class="lang-es" style="display:none;"><strong>Expansión a Chips Personalizados:</strong> Inversión de $3,500M en bonos convertibles de MediaTek para integración de tecnología NVLink Fusion.</li>
+            </ul>
+
+            <h3 class="lang-en">Key Financial Performance (Q2 FY2027)</h3>
+            <h3 class="lang-es" style="display:none;">Desempeño Financiero Clave (Q2 FY2027)</h3>
+            
+            <div class="nvidia-stats">
+                <div class="stat">
+                    <div class="label lang-en">Total Revenue</div>
+                    <div class="label lang-es" style="display:none;">Ingresos Totales</div>
+                    <div class="number">$96,221 M</div>
+                    <div style="font-size:0.8rem; color:var(--success);">+106% YoY</div>
+                </div>
+                <div class="stat">
+                    <div class="label lang-en">Data Center</div>
+                    <div class="label lang-es" style="display:none;">Data Center</div>
+                    <div class="number">$89,020 M</div>
+                    <div style="font-size:0.8rem; color:var(--success);">+117% YoY</div>
+                </div>
+                <div class="stat">
+                    <div class="label lang-en">Net Income (Non-GAAP)</div>
+                    <div class="label lang-es" style="display:none;">Ganancia Neta (Non-GAAP)</div>
+                    <div class="number">$53,954 M</div>
+                    <div style="font-size:0.8rem; color:var(--success);">+118% YoY</div>
+                </div>
+                <div class="stat">
+                    <div class="label lang-en">Diluted EPS (Non-GAAP)</div>
+                    <div class="label lang-es" style="display:none;">EPS Diluido (Non-GAAP)</div>
+                    <div class="number">$2.22</div>
+                    <div style="font-size:0.8rem; color:var(--success);">+120% YoY</div>
+                </div>
+                <div class="stat">
+                    <div class="label lang-en">Revenue Guidance Q3 FY27</div>
+                    <div class="label lang-es" style="display:none;">Guía Ingresos Q3 FY27</div>
+                    <div class="number gold">$108,000 M</div>
+                    <div style="font-size:0.8rem; color:var(--gold-dark);">±2% est.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2 -->
+        <div class="nvidia-analysis">
+            <h2 class="lang-en">2. Econometric & Statistical Analysis</h2>
+            <h2 class="lang-es" style="display:none;">2. Análisis Econométrico y Estadístico</h2>
+            
+            <p class="lang-en">Unlike statistics applied to natural sciences, financial econometrics analyzes time series considering non-stationarity, regime changes (Chow Test), variance compression, and the law of diminishing returns through capital density.</p>
+            <p class="lang-es" style="display:none;">A diferencia de la estadística aplicada a ciencias naturales, la econometría financiera analiza series de tiempo considerando no estacionariedad, cambios de régimen (Chow Test), compresión de varianza y la ley de rendimientos decrecientes por densidad de capital.</p>
+
+            <table class="nvidia-table">
+                <thead>
+                    <tr>
+                        <th class="lang-en">Phase / Period</th>
+                        <th class="lang-es" style="display:none;">Fase / Periodo</th>
+                        <th class="lang-en">Movement Type</th>
+                        <th class="lang-es" style="display:none;">Tipo</th>
+                        <th class="lang-en">Variation (Δ%)</th>
+                        <th class="lang-es" style="display:none;">Variación (Δ%)</th>
+                        <th class="lang-en">Econometric Regime Interpretation</th>
+                        <th class="lang-es" style="display:none;">Interpretación Econométrica de Régimen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="lang-en">Phase 1 (2020)</td><td class="lang-es" style="display:none;">Fase 1 (2020)</td><td class="lang-en">Expansion</td><td class="lang-es" style="display:none;">Expansión</td><td class="green-text">+143.00%</td><td class="lang-en">Early pre-pandemic cycle / Traditional GPU demand.</td><td class="lang-es" style="display:none;">Ciclo temprano prepandemia / Demanda GPU tradicional.</td></tr>
+                    <tr><td class="lang-en">Phase 2 (2020-2021)</td><td class="lang-es" style="display:none;">Fase 2 (2020-2021)</td><td class="lang-en">Expansion</td><td class="lang-es" style="display:none;">Expansión</td><td class="green-text">+243.00%</td><td class="lang-en">Global liquidity bubble and crypto/gaming expansion cycle.</td><td class="lang-es" style="display:none;">Burbuja de liquidez global y ciclo expansión cripto/gaming.</td></tr>
+                    <tr><td class="lang-en">Phase 3 (2021-2022)</td><td class="lang-es" style="display:none;">Fase 3 (2021-2022)</td><td class="lang-en">Contraction</td><td class="lang-es" style="display:none;">Contracción</td><td class="red-text">-68.25%</td><td class="lang-en">Structural Break (Chow Test failure). Complete cycle reset.</td><td class="lang-es" style="display:none;">Ruptura Estructural (Chow Test failure). Restablecimiento completo de ciclo.</td></tr>
+                    <tr><td class="lang-en">Phase 4 (2022-2023)</td><td class="lang-es" style="display:none;">Fase 4 (2022-2023)</td><td class="lang-en">Expansion</td><td class="lang-es" style="display:none;">Expansión</td><td class="green-text">+216.23%</td><td class="lang-en">Regime shift driven by Generative Artificial Intelligence.</td><td class="lang-es" style="display:none;">Inicio de cambio de régimen impulsado por Inteligencia Artificial generativa.</td></tr>
+                    <tr><td class="lang-en">Phase 5 (2023-2024)</td><td class="lang-es" style="display:none;">Fase 5 (2023-2024)</td><td class="lang-en">Expansion</td><td class="lang-es" style="display:none;">Expansión</td><td class="green-text">+220.87%</td><td class="lang-en">Hyperbolic acceleration from massive Data Center demand.</td><td class="lang-es" style="display:none;">Aceleración hiperbólica por demanda masiva de Data Centers.</td></tr>
+                    <tr><td class="lang-en">Phase 6 (Mid 2024)</td><td class="lang-es" style="display:none;">Fase 6 (Mid 2024)</td><td class="lang-en">Contraction</td><td class="lang-es" style="display:none;">Contracción</td><td class="red-text">-40.00%</td><td class="lang-en">Institutional profit-taking and technical overextension correction.</td><td class="lang-es" style="display:none;">Toma de ganancias institucional y corrección por sobreextensión técnica.</td></tr>
+                    <tr><td class="lang-en">Phase 7 (2024-2025)</td><td class="lang-es" style="display:none;">Fase 7 (2024-2025)</td><td class="lang-en">Expansion</td><td class="lang-es" style="display:none;">Expansión</td><td class="green-text">+124.00%</td><td class="lang-en">Maturation of the secular AI rally.</td><td class="lang-es" style="display:none;">Maduración del rally secular de IA.</td></tr>
+                    <tr><td class="lang-en">Phase 8 (2025)</td><td class="lang-es" style="display:none;">Fase 8 (2025)</td><td class="lang-en">Contraction</td><td class="lang-es" style="display:none;">Contracción</td><td class="red-text">-20.00%</td><td class="lang-en">Minor compressed volatility correction / EMA fan support.</td><td class="lang-es" style="display:none;">Corrección menor de volatilidad comprimida / Soporte en abanico EMA.</td></tr>
+                    <tr><td class="lang-en">Phase 9 (2025-2026)</td><td class="lang-es" style="display:none;">Fase 9 (2025-2026)</td><td class="lang-en">Current Expansion</td><td class="lang-es" style="display:none;">Expansión Actual</td><td class="gold-text">+40.00%</td><td class="lang-en">Active trend impulse toward the $234.14 – $236.51 zone.</td><td class="lang-es" style="display:none;">Impulso tendencial activo hacia la zona de $234.14 – $236.51.</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="lang-en">Three Key Conclusions from Statistical Dynamics</h3>
+            <h3 class="lang-es" style="display:none;">Tres Conclusiones Clave de la Dinámica Estadística</h3>
+            
+            <ul>
+                <li class="lang-en"><strong>Asymmetric Drawdown Compression:</strong> Sequential declines (-68.25% → -40% → -20%) demonstrate progressive institutionalization of the asset. NVIDIA has evolved from a high-beta speculative stock to an essential infrastructure asset in institutional portfolios.</li>
+                <li class="lang-es" style="display:none;"><strong>Compresión Asimétrica de Drawdowns:</strong> Las caídas secuenciales (-68.25% → -40% → -20%) demuestran una progresiva institucionalización del activo. NVIDIA pasó de ser un título especulativo de alta beta a un activo de infraestructura esencial en carteras institucionales.</li>
+                <li class="lang-en"><strong>S-Curve Logistic Model (Base Effect):</strong> Expansive percentage impulses show progressive deceleration (+243% → +220% → +124% → +40%). As market capitalization exceeds $3-$4 trillion, greater liquidity mass is required to generate multiplier returns.</li>
+                <li class="lang-es" style="display:none;"><strong>Modelo Logístico en Curva S (Base Effect):</strong> Los impulsos porcentuales expansivos muestran desaceleración progresiva (+243% → +220% → +124% → +40%). A medida que la capitalización supera los $3-$4 billones, se requiere una mayor masa de liquidez para generar retornos multiplicadores.</li>
+                <li class="lang-en"><strong>EMA Fan Alignment:</strong> The EMA 20 > EMA 40 > EMA 80 > EMA 200 structure confirms that recent corrections do not even breach the EMA 200, systematically bouncing from higher dynamic supports.</li>
+                <li class="lang-es" style="display:none;"><strong>Alineación del Abanico de Medias (EMA Fan):</strong> La estructura EMA 20 > EMA 40 > EMA 80 > EMA 200 confirma que las correcciones recientes ni siquiera vulneran la EMA 200, rebotando sistemáticamente en soportes dinámicos superiores.</li>
+            </ul>
+        </div>
+
+        <!-- SECCIÓN 3: FORECAST -->
+        <div class="nvidia-analysis">
+            <h2 class="lang-en">3. Forecast & Price Projection (September – December 31, 2026)</h2>
+            <h2 class="lang-es" style="display:none;">3. Forecast y Proyección de Precios (Septiembre – Diciembre 31, 2026)</h2>
+            
+            <p class="lang-en">Applying the regression matrix by volatility and Q4 seasonality, the following price trajectory is projected across three probability scenarios:</p>
+            <p class="lang-es" style="display:none;">Aplicando la matriz de regresión por volatilidad y estacionalidad del cuarto trimestre (Q4), se proyecta la siguiente trayectoria de precios dividida en tres escenarios de probabilidad:</p>
+
+            <table class="nvidia-table">
+                <thead>
+                    <tr>
+                        <th class="lang-en">Month (2026)</th>
+                        <th class="lang-es" style="display:none;">Mes (2026)</th>
+                        <th class="lang-en">Conservative Scenario</th>
+                        <th class="lang-es" style="display:none;">Escenario Conservador</th>
+                        <th class="lang-en">Base Scenario</th>
+                        <th class="lang-es" style="display:none;">Escenario Base</th>
+                        <th class="lang-en">Bullish Scenario</th>
+                        <th class="lang-es" style="display:none;">Escenario Alcista</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="lang-en"><strong>September</strong></td>
+                        <td class="lang-es" style="display:none;"><strong>Septiembre</strong></td>
+                        <td class="lang-en">$210–$218 (EMA 20 Test)</td>
+                        <td class="lang-es" style="display:none;">$210–$218 (Test EMA 20)</td>
+                        <td class="lang-en">$228–$236 (Consolidation)</td>
+                        <td class="lang-es" style="display:none;">$228–$236 (Consolidación)</td>
+                        <td class="lang-en">$245–$252 (Breakout)</td>
+                        <td class="lang-es" style="display:none;">$245–$252 (Ruptura)</td>
+                    </tr>
+                    <tr>
+                        <td class="lang-en"><strong>October</strong></td>
+                        <td class="lang-es" style="display:none;"><strong>Octubre</strong></td>
+                        <td class="lang-en">$196–$205 (EMA 40 Test)</td>
+                        <td class="lang-es" style="display:none;">$196–$205 (Test EMA 40)</td>
+                        <td class="lang-en">$238–$248 (Accumulation)</td>
+                        <td class="lang-es" style="display:none;">$238–$248 (Acumulación)</td>
+                        <td class="lang-en">$260–$272 (Expansion)</td>
+                        <td class="lang-es" style="display:none;">$260–$272 (Expansión)</td>
+                    </tr>
+                    <tr>
+                        <td class="lang-en"><strong>November</strong></td>
+                        <td class="lang-es" style="display:none;"><strong>Noviembre</strong></td>
+                        <td class="lang-en">$220–$232 (Bounce)</td>
+                        <td class="lang-es" style="display:none;">$220–$232 (Rebote)</td>
+                        <td class="lang-en">$255–$268 (ER Impulse)</td>
+                        <td class="lang-es" style="display:none;">$255–$268 (Impulso por ER)</td>
+                        <td class="lang-en">$280–$292 (Acceleration)</td>
+                        <td class="lang-es" style="display:none;">$280–$292 (Aceleración)</td>
+                    </tr>
+                    <tr>
+                        <td class="lang-en"><strong>December 31</strong></td>
+                        <td class="lang-es" style="display:none;"><strong>Diciembre 31</strong></td>
+                        <td class="lang-en">$240–$250 (Low Close)</td>
+                        <td class="lang-es" style="display:none;">$240–$250 (Cierre bajo)</td>
+                        <td class="gold-text lang-en">$275–$288 (+20% Target)</td>
+                        <td class="gold-text lang-es" style="display:none;">$275–$288 (Objetivo +20%)</td>
+                        <td class="gold-text lang-en">$300–$312 (Channel Top)</td>
+                        <td class="gold-text lang-es" style="display:none;">$300–$312 (Techo de canal)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nvidia-ratio">
+                <strong class="lang-en">Risk Management & Risk/Reward Ratio (R:R) at Current Price ($234.14)</strong>
+                <strong class="lang-es" style="display:none;">Gestión de Riesgo y Ratio Riesgo/Beneficio (R:R) al Precio Actual ($234.14)</strong>
+                
+                <div class="ratio-grid">
+                    <div class="item">
+                        <div class="label lang-en">Entry Point</div>
+                        <div class="label lang-es" style="display:none;">Punto de Entrada</div>
+                        <div class="value">$234.14</div>
+                    </div>
+                    <div class="item">
+                        <div class="label lang-en">Stop Loss</div>
+                        <div class="label lang-es" style="display:none;">Stop Loss</div>
+                        <div class="value red">$195.00 <span style="font-weight:400; color:var(--text-light);">(-16.71%)</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="label lang-en">TP1 (Base Target)</div>
+                        <div class="label lang-es" style="display:none;">TP1 (Objetivo Base)</div>
+                        <div class="value green">$278.00 <span style="font-weight:400; color:var(--text-light);">(+18.73%) → 1:1.12</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="label lang-en">TP2 (Bullish Target)</div>
+                        <div class="label lang-es" style="display:none;">TP2 (Objetivo Alcista)</div>
+                        <div class="value green">$305.00 <span style="font-weight:400; color:var(--text-light);">(+30.26%) → 1:1.81</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nvidia-recomendacion">
+                <strong class="lang-en">Operational Recommendation:</strong>
+                <strong class="lang-es" style="display:none;">Recomendación Operativa:</strong>
+                <span class="lang-en">To optimize the risk/reward equation above a 1:2.5 ratio, it is suggested to wait for accumulations in dynamic pullbacks toward the EMA 20 zone ($213 – $220) or EMA 40 ($196 – $205) before positioning strategic long-term capital.</span>
+                <span class="lang-es" style="display:none;">Para optimizar la ecuación riesgo/beneficio a un ratio superior a 1 : 2.5, se sugiere esperar acumulaciones en los retrocesos dinámicos hacia la franja de la EMA 20 ($213 – $220) o EMA 40 ($196 – $205) antes de posicionar capital estratégico a largo plazo.</span>
+            </div>
+        </div>
+
+        <!-- ==========================================================
+        PARTE 2: ESTUDIO EPIPHANY (RESPALDO DE CREDIBILIDAD)
+        ========================================================== -->
+        <div style="margin-top:60px; padding-top:40px; border-top:2px solid var(--gold);">
+            
+            <div style="text-align:center; margin-bottom:40px;">
+                <span class="badge" style="background:var(--gold); color:var(--white); border:none; padding:8px 24px; font-size:0.9rem;">🏆 Respaldo Institucional</span>
+                <h2 style="font-size:2rem; color:var(--blue-dark); margin-top:16px;">Statistical Study of the <span style="color:var(--gold-dark);">Epiphany</span> Trading System</h2>
+                <p style="color:var(--text-muted); font-size:1.1rem;">Comparative Performance Analysis by Hedging Block</p>
+                <p style="color:var(--text-light); font-size:0.9rem;">Periods Analyzed: Jan 06-22, 2026 (Validation) vs Jan 26-29, 2026 (Optimization)</p>
+            </div>
+
+            <!-- RESUMEN EJECUTIVO -->
+            <div class="nvidia-analysis">
+                <h2 class="lang-en">Executive Summary</h2>
+                <h2 class="lang-es" style="display:none;">Resumen Ejecutivo</h2>
+                
+                <p class="lang-en">This study analyzes the statistical evolution of the Epiphany trading system, comparing two key periods to evaluate the optimization of the geometric edge and the scalability of the methodology.</p>
+                <p class="lang-es" style="display:none;">Este estudio analiza la evolución estadística del sistema de trading Epiphany, comparando dos períodos clave para evaluar la optimización del edge geométrico y la escalabilidad de la metodología.</p>
+                
+                <p style="background:var(--gold-light); padding:12px 20px; border-radius:var(--radius); border-left:4px solid var(--gold); margin-top:12px;">
+                    <strong>Hypothesis:</strong> The implementation of methodological adjustments between periods resulted in statistically significant improvements in performance parameters.
+                </p>
+                <p style="background:var(--gold-light); padding:12px 20px; border-radius:var(--radius); border-left:4px solid var(--gold); margin-top:12px; display:none;" class="lang-es">
+                    <strong>Hipótesis:</strong> La implementación de ajustes metodológicos entre períodos resultó en mejoras estadísticamente significativas en los parámetros de rendimiento.
+                </p>
+            </div>
+
+            <!-- METODOLOGÍA -->
+            <div class="nvidia-analysis">
+                <h2 class="lang-en">Methodology</h2>
+                <h2 class="lang-es" style="display:none;">Metodología</h2>
+                
+                <h3 class="lang-en">Key Definitions</h3>
+                <h3 class="lang-es" style="display:none;">Definiciones Clave</h3>
+                
+                <ul>
+                    <li class="lang-en"><strong>Hedging Block:</strong> Set of positions (buys) that close simultaneously with sell operations, generating a single net result on the balance sheet.</li>
+                    <li class="lang-es" style="display:none;"><strong>Bloque de Hedging:</strong> Conjunto de posiciones (buys) que se cierran simultáneamente con operaciones de venta (sells), generando un resultado neto único en el balance.</li>
+                    <li class="lang-en"><strong>Exclusion Period:</strong> January 23, 2026 (atypical day) excluded from the analysis to avoid extreme outlier bias.</li>
+                    <li class="lang-es" style="display:none;"><strong>Período de Exclusión:</strong> 23 de enero 2026 (día atípico) excluido del análisis para evitar sesgo por outlier extremo.</li>
+                    <li class="lang-en"><strong>Variables Analyzed:</strong> Arithmetic mean, median, standard deviation, range, win rate, winner/loser ratio.</li>
+                    <li class="lang-es" style="display:none;"><strong>Variables Analizadas:</strong> Media aritmética, mediana, desviación estándar, rango, tasa de éxito (Win Rate), ratio ganador/perdedor.</li>
+                </ul>
+            </div>
+
+            <!-- COMPARATIVO -->
+            <div class="nvidia-analysis">
+                <h2 class="lang-en">Comparative Statistical Analysis</h2>
+                <h2 class="lang-es" style="display:none;">Análisis Comparativo Estadístico</h2>
+
+                <div style="overflow-x:auto;">
+                    <table class="nvidia-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Period 06-22 Jan</th>
+                                <th>Period 26-29 Jan</th>
+                                <th>Absolute Change</th>
+                                <th>Relative Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Mean per Block</strong></td><td>$3.81</td><td class="green-text">$34.35</td><td>$30.54</td><td class="green-text">+801%</td></tr>
+                            <tr><td><strong>Median</strong></td><td>$2.90</td><td class="green-text">$17.70</td><td>$14.80</td><td class="green-text">+510%</td></tr>
+                            <tr><td><strong>Standard Deviation</strong></td><td>$5.60</td><td>$18.20</td><td>$12.60</td><td>+225%</td></tr>
+                            <tr><td><strong>Coefficient of Variation</strong></td><td>1.47</td><td class="green-text">0.53</td><td>-0.94</td><td class="green-text">-64%</td></tr>
+                            <tr><td><strong>Win Rate</strong></td><td>85.7%</td><td class="green-text">95.8%</td><td>10.1 pp</td><td class="green-text">+11.8%</td></tr>
+                            <tr><td><strong>Winner/Loser Ratio</strong></td><td>1.66</td><td class="green-text">8.80</td><td>7.14</td><td class="green-text">+430%</td></tr>
+                            <tr><td><strong>Blocks per Day</strong></td><td>3.77</td><td class="green-text">6.00</td><td>2.23</td><td class="green-text">+59%</td></tr>
+                            <tr><td><strong>Avg Daily Profit</strong></td><td>$14.36</td><td class="green-text">$206.08</td><td>$191.72</td><td class="green-text">+1,335%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top:20px; background:var(--gray-bg); padding:16px 20px; border-radius:var(--radius);">
+                    <p style="font-weight:600; color:var(--blue-dark);">🔬 Statistical Interpretation</p>
+                    <p class="lang-en"><strong>Coefficient of Variation:</strong> The 64% reduction indicates greater relative consistency in the second period, despite the increase in absolute standard deviation.</p>
+                    <p class="lang-es" style="display:none;"><strong>Coeficiente de Variación:</strong> La reducción del 64% indica mayor consistencia
